@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Control de Stock Farmacia ABG</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Control de Stock Farmacia ABG</h1>
+      <p>Monitoreo de fármacos, trazadores IAAPS/FOFAR y controlados</p>
+    </div>
+    <div class="updated" id="lastUpdate">Sin stock cargado</div>
+  </header>
+
+  <main class="container">
+    <section class="panel setup">
+      <h2>1. Cargas</h2>
+      <div class="upload-grid">
+        <label class="upload-card">
+          <span class="step">Configuración inicial</span>
+          <strong>Cargar maestro ABG</strong>
+          <small>Se carga una vez por navegador. Debe contener “Glosa ABG”, “Glosa Bodega”, IAAPS/FOFAR y controlados.</small>
+          <input id="masterFile" type="file" accept=".xlsx,.xls,.csv" />
+        </label>
+
+        <label class="upload-card primary">
+          <span class="step">Lunes y jueves</span>
+          <strong>Cargar stock Rayen</strong>
+          <small>Usa el archivo de stock descargado desde Rayen.</small>
+          <input id="stockFile" type="file" accept=".xlsx,.xls,.csv" />
+        </label>
+
+        <label class="upload-card">
+          <span class="step">Inicio de cada mes</span>
+          <strong>Actualizar consumos</strong>
+          <small>Carga la planilla con consumos mensuales. El CPM se calcula con los últimos 3 meses disponibles.</small>
+          <input id="consumptionFile" type="file" accept=".xlsx,.xls,.csv" />
+        </label>
+      </div>
+
+      <div class="load-status">
+        <span id="masterStatus">Maestro: no cargado</span>
+        <span id="consumptionStatus">Consumos: no cargados</span>
+        <span id="stockStatus">Stock: no cargado</span>
+      </div>
+    </section>
+
+    <section class="cards" aria-label="Resumen">
+      <button class="metric critical" data-filter="CRÍTICO">
+        <span id="countCritical">0</span><small>Críticos</small>
+      </button>
+      <button class="metric warning" data-filter="REVISAR">
+        <span id="countReview">0</span><small>Bajo mínimo</small>
+      </button>
+      <button class="metric storage" data-filter="REVISAR BODEGA">
+        <span id="countWarehouse">0</span><small>Revisar bodega</small>
+      </button>
+      <button class="metric notify" data-filter="INFORMAR">
+        <span id="countNotify">0</span><small>Informar</small>
+      </button>
+      <button class="metric good" data-filter="OK">
+        <span id="countOk">0</span><small>Stock adecuado</small>
+      </button>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <div>
+          <h2>2. Panel de medicamentos</h2>
+          <p id="summaryText">Carga el maestro y el stock para comenzar.</p>
+        </div>
+        <div class="actions">
+          <button id="exportBtn" class="secondary">Exportar CSV</button>
+          <button id="resetBtn" class="danger-ghost">Restablecer datos</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <input id="searchInput" type="search" placeholder="Buscar medicamento…" />
+        <select id="programFilter">
+          <option value="">Todos los programas</option>
+          <option value="IAAPS">IAAPS</option>
+          <option value="FOFAR">FOFAR</option>
+          <option value="IAAPS/FOFAR">IAAPS/FOFAR</option>
+          <option value="NO TRAZADOR">No trazador</option>
+        </select>
+        <select id="stateFilter">
+          <option value="">Todos los estados</option>
+          <option value="CRÍTICO">Crítico</option>
+          <option value="REVISAR">Revisar</option>
+          <option value="OK">OK</option>
+          <option value="SIN CPM">Sin CPM</option>
+          <option value="SIN STOCK">Sin stock cargado</option>
+        </select>
+        <button id="clearFilters" class="secondary">Limpiar filtros</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Medicamento</th>
+              <th>Programa</th>
+              <th>Stock</th>
+              <th>CPM 3M</th>
+              <th>Crítico 20%</th>
+              <th>Mínimo 40%</th>
+              <th>Estado</th>
+              <th>Acción</th>
+              <th>Glosa bodega</th>
+            </tr>
+          </thead>
+          <tbody id="medTable"></tbody>
+        </table>
+      </div>
+
+      <div id="unmatchedBox" class="unmatched hidden">
+        <h3>Productos del stock sin coincidencia en el maestro</h3>
+        <p>Estos productos no fueron incorporados automáticamente. Revísalos antes de tomar decisiones.</p>
+        <div id="unmatchedList"></div>
+      </div>
+    </section>
+
+    <section class="panel note">
+      <h2>Reglas utilizadas</h2>
+      <p><strong>Crítico:</strong> stock &lt; 20% del CPM de los últimos 3 meses. <strong>Bajo mínimo:</strong> stock entre 20% y 40%. <strong>OK:</strong> stock ≥ 40%.</p>
+      <p>Los medicamentos controlados definidos en el maestro no se revisan en bodega: si están críticos, la acción es <strong>Informar</strong>.</p>
+      <p>Para el resto de los medicamentos críticos, la herramienta indica <strong>Revisar bodega</strong> y muestra la glosa de bodega. Después puedes registrar si corresponde <strong>Pedir</strong> o <strong>Informar</strong>.</p>
+    </section>
+  </main>
+
+  <dialog id="warehouseDialog">
+    <form method="dialog">
+      <h3 id="dialogTitle">Revisión de bodega</h3>
+      <p id="dialogWarehouseName"></p>
+      <div class="dialog-actions">
+        <button value="available" class="good-btn">Hay stock → Pedir</button>
+        <button value="unavailable" class="bad-btn">No hay stock → Informar</button>
+        <button value="cancel" class="secondary">Cancelar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer>
+    <span>Farmacia ABG · Datos procesados localmente en este navegador</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
