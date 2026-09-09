@@ -11,41 +11,57 @@
   <header class="topbar">
     <div>
       <h1>Control de Stock Farmacia ABG</h1>
-      <p>Monitoreo de fármacos, trazadores IAAPS/FOFAR y controlados</p>
+      <p>Monitoreo de fármacos · IAAPS / FOFAR · controlados</p>
     </div>
-    <div class="updated" id="lastUpdate">Sin stock cargado</div>
+    <div class="header-status">
+      <span id="masterStatus">Cargando maestro…</span>
+      <span id="lastUpdate">Sin stock cargado</span>
+    </div>
   </header>
 
   <main class="container">
-    <section class="panel setup">
-      <h2>1. Cargas</h2>
-      <div class="upload-grid">
-        <label class="upload-card">
-          <span class="step">Configuración inicial</span>
-          <strong>Cargar maestro ABG</strong>
-          <small>Se carga una vez por navegador. Debe contener “Glosa ABG”, “Glosa Bodega”, IAAPS/FOFAR y controlados.</small>
-          <input id="masterFile" type="file" accept=".xlsx,.xls,.csv" />
-        </label>
+    <section class="panel">
+      <div class="section-title">
+        <div>
+          <h2>Actualización de datos</h2>
+          <p>El maestro ABG se carga automáticamente al abrir la herramienta.</p>
+        </div>
+      </div>
 
+      <div class="upload-grid two">
         <label class="upload-card primary">
           <span class="step">Lunes y jueves</span>
-          <strong>Cargar stock Rayen</strong>
-          <small>Usa el archivo de stock descargado desde Rayen.</small>
+          <strong>Cargar stock actual Rayen</strong>
+          <small>Selecciona el archivo de stock exportado desde Rayen.</small>
           <input id="stockFile" type="file" accept=".xlsx,.xls,.csv" />
         </label>
 
-        <label class="upload-card">
+        <div class="upload-card">
           <span class="step">Inicio de cada mes</span>
-          <strong>Actualizar consumos</strong>
-          <small>Carga la planilla con consumos mensuales. El CPM se calcula con los últimos 3 meses disponibles.</small>
-          <input id="consumptionFile" type="file" accept=".xlsx,.xls,.csv" />
-        </label>
+          <strong>Agregar consumo del mes anterior</strong>
+          <small>Selecciona el mes que estás incorporando y carga solo el archivo de consumo de ese mes.</small>
+          <div class="month-row">
+            <select id="monthSelect" aria-label="Mes de consumo"></select>
+            <input id="consumptionFile" type="file" accept=".xlsx,.xls,.csv" />
+          </div>
+        </div>
       </div>
 
       <div class="load-status">
-        <span id="masterStatus">Maestro: no cargado</span>
-        <span id="consumptionStatus">Consumos: no cargados</span>
+        <span id="consumptionStatus">Histórico: cargando…</span>
         <span id="stockStatus">Stock: no cargado</span>
+      </div>
+
+      <div class="backup-bar">
+        <strong>Respaldo del histórico</strong>
+        <span>Recomendado después de agregar el consumo mensual.</span>
+        <div class="actions">
+          <button id="exportBackupBtn" class="secondary">Exportar respaldo</button>
+          <label class="secondary file-button">
+            Importar respaldo
+            <input id="importBackupFile" type="file" accept=".json" />
+          </label>
+        </div>
       </div>
     </section>
 
@@ -70,12 +86,13 @@
     <section class="panel">
       <div class="toolbar">
         <div>
-          <h2>2. Panel de medicamentos</h2>
-          <p id="summaryText">Carga el maestro y el stock para comenzar.</p>
+          <h2>Panel de medicamentos</h2>
+          <p id="summaryText">Cargando datos…</p>
         </div>
         <div class="actions">
-          <button id="exportBtn" class="secondary">Exportar CSV</button>
-          <button id="resetBtn" class="danger-ghost">Restablecer datos</button>
+          <button id="historyBtn" class="secondary">Ver histórico</button>
+          <button id="exportBtn" class="secondary">Exportar resultados</button>
+          <button id="resetOperationalBtn" class="danger-ghost">Borrar stock y decisiones</button>
         </div>
       </div>
 
@@ -91,7 +108,7 @@
         <select id="stateFilter">
           <option value="">Todos los estados</option>
           <option value="CRÍTICO">Crítico</option>
-          <option value="REVISAR">Revisar</option>
+          <option value="REVISAR">Bajo mínimo</option>
           <option value="OK">OK</option>
           <option value="SIN CPM">Sin CPM</option>
           <option value="SIN STOCK">Sin stock cargado</option>
@@ -119,17 +136,17 @@
       </div>
 
       <div id="unmatchedBox" class="unmatched hidden">
-        <h3>Productos del stock sin coincidencia en el maestro</h3>
-        <p>Estos productos no fueron incorporados automáticamente. Revísalos antes de tomar decisiones.</p>
+        <h3>Productos del stock sin coincidencia exacta en el maestro</h3>
+        <p>No se incorporaron automáticamente. Conviene revisarlos antes de tomar una decisión de stock.</p>
         <div id="unmatchedList"></div>
       </div>
     </section>
 
     <section class="panel note">
-      <h2>Reglas utilizadas</h2>
-      <p><strong>Crítico:</strong> stock &lt; 20% del CPM de los últimos 3 meses. <strong>Bajo mínimo:</strong> stock entre 20% y 40%. <strong>OK:</strong> stock ≥ 40%.</p>
-      <p>Los medicamentos controlados definidos en el maestro no se revisan en bodega: si están críticos, la acción es <strong>Informar</strong>.</p>
-      <p>Para el resto de los medicamentos críticos, la herramienta indica <strong>Revisar bodega</strong> y muestra la glosa de bodega. Después puedes registrar si corresponde <strong>Pedir</strong> o <strong>Informar</strong>.</p>
+      <h2>Reglas vigentes</h2>
+      <p><strong>Crítico:</strong> stock &lt; 20% del CPM de los últimos 3 meses disponibles. <strong>Bajo mínimo:</strong> stock entre 20% y 40%. <strong>OK:</strong> stock ≥ 40%.</p>
+      <p>Los medicamentos controlados definidos en el maestro no se revisan en bodega. Si están críticos, la acción es <strong>Informar</strong>.</p>
+      <p>Para el resto de los medicamentos críticos se muestra <strong>Revisar bodega</strong> junto con la glosa exacta de bodega. Luego puedes registrar <strong>Pedir</strong> o <strong>Informar</strong>.</p>
     </section>
   </main>
 
@@ -145,10 +162,22 @@
     </form>
   </dialog>
 
-  <footer>
-    <span>Farmacia ABG · Datos procesados localmente en este navegador</span>
-  </footer>
+  <dialog id="historyDialog" class="history-dialog">
+    <form method="dialog">
+      <div class="toolbar">
+        <div>
+          <h3>Histórico de consumos</h3>
+          <p>Se conserva en este navegador y puede respaldarse en JSON.</p>
+        </div>
+        <button value="close" class="secondary">Cerrar</button>
+      </div>
+      <div class="table-wrap">
+        <table id="historyTable"></table>
+      </div>
+    </form>
+  </dialog>
 
+  <footer>Farmacia ABG · Los archivos de stock y consumo se procesan localmente en el navegador.</footer>
   <script src="app.js"></script>
 </body>
 </html>

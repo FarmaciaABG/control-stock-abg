@@ -1,0 +1,4559 @@
+{
+  "version": "2026-09-09",
+  "centro": "ABG",
+  "medicamentos": [
+    {
+      "glosaABG": "17-Beta Estradiol Micronizado 1 mg Comprimidos",
+      "glosaBodega": "Estradiol Micronizado ciclo 1 mg. COMPRIMIDOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Abalgin Adultos Supositorios",
+      "glosaBodega": "Antiespasmodico Adulto Supositorios (Abalgin sup. Adu.)) SUPOSITORIOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 9.0,
+        "febrero": 9.0,
+        "mayo": 6.0
+      }
+    },
+    {
+      "glosaABG": "Acenocumarol 4 mg Comprimidos",
+      "glosaBodega": "Acenocumarol 4 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 574.0,
+        "febrero": 685.0,
+        "marzo": 920.0,
+        "abril": 745.0,
+        "mayo": 751.0,
+        "junio": 694.0,
+        "julio": 729.0
+      }
+    },
+    {
+      "glosaABG": "Aciclovir 400 mg Comprimidos",
+      "glosaBodega": "Aciclovir Comprimidos 400 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 171.0,
+        "febrero": 114.0,
+        "marzo": 201.0,
+        "abril": 91.0,
+        "mayo": 161.0,
+        "junio": 370.0,
+        "julio": 412.0
+      }
+    },
+    {
+      "glosaABG": "Aciclovir Crema Dermica 5% (15 g)",
+      "glosaBodega": "Aciclovir Crema Dermica 5% (15 g) Crema",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 15.0,
+        "febrero": 6.0,
+        "marzo": 1.0,
+        "abril": 1.0,
+        "mayo": 2.0,
+        "julio": 8.0
+      }
+    },
+    {
+      "glosaABG": "Acido Acetilsalicilico Comprimidos 100 Mg",
+      "glosaBodega": "Acido Acetilsalicilico 100 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 11303.0,
+        "febrero": 18118.0,
+        "marzo": 10297.0,
+        "abril": 14630.0,
+        "mayo": 10056.0,
+        "junio": 13205.0,
+        "julio": 9979.0
+      }
+    },
+    {
+      "glosaABG": "Acido Folico 0,4 mg Comprimidos",
+      "glosaBodega": "Acido Folico 0,4 mg. Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Acido Folico 1 mg Comprimidos",
+      "glosaBodega": "Acido Folico 1 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 165.0,
+        "febrero": 135.0,
+        "marzo": 240.0,
+        "abril": 60.0,
+        "mayo": 120.0,
+        "junio": 150.0,
+        "julio": 37.0
+      }
+    },
+    {
+      "glosaABG": "Acido Folico 5 mg Comprimidos",
+      "glosaBodega": "Acido Folico 5 mg Comprimidos Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 270.0,
+        "febrero": 360.0,
+        "marzo": 330.0,
+        "abril": 300.0,
+        "mayo": 300.0,
+        "junio": 150.0,
+        "julio": 360.0
+      }
+    },
+    {
+      "glosaABG": "Acido Valproico 500 mg Comprimidos de Liberacion Prolongada",
+      "glosaBodega": "Acido Valproico Liberación Prolongada 500 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 585.0,
+        "febrero": 615.0,
+        "marzo": 654.0,
+        "abril": 870.0,
+        "mayo": 645.0,
+        "junio": 735.0,
+        "julio": 735.0
+      }
+    },
+    {
+      "glosaABG": "Acido Valproico Comprimidos Con Recubrimiento Enterico 200 Mg",
+      "glosaBodega": "Acido Valproico Comprimidos Recubiertos 200 Mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 945.0,
+        "febrero": 915.0,
+        "marzo": 1035.0,
+        "abril": 765.0,
+        "mayo": 660.0,
+        "junio": 765.0,
+        "julio": 915.0
+      }
+    },
+    {
+      "glosaABG": "Acido Valproico suspension 250 mg/5 ml (120 ml)",
+      "glosaBodega": "Acido Valproico 250 mg/5ml Jbe.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "febrero": 5.0,
+        "marzo": 6.0,
+        "abril": 5.0,
+        "mayo": 4.0,
+        "junio": 4.0,
+        "julio": 4.0
+      }
+    },
+    {
+      "glosaABG": "Adapaleno 0,1 % Gel Tópico , pomo 30 gramos",
+      "glosaBodega": "Adapaleno 0,1 % Gel Topico 30g. ud",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 1.0
+      }
+    },
+    {
+      "glosaABG": "Adapaleno 0,3 % Gel Topico , pomo",
+      "glosaBodega": "Adapaleno 0,3 % Gel Topico 30g. ud",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Adenosina 6 mg/2ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Adenosina ampollas 6mg/2 ml",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 16.0
+      }
+    },
+    {
+      "glosaABG": "Amiodarona Clorhidrato 150mg/3ml Solucion Inyectable, ampolla",
+      "glosaBodega": "Amiodarona Clorhidrato Solucion Inyectable 150 Mg/ 3 Ml Ampolla",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 1.0
+      }
+    },
+    {
+      "glosaABG": "Amitriptilina Clorhidrato 25 mg Comprimidos",
+      "glosaBodega": "Amitriptilina Clorhidrato 25 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2258.0,
+        "febrero": 3669.0,
+        "marzo": 2716.0,
+        "abril": 2929.0,
+        "mayo": 2595.0,
+        "junio": 2520.0,
+        "julio": 2515.0
+      }
+    },
+    {
+      "glosaABG": "Amlodipino Comprimidos 10 Mg",
+      "glosaBodega": "Amlodipino 10 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS + FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 16993.0,
+        "febrero": 23844.0,
+        "marzo": 16298.0,
+        "abril": 20808.0,
+        "mayo": 16173.0,
+        "junio": 18139.0,
+        "julio": 17668.0
+      }
+    },
+    {
+      "glosaABG": "Amlodipino Comprimidos 5 mg",
+      "glosaBodega": "Amlodipino 5 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS + FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 6110.0,
+        "febrero": 21369.0,
+        "marzo": 12371.0,
+        "abril": 18084.0,
+        "mayo": 12398.0,
+        "junio": 16908.0,
+        "julio": 15710.0
+      }
+    },
+    {
+      "glosaABG": "Amoxicilina 500 mg Capsulas",
+      "glosaBodega": "Amoxicilina 500 mg CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1484.0,
+        "febrero": 1497.0,
+        "marzo": 1490.0,
+        "abril": 3051.0,
+        "mayo": 1933.0,
+        "junio": 1989.0,
+        "julio": 1936.0
+      }
+    },
+    {
+      "glosaABG": "Amoxicilina 500 mg/5 ml Polvo Para Suspension Oral , frasco 60 ml",
+      "glosaBodega": "Amoxicilina Polvo P/Susp.Oral 500 mg/5 ml (60 ml) JARABE",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 14.0,
+        "febrero": 7.0,
+        "marzo": 10.0,
+        "abril": 17.0,
+        "mayo": 23.0,
+        "junio": 27.0,
+        "julio": 47.0
+      }
+    },
+    {
+      "glosaABG": "Amoxicilina 500 mg/Acido Clavulanico 125 mg , Comprimidos",
+      "glosaBodega": "Amoxicilina Con Acido Clavulanico 500 / 125mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 518.0,
+        "febrero": 446.0,
+        "marzo": 769.0,
+        "abril": 1000.0,
+        "mayo": 752.0,
+        "junio": 1085.0,
+        "julio": 1112.0
+      }
+    },
+    {
+      "glosaABG": "Amoxicilina Trihidrato 400 mg/Acido Clavulanico 57 mg en 5 ml, Suspension oral, frasco 70 ml",
+      "glosaBodega": "Amoxicilina Con Acido Clavulanico 400 mg./57 mg. Jarabe 5 ml. Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "mayo": 1.0,
+        "junio": 1.0,
+        "julio": 4.0
+      }
+    },
+    {
+      "glosaABG": "Anfebutamona 150 mg Comprimidos de Liberacion Prolongada (Bupropion)",
+      "glosaBodega": "Anfebutamona 150 mg LIB Prolongada 150 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Atemperator Acido Valproico Gotas Orales 300 Mg/Ml (25 ml)",
+      "glosaBodega": "Acido Valproico Gotas Orales 300 mg/ ml frasco 25 ml (Atemperator)",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Atenolol 50 Mg Comprimidos",
+      "glosaBodega": "Atenolol 50 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1380.0,
+        "febrero": 1980.0,
+        "marzo": 1485.0,
+        "abril": 1335.0,
+        "mayo": 1245.0,
+        "junio": 1455.0,
+        "julio": 1125.0
+      }
+    },
+    {
+      "glosaABG": "Atorvastatina 20 mg Comprimidos",
+      "glosaBodega": "Atorvastatina 20 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS + FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 48119.0,
+        "febrero": 69472.0,
+        "marzo": 50628.0,
+        "abril": 58210.0,
+        "mayo": 48020.0,
+        "junio": 55104.0,
+        "julio": 52323.0
+      }
+    },
+    {
+      "glosaABG": "Atropina Sulfato 0,5 mg/Papaverina Clorhidrato 40 mg, comprimidos",
+      "glosaBodega": "Papaverina/ Atropina (Dolospam) 40 mg/ 0,5 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 544.0,
+        "febrero": 350.0,
+        "marzo": 430.0,
+        "abril": 423.0,
+        "mayo": 188.0,
+        "junio": 198.0,
+        "julio": 305.0
+      }
+    },
+    {
+      "glosaABG": "Atropina Sulfato 1 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Atropina Sulfato Solucion Inyectable 1 Mg/Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Azitromicina 400 mg/5ml Suspension Oral , frasco 20 ml",
+      "glosaBodega": "Azitromicina 400 mg / 5 Ml Fco.",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Azitromicina 500 mg Comprimidos",
+      "glosaBodega": "Azitromicina 500 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 86.0,
+        "febrero": 20.0,
+        "marzo": 21.0,
+        "abril": 47.0,
+        "mayo": 36.0,
+        "junio": 58.0,
+        "julio": 12.0
+      }
+    },
+    {
+      "glosaABG": "Bencilpenicilina Benzatina 1.200.000 U.I. Polvo para Suspension Inyectable , frasco ampolla",
+      "glosaBodega": "Penicilina G (Como Benzatina) Polvo Para Suspension Inyectable 1,200,000 U.I. (fra)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 5.0,
+        "febrero": 4.0,
+        "marzo": 1.0,
+        "abril": 3.0,
+        "mayo": 1.0,
+        "junio": 8.0,
+        "julio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Betametasona Crema Dermica 0,05% (15 g)",
+      "glosaBodega": "Betametasona Crema Dérmica 0,05% (15 gr) CREMA",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 32.0,
+        "febrero": 33.0,
+        "marzo": 22.0,
+        "abril": 24.0,
+        "mayo": 24.0,
+        "junio": 18.0,
+        "julio": 41.0
+      }
+    },
+    {
+      "glosaABG": "Betametasona Fosfato Disodico 4 mg/1 ml, Solucion Inyectable, ampolla",
+      "glosaBodega": "Betametasona Solucion Inyectable 4 Mg/Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 109.0,
+        "febrero": 75.0,
+        "marzo": 69.0,
+        "abril": 62.0,
+        "mayo": 68.0,
+        "junio": 96.0,
+        "julio": 87.0
+      }
+    },
+    {
+      "glosaABG": "Bimatoprost 0,01% / Brimonidina 0,15% / Timolol 0,5% Solucion Oftalmica , frasco 5 ml (1 ml= 20 gotas)",
+      "glosaBodega": "Bimatoprost 0,01% mg. / Brimonidina 0,15% mg / Timolol 0,5% mg. Sol Oft. 5 ml Fco. (triplenex)",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 17.0,
+        "febrero": 11.0,
+        "marzo": 10.0,
+        "abril": 8.0,
+        "mayo": 8.0,
+        "junio": 12.0,
+        "julio": 13.0
+      }
+    },
+    {
+      "glosaABG": "Brimonidina 0,2% Solucion Oftalmica, frasco 5 ml (1 ml=20 gotas) (prescribe gotas)",
+      "glosaBodega": "Brimonidina 0.2% 5ml FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 55.0,
+        "febrero": 50.0,
+        "marzo": 26.0,
+        "abril": 45.0,
+        "mayo": 17.0,
+        "junio": 41.0,
+        "julio": 34.0
+      }
+    },
+    {
+      "glosaABG": "Bromuro de Ipratropio 0.25 mg/Fenoterol Bromhidrato 0.5mg en 1ml Solucion Para Inhalacion por Nebulizador, frasco de 20 ml (1 ml = 20 gotas)",
+      "glosaBodega": "Bromuro de Ipratropio 0,25 mg + Fenoterol 0,5 mg solución inhalación Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "abril": 0.0,
+        "julio": 6.0
+      }
+    },
+    {
+      "glosaABG": "Bromuro De Ipratropio 20 mcg/dosis Aerosol Para Inhalacion , 200 dosis (prescribe dosis)",
+      "glosaBodega": "Bromuro De Ipratropio Aerosol Para Inhalacion 20 Mcg/Dosis (200 dos)",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 271.0,
+        "febrero": 358.0,
+        "marzo": 259.0,
+        "abril": 327.0,
+        "mayo": 247.0,
+        "junio": 337.0,
+        "julio": 268.0
+      }
+    },
+    {
+      "glosaABG": "Budesonida 200 mcg/dosis Aerosol Para Inhalacion , 200 dosis (prescribe dosis)",
+      "glosaBodega": "Budesonida Adultos Aerosol Para Inhalacion 200 Mcg/Dosis (200 dos)",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 122.0,
+        "febrero": 112.0,
+        "marzo": 137.0,
+        "abril": 122.0,
+        "mayo": 107.0,
+        "junio": 111.0,
+        "julio": 104.0
+      }
+    },
+    {
+      "glosaABG": "Buprenorfina 35 mcg/h Sistema Terapeutico Transdermico , parche",
+      "glosaBodega": "Buprenorfina 35 mcg/h PARCHE",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Captopril 25 mg Comprimidos",
+      "glosaBodega": "Captopril Comprimidos 25 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "julio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Carbamazepina 400 mg Comprimidos de Liberacion Prolongada",
+      "glosaBodega": "Carbamazepina Liberación Prolongada 400 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 327.0,
+        "febrero": 208.0,
+        "marzo": 208.0,
+        "abril": 325.0,
+        "mayo": 208.0,
+        "junio": 208.0,
+        "julio": 250.0
+      }
+    },
+    {
+      "glosaABG": "Carbamazepina Comprimidos 200 Mg",
+      "glosaBodega": "Carbamazepina 200 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1005.0,
+        "febrero": 1335.0,
+        "marzo": 1103.0,
+        "abril": 1815.0,
+        "mayo": 990.0,
+        "junio": 1050.0,
+        "julio": 1260.0
+      }
+    },
+    {
+      "glosaABG": "Carvedilol 12,5 mg Comprimidos",
+      "glosaBodega": "Carvedilol 12,5 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3412.0,
+        "febrero": 5130.0,
+        "marzo": 3087.0,
+        "abril": 3730.0,
+        "mayo": 3482.0,
+        "junio": 3512.0,
+        "julio": 3810.0
+      }
+    },
+    {
+      "glosaABG": "Carvedilol 25 mg Comprimidos",
+      "glosaBodega": "Carvedilol 25mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1358.0,
+        "febrero": 1582.0,
+        "marzo": 1560.0,
+        "abril": 893.0,
+        "mayo": 1426.0,
+        "junio": 1080.0,
+        "julio": 1471.0
+      }
+    },
+    {
+      "glosaABG": "Carvedilol 6,25 mg Comprimidos",
+      "glosaBodega": "Carvedilol 6,25 mg Comprimidos",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 9058.0,
+        "febrero": 13800.0,
+        "marzo": 9846.0,
+        "abril": 9963.0,
+        "mayo": 9645.0,
+        "junio": 8430.0,
+        "julio": 8379.0
+      }
+    },
+    {
+      "glosaABG": "Cefadroxilo 250 mg/5 ml Polvo Para Suspension Oral , frasco 60 ml",
+      "glosaBodega": "Cefadroxilo Polvo Para Suspension Oral 250 Mg/5 Ml (60 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3.0,
+        "febrero": 2.0,
+        "marzo": 4.0,
+        "abril": 8.0,
+        "mayo": 2.0,
+        "junio": 2.0,
+        "julio": 5.0
+      }
+    },
+    {
+      "glosaABG": "Cefadroxilo 500 mg Capsulas",
+      "glosaBodega": "Cefadroxilo 500 mg Capsulas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 394.0,
+        "febrero": 236.0,
+        "marzo": 448.0,
+        "abril": 226.0,
+        "mayo": 233.0,
+        "junio": 308.0,
+        "julio": 364.0
+      }
+    },
+    {
+      "glosaABG": "Celecoxib 200 mg Capsulas",
+      "glosaBodega": "Celecoxib Capsulas 200 Mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3592.0,
+        "febrero": 6077.0,
+        "marzo": 2525.0,
+        "abril": 4964.0,
+        "mayo": 2938.0,
+        "junio": 4264.0,
+        "julio": 2903.0
+      }
+    },
+    {
+      "glosaABG": "Cetirizina 5mg/5ml Jarabe, frasco 60 ml",
+      "glosaBodega": "Cetirizina 5 mg/5ml (60ml) JARABE Fco.",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "mayo": 0.0,
+        "junio": 0.0
+      }
+    },
+    {
+      "glosaABG": "Ciclobenzaprina Clorhidrato 10 Mg Comprimidos Recubiertos",
+      "glosaBodega": "Ciclobenzaprina Clorhidrato 10 Mg Comprimidos Recubiertos",
+      "categoria": "",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 18.0,
+        "marzo": 27.0,
+        "abril": 3.0,
+        "mayo": 5.0,
+        "junio": 0.0,
+        "julio": 0.0
+      }
+    },
+    {
+      "glosaABG": "Ciclopiroxolamina 1 % Crema Topica , pomo",
+      "glosaBodega": "Ciclopiroxolamina 1% Crema Dermica 30g ud",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Ciprofloxacino 500 mg Comprimidos",
+      "glosaBodega": "Ciprofloxacino Comprimidos Recubiertos 500 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 202.0,
+        "febrero": 206.0,
+        "marzo": 152.0,
+        "abril": 174.0,
+        "mayo": 186.0,
+        "junio": 190.0,
+        "julio": 196.0
+      }
+    },
+    {
+      "glosaABG": "Citalopram 20 mg comprimidos",
+      "glosaBodega": "Citalopram Comprimidos Recubiertos 20 Mg",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 120.0,
+        "febrero": 210.0,
+        "marzo": 120.0,
+        "abril": 270.0,
+        "mayo": 30.0,
+        "junio": 300.0,
+        "julio": 30.0
+      }
+    },
+    {
+      "glosaABG": "Claritromicina 250 mg/5 ml Polvo Para Suspension Oral , frasco 60 ml",
+      "glosaBodega": "Claritromicina Polvo Granular Para Susp. Oral 250 Mg/5 Ml (80 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 8.0,
+        "febrero": 3.0,
+        "marzo": 2.0,
+        "abril": 31.0,
+        "mayo": 7.0,
+        "junio": 2.0,
+        "julio": 6.0
+      }
+    },
+    {
+      "glosaABG": "Claritromicina 500 mg Comprimidos",
+      "glosaBodega": "Claritromicina Comprimidos Recubiertos 500 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 154.0,
+        "febrero": 266.0,
+        "marzo": 210.0,
+        "abril": 774.0,
+        "mayo": 213.0,
+        "junio": 454.0,
+        "julio": 476.0
+      }
+    },
+    {
+      "glosaABG": "Clindamicina 300 mg Capsulas",
+      "glosaBodega": "Clindamicina 300 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Clobazam 10 mg Comprimidos",
+      "glosaBodega": "",
+      "categoria": "",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Clobetasol Propionato 0,05% Crema Topica ,pomo",
+      "glosaBodega": "Clobetasol Propionato 0,05% 25g Crema Topica Ud.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "febrero": 0.0,
+        "mayo": 1.0,
+        "julio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Clonazepam Comprimidos 0,5 Mg",
+      "glosaBodega": "Clonazepam 0,5 mg comprimidos",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3165.0,
+        "febrero": 3595.0,
+        "marzo": 3420.0,
+        "abril": 3565.0,
+        "mayo": 3698.0,
+        "junio": 4689.0,
+        "julio": 3864.0
+      }
+    },
+    {
+      "glosaABG": "Clonazepam Comprimidos 2 Mg",
+      "glosaBodega": "Clonazepam 2 mg comprimidos",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1590.0,
+        "febrero": 1146.0,
+        "marzo": 1479.0,
+        "abril": 1497.0,
+        "mayo": 1452.0,
+        "junio": 1328.0,
+        "julio": 1614.0
+      }
+    },
+    {
+      "glosaABG": "Clopidogrel 75 mg Comprimidos",
+      "glosaBodega": "Clopidogrel 75 mg comprimidos Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 0.0,
+        "marzo": 4.0,
+        "abril": 0.0,
+        "junio": 27.0
+      }
+    },
+    {
+      "glosaABG": "Cloranfenicol 0,5% Solucion Oftalmica, frasco 10 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Cloranfenicol Solución Oftálmica 10 ml FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3.0,
+        "febrero": 13.0,
+        "marzo": 12.0,
+        "abril": 9.0,
+        "mayo": 5.0,
+        "junio": 8.0,
+        "julio": 9.0
+      }
+    },
+    {
+      "glosaABG": "Cloranfenicol 1% Ungüento Oftalmico , pomo 5 gramos",
+      "glosaBodega": "Cloranfenicol Unguento Oftalmico 1% (3,5 gr) POMO",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3.0,
+        "febrero": 8.0,
+        "marzo": 6.0,
+        "abril": 10.0,
+        "mayo": 3.0,
+        "junio": 7.0,
+        "julio": 5.0
+      }
+    },
+    {
+      "glosaABG": "Clorfenamina Maleato 10 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Clorfenamina Maleato Solucion Inyectable 10 Mg/Ml ( amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 6.0,
+        "febrero": 7.0,
+        "marzo": 6.0,
+        "abril": 1.0,
+        "mayo": 3.0,
+        "junio": 6.0,
+        "julio": 13.0
+      }
+    },
+    {
+      "glosaABG": "Clorfenamina Maleato 4 mg Comprimidos",
+      "glosaBodega": "Clorfenamina Maleato Comprimidos Recubiertos 4 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 732.0,
+        "febrero": 788.0,
+        "marzo": 439.0,
+        "abril": 585.0,
+        "mayo": 345.0,
+        "junio": 824.0,
+        "julio": 536.0
+      }
+    },
+    {
+      "glosaABG": "Clorpromazina Clorhidrato 100 mg Comprimidos",
+      "glosaBodega": "Clorpromazina Clorhidrato Comprimidos 100 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 409.0,
+        "febrero": 785.0,
+        "marzo": 384.0,
+        "abril": 297.0,
+        "mayo": 345.0,
+        "junio": 249.0,
+        "julio": 352.0
+      }
+    },
+    {
+      "glosaABG": "Clorpromazina Clorhidrato 25 mg/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Clorpromazina Clorhidrato Solucion Inyectable 25 Mg/2 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2.0
+      }
+    },
+    {
+      "glosaABG": "Clotrimazol 500 Mg Ovulos",
+      "glosaBodega": "Clotrimazol 500 Mg OVULOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 33.0,
+        "febrero": 17.0,
+        "marzo": 20.0,
+        "abril": 25.0,
+        "mayo": 25.0,
+        "junio": 35.0,
+        "julio": 21.0
+      }
+    },
+    {
+      "glosaABG": "Clotrimazol Crema Topica 1%",
+      "glosaBodega": "Clotrimazol Crema Topica 1% POMO",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 101.0,
+        "febrero": 102.0,
+        "marzo": 97.0,
+        "abril": 113.0,
+        "mayo": 140.0,
+        "junio": 110.0,
+        "julio": 111.0
+      }
+    },
+    {
+      "glosaABG": "Cotrimoxazol 240mg / 5 ml Suspension Oral (50 ml)",
+      "glosaBodega": "Cotrimoxazol 240mg / 5 ml Suspension Oral (50 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Cotrimoxazol 800 mg/160 mg Comprimidos",
+      "glosaBodega": "Cotrimoxazol Comprimidos Forte 800 +160 mg. Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 10.0,
+        "febrero": 62.0,
+        "marzo": 34.0,
+        "mayo": 42.0,
+        "junio": 66.0,
+        "julio": 14.0
+      }
+    },
+    {
+      "glosaABG": "Crema Humectante con urea 10%",
+      "glosaBodega": "Crema Corporal Humectante Con UREA 10% 400ml fco.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Dapagliflozina 10 mg Comprimidos",
+      "glosaBodega": "Dapagliflozina 10 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 198.0,
+        "febrero": 820.0,
+        "marzo": 876.0,
+        "abril": 935.0,
+        "mayo": 1485.0,
+        "junio": 1061.0,
+        "julio": 1785.0
+      }
+    },
+    {
+      "glosaABG": "Depo - Prodasone Suspension Inyectable 150 Mg/1 Ml (1 ml)",
+      "glosaBodega": "Medroxiprogesterona Acetato 150 mg./1 ml. 150mg/1ml JERINGA",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 5.0,
+        "febrero": 8.0,
+        "marzo": 16.0,
+        "abril": 23.0,
+        "mayo": 11.0,
+        "junio": 15.0,
+        "julio": 19.0
+      }
+    },
+    {
+      "glosaABG": "Desloratadina 2,5 mg/5 ml Jarabe, frasco 120 ml",
+      "glosaBodega": "Desloratadina 2,5mg / 5ml Jbe",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "febrero": 0.0,
+        "marzo": 0.0,
+        "abril": 0.0,
+        "mayo": 0.0
+      }
+    },
+    {
+      "glosaABG": "Desloratadina Comprimidos Recubiertos 5 Mg",
+      "glosaBodega": "Desloratadina (Ira-Era) 5 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1668.0,
+        "febrero": 1844.0,
+        "marzo": 2090.0,
+        "abril": 1650.0,
+        "mayo": 1444.0,
+        "junio": 2014.0,
+        "julio": 1188.0
+      }
+    },
+    {
+      "glosaABG": "Diazepam 10 mg/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Diazepam 10 mg/2 mL sol. Iny.",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 1.0,
+        "marzo": 2.0,
+        "abril": 1.0,
+        "mayo": 1.0,
+        "junio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Diazepam Comprimidos 10 Mg",
+      "glosaBodega": "Diazepam 10 mg comprimidos",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 820.0,
+        "febrero": 810.0,
+        "marzo": 1161.0,
+        "abril": 1053.0,
+        "mayo": 1027.0,
+        "junio": 1166.0,
+        "julio": 1051.0
+      }
+    },
+    {
+      "glosaABG": "Diclofenaco Sodico 12,5 mg ,supositorio",
+      "glosaBodega": "Diclofenaco Sodico Supositorios Infantil 12,5 Mg Sup.",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "mayo": 3.0
+      }
+    },
+    {
+      "glosaABG": "Diclofenaco Sodico 50 mg Comprimidos",
+      "glosaBodega": "Diclofenaco Sodico 50 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 845.0,
+        "febrero": 603.0,
+        "marzo": 663.0,
+        "abril": 662.0,
+        "mayo": 630.0,
+        "junio": 657.0,
+        "julio": 837.0
+      }
+    },
+    {
+      "glosaABG": "Diclofenaco Sodico 75 mg/3 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Diclofenaco Sodico Solucion Inyectable 75 Mg/3 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 149.0,
+        "febrero": 102.0,
+        "marzo": 109.0,
+        "abril": 85.0,
+        "mayo": 93.0,
+        "junio": 106.0,
+        "julio": 102.0
+      }
+    },
+    {
+      "glosaABG": "Digoxina Comprimidos 0,25 Mg",
+      "glosaBodega": "Digoxina 0,25 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 75.0,
+        "febrero": 30.0,
+        "marzo": 120.0,
+        "abril": 30.0,
+        "mayo": 45.0,
+        "junio": 45.0,
+        "julio": 105.0
+      }
+    },
+    {
+      "glosaABG": "Disulfiramo Comprimidos 500 Mg",
+      "glosaBodega": "Disulfiramo Comprimidos 500 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 119.0,
+        "febrero": 120.0,
+        "marzo": 75.0,
+        "abril": 60.0,
+        "mayo": 135.0,
+        "junio": 15.0,
+        "julio": 150.0
+      }
+    },
+    {
+      "glosaABG": "Domperidona 10 mg Comprimidos",
+      "glosaBodega": "Domperidona 10 mg Cm. Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 585.0,
+        "febrero": 736.0,
+        "marzo": 950.0,
+        "abril": 765.0,
+        "mayo": 805.0,
+        "junio": 745.0,
+        "julio": 519.0
+      }
+    },
+    {
+      "glosaABG": "Domperidona 10 mg/1 ml Suspension para Gotas Orales, frasco 20 ml (1ml=20 gotas=10 mg)",
+      "glosaBodega": "Domperidona 10 mg / ml. Gotas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "febrero": 1.0,
+        "marzo": 2.0,
+        "abril": 1.0,
+        "julio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Dorzolamida 2% Solucion Oftalmica, frasco 5 ml (1 ml=20 gotas) (prescribe gotas)",
+      "glosaBodega": "Dorzolamida 20 MG. 2 % Sol. Oft. Esteril 5 ml ud.",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 20.0,
+        "febrero": 30.0,
+        "marzo": 22.0,
+        "abril": 34.0,
+        "mayo": 25.0,
+        "junio": 30.0,
+        "julio": 34.0
+      }
+    },
+    {
+      "glosaABG": "Dorzolamida 20 mg/ Timolol 5 mg en 1 ml Solucion Oftalmica, frasco 5 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Dorzolamida 20 mg. + Timolol 5 mg. FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 30.0,
+        "febrero": 36.0,
+        "marzo": 22.0,
+        "abril": 20.0,
+        "mayo": 15.0,
+        "junio": 25.0,
+        "julio": 19.0
+      }
+    },
+    {
+      "glosaABG": "Doxiciclina 100 mg Capsulas",
+      "glosaBodega": "Doxiciclina 100 mg. CAPSULAS",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 60.0,
+        "febrero": 60.0,
+        "abril": 30.0,
+        "mayo": 61.0,
+        "junio": 20.0,
+        "julio": 99.0
+      }
+    },
+    {
+      "glosaABG": "Duloxetina 30 mg Capsulas",
+      "glosaBodega": "Duloxetina Capsulas con Granulos Con Recubrimiento Enterico 30 Mg. Capsulas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 4050.0,
+        "febrero": 4466.0,
+        "marzo": 4154.0,
+        "abril": 4925.0,
+        "mayo": 4372.0,
+        "junio": 4714.0,
+        "julio": 5288.0
+      }
+    },
+    {
+      "glosaABG": "Enalapril Maleato Comprimidos Recubiertos 10 Mg",
+      "glosaBodega": "Enalapril Maleato Comprimidos Recubiertos 10 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 13333.0,
+        "febrero": 21444.0,
+        "marzo": 11498.0,
+        "abril": 16459.0,
+        "mayo": 11329.0,
+        "junio": 14624.0,
+        "julio": 11882.0
+      }
+    },
+    {
+      "glosaABG": "Enantato de Noretisterona 50mg; Valerato de estradiol 5mg (Mesigyna inyectable)",
+      "glosaBodega": "Noretisterona/Estradiol (Mesigyna) 50/5 mg JERINGA",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 66.0,
+        "febrero": 23.0,
+        "marzo": 43.0,
+        "abril": 38.0,
+        "mayo": 25.0,
+        "junio": 38.0,
+        "julio": 84.0
+      }
+    },
+    {
+      "glosaABG": "Epinefrina 1 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Epinefrina Solucion Inyectable 1 Mg/1 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 1.0,
+        "abril": 1.0
+      }
+    },
+    {
+      "glosaABG": "Espironolactona Comprimidos 25 Mg",
+      "glosaBodega": "Espironolactona Comprimidos 25 Mg",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 4177.0,
+        "febrero": 6265.0,
+        "marzo": 4017.0,
+        "abril": 5309.0,
+        "mayo": 4341.0,
+        "junio": 4973.0,
+        "julio": 4960.0
+      }
+    },
+    {
+      "glosaABG": "Estradiol 1mg / Didrogesterona 5mg, Blister",
+      "glosaBodega": "Estradiol/Didrogesterona 1mg/5mg ud.",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "febrero": 1.0,
+        "marzo": 1.0,
+        "abril": 1.0,
+        "junio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Estradiol Micronizado 0,5 mg/aplicacion Gel Transdermico, frasco 95 g",
+      "glosaBodega": "Estradiol gel 0,5 mg/ dosis (Transdermico o en dispensador) FRASCOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 5.0,
+        "febrero": 6.0,
+        "marzo": 5.0,
+        "abril": 6.0,
+        "mayo": 11.0,
+        "junio": 10.0,
+        "julio": 14.0
+      }
+    },
+    {
+      "glosaABG": "Etambutol Clorhidrato 400 mg Comprimidos",
+      "glosaBodega": "Etambutol 400 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 163.0,
+        "junio": 22.0
+      }
+    },
+    {
+      "glosaABG": "Famotidina Comprimidos 40 Mg",
+      "glosaBodega": "Famotidina 40 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1936.0,
+        "febrero": 2097.0,
+        "marzo": 1081.0,
+        "abril": 1952.0,
+        "mayo": 1184.0,
+        "junio": 1347.0,
+        "julio": 1294.0
+      }
+    },
+    {
+      "glosaABG": "Fenitoina Sodica Comprimidos 100 Mg",
+      "glosaBodega": "Fenitoina Sodica 100 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 735.0,
+        "febrero": 975.0,
+        "marzo": 990.0,
+        "abril": 1020.0,
+        "mayo": 900.0,
+        "junio": 1155.0,
+        "julio": 1080.0
+      }
+    },
+    {
+      "glosaABG": "Fenobarbital Comprimidos 100 Mg",
+      "glosaBodega": "Fenobarbital 100 mg comprimidos",
+      "categoria": "CONTROLADOS",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 888.0,
+        "febrero": 760.0,
+        "marzo": 691.0,
+        "abril": 931.0,
+        "mayo": 972.0,
+        "junio": 807.0,
+        "julio": 838.0
+      }
+    },
+    {
+      "glosaABG": "Flucloxacilina 250 mg/5 ml Polvo Para Suspension Oral , frasco 60 ml",
+      "glosaBodega": "Flucloxacilina Polvo Para Jarabe 250 mg/5ml (60ml) FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 2.0,
+        "abril": 2.0,
+        "mayo": 2.0,
+        "junio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Flucloxacilina 500 mg Capsulas",
+      "glosaBodega": "Flucloxacilina 500 mg CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 28.0,
+        "febrero": 245.0,
+        "marzo": 322.0,
+        "abril": 105.0,
+        "mayo": 216.0,
+        "junio": 211.0,
+        "julio": 329.0
+      }
+    },
+    {
+      "glosaABG": "Fluconazol 150 mg Capsulas",
+      "glosaBodega": "Fluconazol 150 mgs. Caps.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2.0,
+        "febrero": 15.0,
+        "marzo": 14.0,
+        "abril": 16.0,
+        "junio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Flumazenil 0,5 mg/5 ml Solucion Inyectable, ampolla",
+      "glosaBodega": "Flumazenil 0,5 mg/ 5ml Sol. Inyectable Via Intravenosa Amp. Ampollas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Fluoxetina Comprimidos Recubiertos 20 Mg",
+      "glosaBodega": "Fluoxetina Clorhidrato 20 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 5843.0,
+        "febrero": 7813.0,
+        "marzo": 6046.0,
+        "abril": 2381.0,
+        "mayo": 2981.0,
+        "junio": 4774.0,
+        "julio": 6406.0
+      }
+    },
+    {
+      "glosaABG": "Fluticasona Propionato 250 mcg /Salmeterol 25 mcg/dosis , Aerosol para Inhalacion 120 dosis (prescribe dosis)",
+      "glosaBodega": "Fluticasona/Salmeterol 250 mcg/25 ug Do Inhalador",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 142.0,
+        "febrero": 191.0,
+        "marzo": 154.0,
+        "abril": 177.0,
+        "mayo": 135.0,
+        "junio": 178.0,
+        "julio": 129.0
+      }
+    },
+    {
+      "glosaABG": "Fluticasona Propionato Aerosol Para Inhalacion 125 Mcg/Dosis (120 dos)",
+      "glosaBodega": "Fluticasona 125 mcg Do Inhalador",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 20.0,
+        "febrero": 16.0,
+        "marzo": 16.0,
+        "abril": 15.0,
+        "mayo": 12.0,
+        "junio": 18.0,
+        "julio": 16.0
+      }
+    },
+    {
+      "glosaABG": "Fluticasona Propionato/Salmeterol (125/25) Aerosol Para Inhalacion (120 dos)",
+      "glosaBodega": "Fluticasona/Salmeterol 125 mcg/25 ug Do Inhalador",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 21.0,
+        "febrero": 25.0,
+        "marzo": 25.0,
+        "abril": 27.0,
+        "mayo": 17.0,
+        "junio": 21.0,
+        "julio": 25.0
+      }
+    },
+    {
+      "glosaABG": "Folifer Capsulas Con Granulos Con Hierro De Liberacion Prolongada",
+      "glosaBodega": "Fumarato Ferroso 330 mg Capsulas Con Granulos Con Hierro De Liberacion Prolongada (Folifer)",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1673.0,
+        "febrero": 675.0,
+        "marzo": 960.0,
+        "abril": 2134.0,
+        "mayo": 2115.0,
+        "junio": 1880.0,
+        "julio": 2220.0
+      }
+    },
+    {
+      "glosaABG": "Furosemida 20 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Furosemida Solucion Inyectable 20 Mg/1 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "junio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Furosemida 40 mg Comprimidos",
+      "glosaBodega": "Furosemida 40 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 4322.0,
+        "febrero": 5866.0,
+        "marzo": 4236.0,
+        "abril": 4729.0,
+        "mayo": 3655.0,
+        "junio": 4219.0,
+        "julio": 3881.0
+      }
+    },
+    {
+      "glosaABG": "Gemfibrozilo Comprimidos Recubiertos 600 Mg",
+      "glosaBodega": "Gemfibrozilo Comprimidos Recubiertos 600 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 108.0,
+        "febrero": 4015.0,
+        "marzo": 3172.0,
+        "abril": 4273.0,
+        "mayo": 2465.0,
+        "junio": 3992.0,
+        "julio": 3403.0
+      }
+    },
+    {
+      "glosaABG": "Gentamicina 0,3% Solucion Oftalmica , frasco 5 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Gentamicina Solucion Oftalmica 0,3% (5 ml) FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "febrero": 1.0
+      }
+    },
+    {
+      "glosaABG": "Gentamicina 0,3% Ungüento Oftalmico , pomo",
+      "glosaBodega": "Gentamicina Unguento Oftálmico 0,3% POMO",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 3.0,
+        "abril": 1.0,
+        "mayo": 1.0
+      }
+    },
+    {
+      "glosaABG": "Gentamicina Solucion Inyectable 80 Mg/2 Ml (amp)",
+      "glosaBodega": "Gentamicina Solucion Inyectable 80 Mg/2 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 5.0,
+        "mayo": 9.0,
+        "julio": 3.0
+      }
+    },
+    {
+      "glosaABG": "Glibenclamida Comprimidos 5 Mg",
+      "glosaBodega": "Glibenclamida 5 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1087.0,
+        "febrero": 1275.0,
+        "marzo": 854.0,
+        "abril": 1260.0,
+        "mayo": 900.0,
+        "junio": 720.0,
+        "julio": 435.0
+      }
+    },
+    {
+      "glosaABG": "Haloperidol 1 mg Comprimidos",
+      "glosaBodega": "Haloperidol 1 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 150.0,
+        "febrero": 30.0,
+        "marzo": 120.0,
+        "abril": 158.0,
+        "mayo": 45.0,
+        "junio": 180.0,
+        "julio": 125.0
+      }
+    },
+    {
+      "glosaABG": "Haloperidol 5 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Haloperidol 5 Mg / 1 ml amp.",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Hidralazina Clorhidrato 50 mg Comprimidos",
+      "glosaBodega": "Hidralazina 50 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 465.0,
+        "febrero": 750.0,
+        "marzo": 390.0,
+        "abril": 870.0,
+        "mayo": 360.0,
+        "junio": 720.0,
+        "julio": 390.0
+      }
+    },
+    {
+      "glosaABG": "Hidroclorotiazida Comprimidos 50 Mg",
+      "glosaBodega": "Hidroclorotiazida Comprimidos 50 Mg",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 12725.0,
+        "febrero": 17994.0,
+        "marzo": 12041.0,
+        "abril": 14397.0,
+        "mayo": 12361.0,
+        "junio": 12437.0,
+        "julio": 11616.0
+      }
+    },
+    {
+      "glosaABG": "Hidrocortisona 1 % Crema Topica , pomo",
+      "glosaBodega": "Hidrocortisona 1 % CREMA",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "julio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Hidrocortisona 100 mg Polvo Liofilizado para Solucion Inyectable , frasco ampolla",
+      "glosaBodega": "Hidrocortisona Polvo Para Solucion Inyectable 100 Mg AMPOLLAS",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 12.0,
+        "febrero": 9.0,
+        "marzo": 14.0,
+        "abril": 19.0,
+        "mayo": 18.0,
+        "junio": 18.0,
+        "julio": 31.0
+      }
+    },
+    {
+      "glosaABG": "Hidrocortisona 500 mg Polvo Liofilizado para Solucion Inyectable , frasco ampolla",
+      "glosaBodega": "Hidrocortisona Polvo Para Solucion Inyectable 500 Mg",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "mayo": 1.0,
+        "junio": 1.0,
+        "julio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Hidroxido de Aluminio 6% Suspension Oral , frasco 180 ml",
+      "glosaBodega": "Aluminio Hidróxido 6% gel FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 4.0,
+        "febrero": 5.0,
+        "marzo": 3.0,
+        "abril": 5.0,
+        "mayo": 5.0,
+        "junio": 5.0,
+        "julio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Hidroxizina 10 mg/5 ml Jarabe, frasco 120 ml (prescribe frasco)",
+      "glosaBodega": "Hidroxizina 10mg/5ml. Jarabe 120 ml. Fco.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Hidroxizina 20 mg Comprimidos",
+      "glosaBodega": "Hidroxizina 20 mg. Cm",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 42.0
+      }
+    },
+    {
+      "glosaABG": "Ibuprofeno 200 mg/5 ml Suspension Oral , frasco 120 ml",
+      "glosaBodega": "Ibuprofeno 200 mg/5 ml (100ml o 120ml) JARABE",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 27.0,
+        "febrero": 20.0,
+        "marzo": 42.0,
+        "abril": 57.0,
+        "mayo": 63.0,
+        "junio": 77.0,
+        "julio": 54.0
+      }
+    },
+    {
+      "glosaABG": "Ibuprofeno 400 mg Comprimidos",
+      "glosaBodega": "Ibuprofeno Comprimidos Recubiertos 400 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1483.0,
+        "febrero": 1448.0,
+        "marzo": 1665.0,
+        "abril": 1990.0,
+        "mayo": 2186.0,
+        "junio": 3014.0,
+        "julio": 2546.0
+      }
+    },
+    {
+      "glosaABG": "Imipramina Clorhidrato Comprimidos 25 Mg",
+      "glosaBodega": "Imipramina Clorhidrato Comprimidos 25 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 180.0,
+        "febrero": 240.0,
+        "marzo": 240.0,
+        "abril": 75.0,
+        "mayo": 270.0,
+        "junio": 150.0,
+        "julio": 180.0
+      }
+    },
+    {
+      "glosaABG": "Insulina Cristalina 100 U.I/ml,frasco ampolla 10 ml",
+      "glosaBodega": "Insulina Cristalina 100 U.I./mL F.A. 10 mL",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Insulina NPH fco amp 100UI/ml fco 10 ml",
+      "glosaBodega": "Insulina Humana NPH Inyectable 100 U.I./mL F.A 10 mL",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 562.0,
+        "febrero": 768.0,
+        "marzo": 492.0,
+        "abril": 560.0,
+        "mayo": 455.0,
+        "junio": 589.0,
+        "julio": 609.0
+      }
+    },
+    {
+      "glosaABG": "Isoniazida 100 mg/5 ml Suspension oral, frasco 200 ml",
+      "glosaBodega": "Isoniazida 200 mg/5 ml Suspension oral 120 ml Fco",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Isoniazida 300 mg Comprimidos",
+      "glosaBodega": "Isoniazida cm 300 mg Cm.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 124.0
+      }
+    },
+    {
+      "glosaABG": "Isoniazida Comprimidos 100 Mg",
+      "glosaBodega": "Isoniazida cm 100 mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 6.0,
+        "junio": 57.0
+      }
+    },
+    {
+      "glosaABG": "Isosorbide Dinitrato Comprimidos 10 Mg",
+      "glosaBodega": "Isosorbide Dinitrato 10 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 405.0,
+        "febrero": 810.0,
+        "marzo": 180.0,
+        "abril": 750.0,
+        "mayo": 540.0,
+        "junio": 600.0,
+        "julio": 390.0
+      }
+    },
+    {
+      "glosaABG": "Ketoconazol 2 % Shampoo , frasco",
+      "glosaBodega": "Ketoconazol 2% Shampoo 100ml Fco.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Ketoprofeno 100 mg/2 ml, Solucion Inyectable, ampolla",
+      "glosaBodega": "KETOPROFENO 100MG/2ML IV AMPOLLAS",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 8.0,
+        "febrero": 14.0,
+        "marzo": 11.0,
+        "abril": 14.0,
+        "mayo": 8.0,
+        "junio": 17.0,
+        "julio": 5.0
+      }
+    },
+    {
+      "glosaABG": "Ketorolaco 30 mg Comprimidos Sublingual",
+      "glosaBodega": "Ketorolaco 30 mg sublingual COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Lactulosa 65% Solucion Oral , frasco 200 ml",
+      "glosaBodega": "Lactulosa 65% o 66,7% sol. oral 200 mL FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 6.0,
+        "febrero": 10.0,
+        "marzo": 9.0,
+        "abril": 12.0,
+        "mayo": 10.0,
+        "junio": 18.0,
+        "julio": 16.0
+      }
+    },
+    {
+      "glosaABG": "Lagrimas Artificiales Solucion Oftalmica , frasco 15 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Lagrima artificial FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 106.0,
+        "febrero": 111.0,
+        "marzo": 83.0,
+        "abril": 77.0,
+        "mayo": 60.0,
+        "junio": 78.0,
+        "julio": 72.0
+      }
+    },
+    {
+      "glosaABG": "Lamotrigina Comprimidos 100 Mg",
+      "glosaBodega": "Lamotrigina 100 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 345.0,
+        "febrero": 435.0,
+        "marzo": 161.0,
+        "abril": 259.0,
+        "mayo": 300.0,
+        "junio": 330.0,
+        "julio": 375.0
+      }
+    },
+    {
+      "glosaABG": "Lamotrigina Comprimidos 50 Mg",
+      "glosaBodega": "Lamotrigina Cm 50 Mg (S. S. M. S.)",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 180.0,
+        "febrero": 390.0,
+        "marzo": 345.0,
+        "abril": 210.0,
+        "mayo": 300.0,
+        "junio": 300.0,
+        "julio": 330.0
+      }
+    },
+    {
+      "glosaABG": "Lanatosido C 0,4 mg/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Lanatosido C 0,4 Mg/2Ml Ampolla",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Latanoprost 50 mcg/1 ml Solucion Oftalmica , frasco 2,5 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Latanoprost 50 mcg/ml (2,5 ml) FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 88.0,
+        "febrero": 76.0,
+        "marzo": 66.0,
+        "abril": 81.0,
+        "mayo": 55.0,
+        "junio": 79.0,
+        "julio": 62.0
+      }
+    },
+    {
+      "glosaABG": "Levetiracetam 1000 mg Comprimidos",
+      "glosaBodega": "Levetiracetam 1000 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 405.0,
+        "febrero": 660.0,
+        "marzo": 420.0,
+        "abril": 660.0,
+        "mayo": 240.0,
+        "junio": 810.0,
+        "julio": 360.0
+      }
+    },
+    {
+      "glosaABG": "LEVETIRACETAM 500 mg",
+      "glosaBodega": "Levetiracetam 500 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1110.0,
+        "febrero": 1355.0,
+        "marzo": 1275.0,
+        "abril": 1335.0,
+        "mayo": 1005.0,
+        "junio": 1033.0,
+        "julio": 1665.0
+      }
+    },
+    {
+      "glosaABG": "Levetiracetam solución oral 100 mg/ml (300 ml)",
+      "glosaBodega": "Levetiracetam 100 mg/ml SOL. ORAL",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2.0,
+        "febrero": 2.0,
+        "marzo": 2.0,
+        "mayo": 2.0,
+        "junio": 2.0,
+        "julio": 5.0
+      }
+    },
+    {
+      "glosaABG": "Levocetirizina 2,5 mg/5 ml jarabe, frasco 100 ml",
+      "glosaBodega": "Levocetirizina 2.5 mg/5 ml Jarabe ud.",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 1.0,
+        "julio": 0.0
+      }
+    },
+    {
+      "glosaABG": "Levocetirizina 5 mg Comprimidos",
+      "glosaBodega": "Levocetirizina Diclorhidrato Com. Recubierto 5 mg. Cm.",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 30.0,
+        "febrero": 6.0,
+        "marzo": 0.0,
+        "abril": 30.0,
+        "mayo": 0.0,
+        "junio": 0.0,
+        "julio": 0.0
+      }
+    },
+    {
+      "glosaABG": "Levodopa 200mg + Benserazida 50mg Comprimidos",
+      "glosaBodega": "Levodopa/Benserazida 200/ 50 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3676.0,
+        "febrero": 3923.0,
+        "marzo": 4665.0,
+        "abril": 3420.0,
+        "mayo": 3300.0,
+        "junio": 2310.0,
+        "julio": 3810.0
+      }
+    },
+    {
+      "glosaABG": "Levodopa 250 mg+ carbidopa 25 mg",
+      "glosaBodega": "Levodopa / Carbidopa 250 / 25 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 603.0,
+        "febrero": 781.0,
+        "marzo": 638.0,
+        "abril": 1213.0,
+        "mayo": 450.0,
+        "junio": 608.0,
+        "julio": 586.0
+      }
+    },
+    {
+      "glosaABG": "Levodropropizina 60 Mg/10ml Solucion Oral , frasco 120 ml",
+      "glosaBodega": "Levodropropizina 60mg/10 ml Jarabe 120ml",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Levonorgestrel 0,03 mg comprimidos",
+      "glosaBodega": "Levonorgestrel (Anulit) 0,03mg. CICLOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 38.0,
+        "febrero": 55.0,
+        "marzo": 32.0,
+        "abril": 63.0,
+        "mayo": 43.0,
+        "junio": 41.0,
+        "julio": 56.0
+      }
+    },
+    {
+      "glosaABG": "Levonorgestrel 0,75 mg Comprimidos , blister",
+      "glosaBodega": "Anticonceptivo de emergencia. 0,75 mg o 1,5 mg COMPRIMIDOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Levonorgestrel 1,5mg Comprimido",
+      "glosaBodega": "Anticonceptivo de emergencia. 0,75 mg o 1,5 mg COMPRIMIDOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2.0,
+        "febrero": 2.0,
+        "marzo": 3.0,
+        "mayo": 3.0,
+        "junio": 4.0,
+        "julio": 5.0
+      }
+    },
+    {
+      "glosaABG": "Levonorgestrel+Etinilestradiol cm ANULETTE® blister 28 cm",
+      "glosaBodega": "(Anulette) Levonorgestrel 0,15mg / Etinilestradiol 0,03mg Recubierto Cm. ( blister 28cm ) CICLOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 167.0,
+        "febrero": 203.0,
+        "marzo": 166.0,
+        "abril": 165.0,
+        "mayo": 165.0,
+        "junio": 153.0,
+        "julio": 157.0
+      }
+    },
+    {
+      "glosaABG": "Levotiroxina Sodica Comprimidos 100 Mcg",
+      "glosaBodega": "Levotiroxina 100 mcg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 10552.0,
+        "febrero": 16103.0,
+        "marzo": 11635.0,
+        "abril": 12966.0,
+        "mayo": 11561.0,
+        "junio": 11945.0,
+        "julio": 11451.0
+      }
+    },
+    {
+      "glosaABG": "Levotiroxina Sodica Comprimidos 50 Mcg",
+      "glosaBodega": "Levotiroxina 50 mcg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 7505.0,
+        "febrero": 11409.0,
+        "marzo": 7326.0,
+        "abril": 9276.0,
+        "mayo": 7121.0,
+        "junio": 9087.0,
+        "julio": 8276.0
+      }
+    },
+    {
+      "glosaABG": "Lidocaina Clorhidrato 2% Solucion Inyectable , ampolla 5 ml",
+      "glosaBodega": "Lidocaina Clorhidrato 2% Solucion Inyectable Ampollas De 5 Ml",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 23.0,
+        "febrero": 11.0,
+        "marzo": 31.0,
+        "abril": 11.0,
+        "mayo": 16.0,
+        "junio": 24.0,
+        "julio": 22.0
+      }
+    },
+    {
+      "glosaABG": "Loratadina 10 Mg Comprimidos",
+      "glosaBodega": "Loratadina 10 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 2602.0,
+        "febrero": 2114.0,
+        "marzo": 3326.0,
+        "abril": 3647.0,
+        "mayo": 2887.0,
+        "junio": 3556.0,
+        "julio": 2895.0
+      }
+    },
+    {
+      "glosaABG": "Loratadina 5 mg/5 ml Jarabe , frasco 60 ml",
+      "glosaBodega": "Loratadina 5mg / 5ml Jbe x 60ml a 100ml",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 52.0,
+        "febrero": 40.0,
+        "marzo": 59.0,
+        "abril": 51.0,
+        "mayo": 70.0,
+        "junio": 60.0,
+        "julio": 55.0
+      }
+    },
+    {
+      "glosaABG": "Losartan Potasico Comprimidos Recubiertos 50 Mg",
+      "glosaBodega": "Losartan Potasico Comprimidos Recubiertos 50 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS + FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 74041.0,
+        "febrero": 109522.0,
+        "marzo": 71144.0,
+        "abril": 89056.0,
+        "mayo": 72188.0,
+        "junio": 80307.0,
+        "julio": 75733.0
+      }
+    },
+    {
+      "glosaABG": "Mebendazol Comprimidos 100 Mg",
+      "glosaBodega": "Mebendazol Comprimidos 100 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 3.0,
+        "marzo": 2.0,
+        "abril": 6.0,
+        "junio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Mebendazol Suspension 100 Mg/5 Ml (30 ml)",
+      "glosaBodega": "Mebendazol Suspension 100 Mg/5 Ml (30 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Medroxiprogesterona Acetato 104 mg/0.65 ml jeringa prellenada",
+      "glosaBodega": "Medroxiprogesterona Acetato Susp. Inyectable (Sayana ) 104 mg/0.65 ml JERINGA",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 121.0,
+        "febrero": 75.0,
+        "marzo": 126.0,
+        "abril": 121.0,
+        "mayo": 93.0,
+        "junio": 126.0,
+        "julio": 125.0
+      }
+    },
+    {
+      "glosaABG": "Metamizol Sodico Monohidrato 1 g/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Metamizol Sodico (Dipirona) Solucion Inyectable 1 gr/2 ml AMPOLLAS",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 57.0,
+        "febrero": 45.0,
+        "marzo": 41.0,
+        "abril": 42.0,
+        "mayo": 30.0,
+        "junio": 45.0,
+        "julio": 38.0
+      }
+    },
+    {
+      "glosaABG": "Metformina Clorhidrato 1000 mg Comprimidos de Liberacion Prolongada",
+      "glosaBodega": "Metformina 1000 mg XR COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS + FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 15316.0,
+        "febrero": 21764.0,
+        "marzo": 15374.0,
+        "abril": 17533.0,
+        "mayo": 14030.0,
+        "junio": 17978.0,
+        "julio": 16575.0
+      }
+    },
+    {
+      "glosaABG": "Metformina Clorhidrato Comprimidos Recubiertos 850 Mg",
+      "glosaBodega": "Metformina Comprimido Recubierto 850 mg COMPRIMIDOS",
+      "categoria": "FOFAR",
+      "fofar": true,
+      "iaaps": false,
+      "trazador": true,
+      "programa": "FOFAR",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 26955.0,
+        "febrero": 37947.0,
+        "marzo": 28128.0,
+        "abril": 30636.0,
+        "mayo": 25752.0,
+        "junio": 27599.0,
+        "julio": 28274.0
+      }
+    },
+    {
+      "glosaABG": "Metildopa 250 mg comprimido",
+      "glosaBodega": "Metildopa 250 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 60.0,
+        "junio": 120.0,
+        "julio": 120.0
+      }
+    },
+    {
+      "glosaABG": "Metilfenidato Clorhidrato Comprimidos 10 Mg",
+      "glosaBodega": "Metilfenidato 10 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1132.0,
+        "febrero": 1018.0,
+        "marzo": 2468.0,
+        "abril": 3207.0,
+        "mayo": 3140.0,
+        "junio": 3224.0,
+        "julio": 4113.0
+      }
+    },
+    {
+      "glosaABG": "Metoclopramida Clorhidrato 10 mg/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Metoclopramida Clorhidrato Solucion Inyectable 10 Mg/2 Ml (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 11.0,
+        "febrero": 9.0,
+        "marzo": 14.0,
+        "abril": 10.0,
+        "mayo": 9.0,
+        "junio": 9.0,
+        "julio": 9.0
+      }
+    },
+    {
+      "glosaABG": "Metronidazol 0,75 % gel dermico , pomo",
+      "glosaBodega": "Metronidazol Gel 0,75 % GEL",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Metronidazol 125 mg/ 5 ml Suspensión Oral, frasco 120 ml",
+      "glosaBodega": "Metronidazol 125 mg/5ml 120ml Susp. Oral Jbe",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Metronidazol 500 mg Comprimidos",
+      "glosaBodega": "Metronidazol Comprimidos Recubiertos 500 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 279.0,
+        "febrero": 422.0,
+        "marzo": 317.0,
+        "abril": 1222.0,
+        "mayo": 553.0,
+        "junio": 497.0,
+        "julio": 561.0
+      }
+    },
+    {
+      "glosaABG": "Metronidazol Ovulos 500 Mg",
+      "glosaBodega": "Metronidazol 500 mg Ovulos ud. OVULOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 287.0,
+        "febrero": 259.0,
+        "marzo": 309.0,
+        "abril": 194.0,
+        "mayo": 297.0,
+        "junio": 273.0,
+        "julio": 236.0
+      }
+    },
+    {
+      "glosaABG": "Miconazol 2% Gel Oral, pomo 40 g",
+      "glosaBodega": "Miconazol 2% gel 40 g POMO",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Midazolam 5 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Midazolam Solucion Inyectable 5 Mg/1 Ml (amp) Ampollas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0
+      }
+    },
+    {
+      "glosaABG": "Mometasona Furoato 0,1% Crema Topica , pomo",
+      "glosaBodega": "Mometasona Furoato 0,1% 15g ud. CREMA",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Morfina Clorhidrato 10 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Morfina 10 mg/ml amp. Ampollas",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": true,
+      "disponibleBodega": false,
+      "accionSiCritico": "INFORMAR QUIEBRE / NO REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Nistatina 100.000 U.I. Ovulos",
+      "glosaBodega": "Nistatina 100.000 UI OVULOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Nistatina 100.000 U.I./1 ml Suspension para Gotas Orales , frasco 24 ml (1 ml=20 gotas)",
+      "glosaBodega": "Nistatina 100.000 UI/ml Susp. Oral para Gotas Fco 20 a 30 Ml",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Nitrofurantoina 100 mg Capsulas",
+      "glosaBodega": "Nitrofurantoina Macrocristales 100 mg CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 120.0,
+        "febrero": 186.0,
+        "marzo": 86.0,
+        "abril": 146.0,
+        "mayo": 242.0,
+        "junio": 87.0,
+        "julio": 162.0
+      }
+    },
+    {
+      "glosaABG": "Novafem Suspension Inyectable (amp)",
+      "glosaBodega": "Medroxiprogesterona/Estradiol (Novafem Jeringa) 25/5 mg JERINGA",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 189.0,
+        "febrero": 155.0,
+        "marzo": 109.0,
+        "abril": 140.0,
+        "mayo": 167.0,
+        "junio": 115.0,
+        "julio": 156.0
+      }
+    },
+    {
+      "glosaABG": "Omeprazol 20 mg Capsulas",
+      "glosaBodega": "Omeprazol 20 mg CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 7806.0,
+        "febrero": 11073.0,
+        "marzo": 8172.0,
+        "abril": 9665.0,
+        "mayo": 7610.0,
+        "junio": 8512.0,
+        "julio": 8483.0
+      }
+    },
+    {
+      "glosaABG": "Paracetamol 100 mg/1 ml Solucion para gotas Orales , frasco 15 ml (1ml=30 gotas=100 mg)",
+      "glosaBodega": "Paracetamol Solucion Para Gotas Orales 100 Mg/Ml (15 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Paracetamol 125mg Supositorios",
+      "glosaBodega": "Paracetamol Sup. 125 mg SUPOSITORIOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1.0,
+        "marzo": 1.0,
+        "abril": 8.0,
+        "junio": 8.0,
+        "julio": 2.0
+      }
+    },
+    {
+      "glosaABG": "Paracetamol 500 mg Comprimidos",
+      "glosaBodega": "Paracetamol 500 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 115827.0,
+        "febrero": 185561.0,
+        "marzo": 115836.0,
+        "abril": 154911.0,
+        "mayo": 120213.0,
+        "junio": 146485.0,
+        "julio": 123999.0
+      }
+    },
+    {
+      "glosaABG": "Paracetamol 80 mg Comprimidos",
+      "glosaBodega": "Paracetamol Infantil Comprimidos Masticables 80 Mg Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 101.0,
+        "febrero": 65.0,
+        "marzo": 159.0,
+        "abril": 206.0,
+        "mayo": 246.0,
+        "junio": 334.0,
+        "julio": 378.0
+      }
+    },
+    {
+      "glosaABG": "Pargeverina Clorhidrato 5 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Pargeverina 5mg / 2ml Amp.",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 31.0,
+        "febrero": 11.0,
+        "marzo": 53.0,
+        "abril": 16.0,
+        "mayo": 16.0,
+        "junio": 18.0,
+        "julio": 9.0
+      }
+    },
+    {
+      "glosaABG": "Paroxetina 20 Mg Comprimidos Recubiertos",
+      "glosaBodega": "Paroxetina 20 Mg Comprimidos Recubiertos Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 800.0,
+        "febrero": 968.0,
+        "marzo": 870.0,
+        "abril": 1250.0,
+        "mayo": 660.0,
+        "junio": 810.0,
+        "julio": 540.0
+      }
+    },
+    {
+      "glosaABG": "Piridoxina 10 mg Comprimidos",
+      "glosaBodega": "PIRIDOXINA 10MG COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Piridoxina 50 mg Comprimidos",
+      "glosaBodega": "Piridoxina 50 mg. Cm.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 30.0,
+        "abril": 871.0,
+        "junio": 434.0
+      }
+    },
+    {
+      "glosaABG": "Pomada 6% azufrada, Pomo 50 gramos",
+      "glosaBodega": "Pomada Azufrada 6% 50 g POTE",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Prednisona 20 mg Comprimidos",
+      "glosaBodega": "Prednisona 20 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 368.0,
+        "febrero": 229.0,
+        "marzo": 321.0,
+        "abril": 379.0,
+        "mayo": 379.0,
+        "junio": 588.0,
+        "julio": 493.0
+      }
+    },
+    {
+      "glosaABG": "Prednisona 20 mg/5 ml Suspension Oral , frasco 60 ml",
+      "glosaBodega": "Prednisona Jarabe 20 mg/5 ml FRASCOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 11.0,
+        "febrero": 4.0,
+        "marzo": 7.0,
+        "abril": 15.0,
+        "mayo": 16.0,
+        "junio": 46.0,
+        "julio": 15.0
+      }
+    },
+    {
+      "glosaABG": "Prednisona 5 mg Comprimidos",
+      "glosaBodega": "Prednisona 5 Mg. Cm. COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 63.0,
+        "febrero": 18.0,
+        "marzo": 60.0,
+        "abril": 12.0,
+        "mayo": 17.0,
+        "junio": 94.0,
+        "julio": 93.0
+      }
+    },
+    {
+      "glosaABG": "Pregabalina 75 mg Capsulas",
+      "glosaBodega": "Pregabalina 75 mg. Cm. Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Primidona 250 Mg Comprimidos",
+      "glosaBodega": "Primidona 250 Mg Comprimidos Comprimidos",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 150.0,
+        "febrero": 210.0,
+        "marzo": 225.0,
+        "abril": 120.0,
+        "mayo": 345.0,
+        "junio": 60.0,
+        "julio": 240.0
+      }
+    },
+    {
+      "glosaABG": "Progesterona Micronizada 100 mg Capsulas",
+      "glosaBodega": "Progesterona Micronizada 100 mg Cap. CICLOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "febrero": 0.0,
+        "marzo": 0.0,
+        "abril": 0.0,
+        "mayo": 90.0,
+        "junio": 120.0,
+        "julio": 150.0
+      }
+    },
+    {
+      "glosaABG": "Propanolol Comprimidos 40 Mg",
+      "glosaBodega": "Propranolol 40 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1307.0,
+        "febrero": 1894.0,
+        "marzo": 1362.0,
+        "abril": 1369.0,
+        "mayo": 1628.0,
+        "junio": 1142.0,
+        "julio": 1555.0
+      }
+    },
+    {
+      "glosaABG": "Propranolol Clorhidrato 1 mg/1 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Propranolol Clorhidrato 1Mg/1Ml inyectable Ampolla 1 ml",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Quetiapina 100 mg",
+      "glosaBodega": "Quetiapina 100 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 135.0,
+        "febrero": 300.0,
+        "marzo": 60.0,
+        "abril": 435.0,
+        "mayo": 150.0,
+        "junio": 480.0,
+        "julio": 195.0
+      }
+    },
+    {
+      "glosaABG": "Quetiapina 25 mg Comprimidos",
+      "glosaBodega": "Quetiapina 25 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1065.0,
+        "febrero": 1767.0,
+        "marzo": 1327.0,
+        "abril": 2005.0,
+        "mayo": 1040.0,
+        "junio": 1882.0,
+        "julio": 1514.0
+      }
+    },
+    {
+      "glosaABG": "Rifampicina 150 Mg Capsulas",
+      "glosaBodega": "Rifampicina Cp 150 Mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Rifampicina 150 mg/Isoniazida 75 mg Comprimidos",
+      "glosaBodega": "Fase 2.Trisemanal Rifampicina 150/Isoniazida 75 Cm",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 736.0,
+        "junio": 732.0
+      }
+    },
+    {
+      "glosaABG": "Rifampicina 150 mg/Isoniazida 75 mg/Pirazinamida 400 mg/Etambutol 275 mg, Comprimidos",
+      "glosaBodega": "Fase 1.Diaria Rifampicina 150/Pirazinamida 400/Isoniazida 75/Etambutol 275 Cm",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 364.0,
+        "junio": 353.0
+      }
+    },
+    {
+      "glosaABG": "Rifapentina 150 mg Comprimidos",
+      "glosaBodega": "Rifapentine 150 mg. Cm.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Rifapentina 300 mg/Isoniazida 300 mg Comprimidos",
+      "glosaBodega": "Isoniazida cm 300 mg Cm. + Rifapentine 300 mg Cm Recub.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "abril": 118.0,
+        "junio": 80.0
+      }
+    },
+    {
+      "glosaABG": "Risperidona 1 mg Comprimidos",
+      "glosaBodega": "Risperidona Comprimidos Recubiertos 1 Mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 293.0,
+        "febrero": 379.0,
+        "marzo": 280.0,
+        "abril": 255.0,
+        "mayo": 480.0,
+        "junio": 403.0,
+        "julio": 405.0
+      }
+    },
+    {
+      "glosaABG": "Salbutamol 100 mcg/dosis Aerosol Para Inhalacion , 200 dosis (prescribe dosis)",
+      "glosaBodega": "Salbutamol 100 ug/dosis INHALADORES",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 266.0,
+        "febrero": 262.0,
+        "marzo": 279.0,
+        "abril": 278.0,
+        "mayo": 232.0,
+        "junio": 278.0,
+        "julio": 280.0
+      }
+    },
+    {
+      "glosaABG": "Sales Para Rehidratacion Oral-60 Polvo Para Solucion oral, sobre",
+      "glosaBodega": "Sales Para Rehidratacion Oral-60 Polvo Para Solucion (sac) Sobre",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 22.0,
+        "febrero": 28.0,
+        "marzo": 61.0,
+        "abril": 79.0,
+        "mayo": 85.0,
+        "junio": 51.0,
+        "julio": 52.0
+      }
+    },
+    {
+      "glosaABG": "Sales Para Rehidratacion Oral-90 Polvo Para Solucion oral, sobre",
+      "glosaBodega": "Sales Para Rehidratacion Oral-90 Polvo Para Solucion (sac) Sobre",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 60.0,
+        "febrero": 107.0,
+        "marzo": 147.0,
+        "abril": 113.0,
+        "mayo": 94.0,
+        "junio": 110.0,
+        "julio": 84.0
+      }
+    },
+    {
+      "glosaABG": "Salmeterol Aerosol Para Inhalacion 25 Mcg/Dosis (120 dos)",
+      "glosaBodega": "Salmeterol 25 Ug/Do Inhalador Presurizado Fc 120 Do",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 62.0,
+        "febrero": 94.0,
+        "marzo": 47.0,
+        "abril": 86.0,
+        "mayo": 43.0,
+        "junio": 71.0,
+        "julio": 44.0
+      }
+    },
+    {
+      "glosaABG": "sellos de seguridad carro de paro",
+      "glosaBodega": "Sello Desechable para Carro de Paro Numerado SR rojo Ud.",
+      "categoria": "",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 13.0
+      }
+    },
+    {
+      "glosaABG": "Sertralina 50 Mg Comprimidos",
+      "glosaBodega": "Sertralina 50 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 16288.0,
+        "febrero": 23264.0,
+        "marzo": 16421.0,
+        "abril": 20897.0,
+        "mayo": 17011.0,
+        "junio": 17139.0,
+        "julio": 16481.0
+      }
+    },
+    {
+      "glosaABG": "Sifrol (Pramipexol) 0,25 mg.",
+      "glosaBodega": "Pramipexol 0,25 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 480.0,
+        "febrero": 840.0,
+        "marzo": 510.0,
+        "abril": 840.0,
+        "mayo": 390.0,
+        "junio": 540.0,
+        "julio": 516.0
+      }
+    },
+    {
+      "glosaABG": "Sifrol Comprimidos 1 Mg",
+      "glosaBodega": "Pramipexol 1 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 606.0,
+        "febrero": 1035.0,
+        "marzo": 375.0,
+        "abril": 840.0,
+        "mayo": 519.0,
+        "junio": 465.0,
+        "julio": 660.0
+      }
+    },
+    {
+      "glosaABG": "Sulfato De Magnesio 25% Solucion Inyectable , ampolla",
+      "glosaBodega": "Sulfato de Magnesio 25% (5 ml) AMPOLLAS",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Sulfato de Zinc 5 mg / ml Frasco 30 ml",
+      "glosaBodega": "Zinc sol. oral gotas 5mg/mL FRASCOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Sulfato Ferroso 125 Mg/Ml Solución Para Gotas Orales (30 Ml)",
+      "glosaBodega": "Sulfato Ferroso Solucion Para Gotas Orales 125 Mg/Ml (10 ml) Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 7.0,
+        "febrero": 5.0,
+        "marzo": 11.0,
+        "abril": 6.0,
+        "mayo": 9.0,
+        "junio": 8.0,
+        "julio": 17.0
+      }
+    },
+    {
+      "glosaABG": "Sulfato Ferroso Comprimidos 200 Mg",
+      "glosaBodega": "Sulfato Ferroso 200 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 4.0,
+        "febrero": 2447.0,
+        "marzo": 1588.0,
+        "abril": 0.0,
+        "mayo": 0.0,
+        "junio": 405.0,
+        "julio": 621.0
+      }
+    },
+    {
+      "glosaABG": "Suxametonio 100 mg Polvo Liofilizado para Solución Inyectable, ampolla",
+      "glosaBodega": "Suxametonio CI 100 mg/5 ml Amp.",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {}
+    },
+    {
+      "glosaABG": "Terbinafina 1 % Solucion Topica, frasco 15 ml",
+      "glosaBodega": "Terbinafina Clorhidrato Sol. Topica 1% 15ml",
+      "categoria": "TELEDERMATOLOGIA",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0
+      }
+    },
+    {
+      "glosaABG": "Terbinafina 250 mg Comprimidos",
+      "glosaBodega": "Terbinafina 250 mg COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 723.0,
+        "febrero": 836.0,
+        "marzo": 469.0,
+        "abril": 558.0,
+        "mayo": 462.0,
+        "junio": 318.0,
+        "julio": 150.0
+      }
+    },
+    {
+      "glosaABG": "Tibolona 2,5 mg Comprimidos, blister",
+      "glosaBodega": "Tibolona 2,5 mg COMPRIMIDOS",
+      "categoria": "Prog. Salud Sexual y Reproductiva",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 17.0,
+        "febrero": 4.0,
+        "marzo": 4.0,
+        "abril": 5.0,
+        "junio": 4.0,
+        "julio": 3.0
+      }
+    },
+    {
+      "glosaABG": "Timolol 0,5% Solucion Oftalmica , frasco 10 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Timolol 0,5 % 10 ml. FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 8.0,
+        "febrero": 7.0,
+        "marzo": 8.0,
+        "abril": 11.0,
+        "mayo": 4.0,
+        "junio": 10.0,
+        "julio": 1.0
+      }
+    },
+    {
+      "glosaABG": "Tonaril Comprimidos 2 Mg",
+      "glosaBodega": "Trihexifenidilo Clorhidrato (Tonaril) 2 mg COMPRIMIDOS",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 292.0,
+        "febrero": 510.0,
+        "marzo": 360.0,
+        "abril": 420.0,
+        "mayo": 120.0,
+        "junio": 210.0,
+        "julio": 270.0
+      }
+    },
+    {
+      "glosaABG": "Tramadol Clorhidrato 100 mg/1 ml Solucion para gotas Orales , frasco 10 ml (1 ml= 25 gotas =100 mg)",
+      "glosaBodega": "Tramadol Clorhidrato Fc 100 Mg/Ml Solucion En Gotas 10 Ml",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 103.0,
+        "febrero": 140.0,
+        "marzo": 82.0,
+        "abril": 94.0,
+        "mayo": 84.0,
+        "junio": 85.0,
+        "julio": 85.0
+      }
+    },
+    {
+      "glosaABG": "Tramadol Clorhidrato 50 mg Comprimidos",
+      "glosaBodega": "Tramadol Clorhidrato Cm 50 Mg",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 974.0,
+        "febrero": 1310.0,
+        "marzo": 696.0,
+        "abril": 1272.0,
+        "mayo": 899.0,
+        "junio": 1078.0,
+        "julio": 887.0
+      }
+    },
+    {
+      "glosaABG": "Travoprost 0,004%/Timolol 0,5% Solucion Oftalmica, frasco 2,5 ml (1 ml= 20 gotas) (prescribe gotas)",
+      "glosaBodega": "Travoprost 0,004% + Timolol 0,5 mg. Fco (Duotrav) FRASCOS",
+      "categoria": "UAPO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 25.0,
+        "febrero": 45.0,
+        "marzo": 29.0,
+        "abril": 40.0,
+        "mayo": 39.0,
+        "junio": 43.0,
+        "julio": 32.0
+      }
+    },
+    {
+      "glosaABG": "Trazodona 100 mg Capsulas",
+      "glosaBodega": "Trazodona Clorhidrato 100 mg CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 263.0,
+        "febrero": 375.0,
+        "marzo": 204.0,
+        "abril": 428.0,
+        "mayo": 120.0,
+        "junio": 436.0,
+        "julio": 91.0
+      }
+    },
+    {
+      "glosaABG": "Vaselina Liquida Esteril 1mg/ 1 ml, ampolla 10 ml",
+      "glosaBodega": "Vaselina esteril ampollas 10 ml ud.",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "febrero": 5.0,
+        "marzo": 131.0,
+        "abril": 7.0,
+        "mayo": 13.0,
+        "julio": 9.0
+      }
+    },
+    {
+      "glosaABG": "Venlafaxina 37,5 mg Capsulas de Liberacion Prolongada",
+      "glosaBodega": "Venlafaxina 37.5 mg Liberación Prolongada CAPSULAS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "febrero": 223.0,
+        "marzo": 745.0,
+        "abril": 629.0,
+        "mayo": 505.0,
+        "junio": 407.0,
+        "julio": 841.0
+      }
+    },
+    {
+      "glosaABG": "Venlafaxina 75 mg Comprimidos",
+      "glosaBodega": "Venlafaxina 75 mg XR COMPRIMIDOS",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 3930.0,
+        "febrero": 5889.0,
+        "marzo": 5690.0,
+        "abril": 6349.0,
+        "mayo": 3692.0,
+        "junio": 5409.0,
+        "julio": 5261.0
+      }
+    },
+    {
+      "glosaABG": "Verapamilo Clorhidrato 5 mg/2 ml Solucion Inyectable , ampolla",
+      "glosaBodega": "Verapamilo 5 mg/ml. Amp",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 0.0,
+        "marzo": 10.0
+      }
+    },
+    {
+      "glosaABG": "Vildagliptina 50 mg Comprimidos",
+      "glosaBodega": "Vildagliptina 50 mg. Cm.",
+      "categoria": "Prog. Ministerial",
+      "fofar": false,
+      "iaaps": true,
+      "trazador": true,
+      "programa": "IAAPS",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 1620.0,
+        "febrero": 2349.0,
+        "marzo": 2237.0,
+        "abril": 3676.0,
+        "mayo": 3957.0,
+        "junio": 5161.0,
+        "julio": 6611.0
+      }
+    },
+    {
+      "glosaABG": "Vitaminas ACD gotas fco 30 ml",
+      "glosaBodega": "Vitaminas ACD gotas fco 30 ml Frasco",
+      "categoria": "MEDICAMENTO",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 25.0,
+        "febrero": 27.0,
+        "marzo": 32.0,
+        "abril": 30.0,
+        "mayo": 33.0,
+        "junio": 35.0,
+        "julio": 47.0
+      }
+    },
+    {
+      "glosaABG": "Vitaminas B1, B6, B12 10.000 Solucion Inyectable (amp)",
+      "glosaBodega": "Vitaminas B1, B6, B12 10.000 Solucion Inyectable (amp)",
+      "categoria": "INYECTABLE",
+      "fofar": false,
+      "iaaps": false,
+      "trazador": false,
+      "programa": "",
+      "controlado": false,
+      "disponibleBodega": true,
+      "accionSiCritico": "REVISAR BODEGA",
+      "initialConsumption": {
+        "enero": 89.0,
+        "febrero": 126.0,
+        "marzo": 143.0,
+        "abril": 133.0,
+        "mayo": 108.0,
+        "junio": 98.0,
+        "julio": 87.0
+      }
+    }
+  ]
+}

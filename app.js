@@ -1,12 +1,17 @@
 const STORAGE = {
-  master: "abg_master_v1",
-  consumption: "abg_consumption_v1",
-  stock: "abg_stock_v1",
-  lastStock: "abg_last_stock_v1",
-  warehouse: "abg_warehouse_decisions_v1"
+  consumption: "abg_consumption_v2",
+  stock: "abg_stock_v2",
+  lastStock: "abg_last_stock_v2",
+  warehouse: "abg_warehouse_decisions_v2"
 };
 
-let master = loadJSON(STORAGE.master, []);
+const MONTHS = [
+  "enero","febrero","marzo","abril","mayo","junio",
+  "julio","agosto","septiembre","octubre","noviembre","diciembre"
+];
+
+let master = [];
+let masterVersion = "";
 let consumptionMap = loadJSON(STORAGE.consumption, {});
 let stockMap = loadJSON(STORAGE.stock, {});
 let warehouseDecisions = loadJSON(STORAGE.warehouse, {});
@@ -14,10 +19,12 @@ let unmatchedStock = [];
 let activeActionFilter = "";
 
 const els = {
-  masterFile: document.getElementById("masterFile"),
+  masterStatus: document.getElementById("masterStatus"),
   stockFile: document.getElementById("stockFile"),
   consumptionFile: document.getElementById("consumptionFile"),
-  masterStatus: document.getElementById("masterStatus"),
+  monthSelect: document.getElementById("monthSelect"),
+  importBackupFile: document.getElementById("importBackupFile"),
+  exportBackupBtn: document.getElementById("exportBackupBtn"),
   consumptionStatus: document.getElementById("consumptionStatus"),
   stockStatus: document.getElementById("stockStatus"),
   lastUpdate: document.getElementById("lastUpdate"),
@@ -29,20 +36,22 @@ const els = {
   unmatchedBox: document.getElementById("unmatchedBox"),
   unmatchedList: document.getElementById("unmatchedList"),
   exportBtn: document.getElementById("exportBtn"),
-  resetBtn: document.getElementById("resetBtn"),
+  resetOperationalBtn: document.getElementById("resetOperationalBtn"),
   clearFilters: document.getElementById("clearFilters"),
   dialog: document.getElementById("warehouseDialog"),
   dialogTitle: document.getElementById("dialogTitle"),
-  dialogWarehouseName: document.getElementById("dialogWarehouseName")
+  dialogWarehouseName: document.getElementById("dialogWarehouseName"),
+  historyBtn: document.getElementById("historyBtn"),
+  historyDialog: document.getElementById("historyDialog"),
+  historyTable: document.getElementById("historyTable")
 };
 
 function loadJSON(key, fallback) {
   try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
   catch { return fallback; }
 }
-function saveJSON(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
-}
+function saveJSON(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+
 function normalizeText(value) {
   return String(value ?? "")
     .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -55,19 +64,25 @@ function normalizeText(value) {
 }
 function n(value) {
   if (value === null || value === undefined || value === "") return null;
-  const x = Number(String(value).replace(/\./g, "").replace(",", "."));
+  if (typeof value === "number") return Number.isFinite(value) ? value : null;
+  let s = String(value).trim().replace(/\s/g,"");
+  if (s.includes(",") && s.includes(".")) {
+    if (s.lastIndexOf(",") > s.lastIndexOf(".")) s = s.replace(/\./g,"").replace(",",".");
+    else s = s.replace(/,/g,"");
+  } else if (s.includes(",")) {
+    s = s.replace(",",".");
+  }
+  const x = Number(s);
   return Number.isFinite(x) ? x : null;
-}
-function boolYes(value) {
-  const x = normalizeText(value);
-  return ["SI","SÍ","YES","TRUE","1"].includes(x);
 }
 function findHeader(headers, candidates) {
   const norm = headers.map(normalizeText);
   for (const c of candidates) {
     const target = normalizeText(c);
-    const idx = norm.findIndex(h => h === target || h.includes(target));
-    if (idx >= 0) return headers[idx];
+    const exact = norm.findIndex(h => h === target);
+    if (exact >= 0) return headers[exact];
+    const partial = norm.findIndex(h => h.includes(target));
+    if (partial >= 0) return headers[partial];
   }
   return null;
 }
@@ -77,69 +92,59 @@ function readWorkbook(file) {
     reader.onload = e => {
       try {
         const data = new Uint8Array(e.target.result);
-        const wb = XLSX.read(data, {type:"array", cellDates:false});
-        resolve(wb);
-      } catch (err) { reject(err); }
+        resolve(XLSX.read(data, {type:"array", cellDates:false}));
+      } catch(err) { reject(err); }
     };
     reader.onerror = reject;
     reader.readAsArrayBuffer(file);
   });
 }
-function sheetToRows(wb, preferredName) {
-  let name = preferredName && wb.SheetNames.find(x => normalizeText(x) === normalizeText(preferredName));
-  if (!name) name = wb.SheetNames[0];
+function sheetToRows(wb) {
+  const name = wb.SheetNames[0];
   return XLSX.utils.sheet_to_json(wb.Sheets[name], {defval:null, raw:true});
 }
 
-async function handleMaster(file) {
-  const wb = await readWorkbook(file);
-  const rows = sheetToRows(wb, "Maestro medicamentos");
-  if (!rows.length) throw new Error("El maestro está vacío.");
+async function loadMaster() {
+  const response = await fetch("./maestro.json", {cache:"no-store"});
+  if (!response.ok) throw new Error("No fue posible cargar maestro.json.");
+  const payload = await response.json();
+  master = payload.medicamentos || [];
+  masterVersion = payload.version || "";
 
-  const headers = Object.keys(rows[0]);
-  const glosaABG = findHeader(headers, ["Glosa ABG"]);
-  const glosaBodega = findHeader(headers, ["Glosa Bodega"]);
-  const iaaps = findHeader(headers, ["IAAPS"]);
-  const fofar = findHeader(headers, ["FOFAR"]);
-  const programa = findHeader(headers, ["Programa"]);
-  const controlado = findHeader(headers, ["Controlado psicotrópico","Controlado psicotropico"]);
-  if (!glosaABG) throw new Error("No encontré la columna “Glosa ABG”.");
-
-  const monthNames = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-  master = rows.filter(r => r[glosaABG]).map((r, idx) => {
-    const months = {};
-    monthNames.forEach(m => {
-      const h = headers.find(x => normalizeText(x) === normalizeText(m));
-      if (h && n(r[h]) !== null) months[m] = n(r[h]);
-    });
-    return {
-      id: "m" + idx + "_" + normalizeText(r[glosaABG]).slice(0,20),
-      glosaABG: String(r[glosaABG]).trim(),
-      glosaBodega: glosaBodega ? String(r[glosaBodega] ?? "").trim() : "",
-      iaaps: iaaps ? boolYes(r[iaaps]) : false,
-      fofar: fofar ? boolYes(r[fofar]) : false,
-      programa: programa ? String(r[programa] ?? "").trim() : "",
-      controlado: controlado ? boolYes(r[controlado]) : false,
-      embeddedMonths: months
-    };
-  });
-  saveJSON(STORAGE.master, master);
-
-  // Si el maestro trae consumos históricos, se usan como base salvo que ya haya consumos cargados.
+  // Primera vez: sembrar histórico con los consumos que ya venían en el maestro.
   if (!Object.keys(consumptionMap).length) {
     master.forEach(m => {
-      if (Object.keys(m.embeddedMonths).length) consumptionMap[normalizeText(m.glosaABG)] = m.embeddedMonths;
+      const key = normalizeText(m.glosaABG);
+      consumptionMap[key] = {...(m.initialConsumption || {})};
+    });
+    saveJSON(STORAGE.consumption, consumptionMap);
+  } else {
+    // Si aparecen medicamentos nuevos en el maestro, añadir su histórico inicial sin pisar lo ya guardado.
+    master.forEach(m => {
+      const key = normalizeText(m.glosaABG);
+      if (!consumptionMap[key]) consumptionMap[key] = {...(m.initialConsumption || {})};
     });
     saveJSON(STORAGE.consumption, consumptionMap);
   }
+
   render();
 }
 
+function previousMonthName() {
+  const d = new Date();
+  return MONTHS[(d.getMonth() + 11) % 12];
+}
+function populateMonthSelect() {
+  els.monthSelect.innerHTML = MONTHS.map(m => `<option value="${m}">${m[0].toUpperCase()+m.slice(1)}</option>`).join("");
+  els.monthSelect.value = previousMonthName();
+}
+
 async function handleStock(file) {
-  if (!master.length) throw new Error("Primero carga el maestro ABG.");
+  if (!master.length) throw new Error("El maestro aún no termina de cargar.");
   const wb = await readWorkbook(file);
   const rows = sheetToRows(wb);
   if (!rows.length) throw new Error("El archivo de stock está vacío.");
+
   const headers = Object.keys(rows[0]);
   const article = findHeader(headers, ["ARTÍCULO","ARTICULO","Glosa ABG","Producto","Medicamento"]);
   const stock = findHeader(headers, ["TOTAL EN BODEGA","STOCK ACTUAL","STOCK INSTITUCIONAL","Stock"]);
@@ -159,65 +164,77 @@ async function handleStock(file) {
   });
 
   saveJSON(STORAGE.stock, stockMap);
-  const stamp = new Date().toISOString();
-  localStorage.setItem(STORAGE.lastStock, stamp);
+  localStorage.setItem(STORAGE.lastStock, new Date().toISOString());
   render();
 }
 
-async function handleConsumption(file) {
-  if (!master.length) throw new Error("Primero carga el maestro ABG.");
+async function handleMonthlyConsumption(file, month) {
+  if (!master.length) throw new Error("El maestro aún no termina de cargar.");
+  if (!month) throw new Error("Selecciona el mes que estás incorporando.");
+
   const wb = await readWorkbook(file);
   const rows = sheetToRows(wb);
-  if (!rows.length) throw new Error("El archivo de consumos está vacío.");
+  if (!rows.length) throw new Error("El archivo de consumo está vacío.");
 
   const headers = Object.keys(rows[0]);
-  const article = findHeader(headers, ["Glosa ABG","ARTÍCULO","ARTICULO","Medicamento","Producto","Glosa"]);
-  if (!article) throw new Error("No encontré una columna con el nombre del medicamento.");
+  const article = findHeader(headers, [
+    "Glosa ABG","ARTÍCULO","ARTICULO","Medicamento","Producto","Glosa"
+  ]);
+  if (!article) throw new Error("No encontré la columna con el nombre del medicamento.");
 
-  const monthTokens = [
-    ["enero","ene"],["febrero","feb"],["marzo","mar"],["abril","abr"],
-    ["mayo","may"],["junio","jun"],["julio","jul"],["agosto","ago"],
-    ["septiembre","sep"],["octubre","oct"],["noviembre","nov"],["diciembre","dic"]
-  ];
-  const monthHeaders = [];
-  headers.forEach(h => {
-    const hn = normalizeText(h).toLowerCase();
-    monthTokens.forEach(([full, short]) => {
-      if (hn === full || hn === short || hn.startsWith(full+" ") || hn.startsWith(short+" ")) {
-        monthHeaders.push({name:full, header:h});
-      }
+  // Acepta una planilla de un solo mes o una planilla que ya tenga el mes seleccionado como columna.
+  let consumptionHeader = findHeader(headers, [
+    month, "CONSUMO", "CONSUMO MES", "CONSUMO MENSUAL", "CANTIDAD", "TOTAL"
+  ]);
+  if (!consumptionHeader) {
+    const numericCandidates = headers.filter(h => h !== article).filter(h => {
+      const vals = rows.slice(0,30).map(r => n(r[h])).filter(v => v !== null);
+      return vals.length >= 3;
     });
-  });
-  if (!monthHeaders.length) throw new Error("No encontré columnas mensuales (enero, febrero, marzo, etc.).");
+    if (numericCandidates.length === 1) consumptionHeader = numericCandidates[0];
+  }
+  if (!consumptionHeader) {
+    throw new Error(`No pude identificar la columna de consumo. Idealmente nómbrala “Consumo” o “${month}”.`);
+  }
+
+  const masterKeys = new Set(master.map(m => normalizeText(m.glosaABG)));
+  let updated = 0;
+  let unmatched = [];
 
   rows.forEach(r => {
     if (!r[article]) return;
     const key = normalizeText(r[article]);
-    const existing = consumptionMap[key] || {};
-    monthHeaders.forEach(({name, header}) => {
-      const value = n(r[header]);
-      if (value !== null) existing[name] = value;
-    });
-    consumptionMap[key] = existing;
+    const value = n(r[consumptionHeader]);
+    if (value === null) return;
+    if (!masterKeys.has(key)) {
+      unmatched.push(String(r[article]));
+      return;
+    }
+    if (!consumptionMap[key]) consumptionMap[key] = {};
+    consumptionMap[key][month] = value;
+    updated++;
   });
+
   saveJSON(STORAGE.consumption, consumptionMap);
   render();
+
+  let message = `Consumo de ${month} incorporado para ${updated} medicamentos.`;
+  if (unmatched.length) message += `\n\n${unmatched.length} glosas no coincidieron exactamente con el maestro y no se incorporaron.`;
+  alert(message);
 }
 
 function getMonthsFor(med) {
-  const key = normalizeText(med.glosaABG);
-  return consumptionMap[key] || med.embeddedMonths || {};
+  return consumptionMap[normalizeText(med.glosaABG)] || {};
 }
 function cpm3(med) {
-  const order = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
   const months = getMonthsFor(med);
-  const vals = order.map(m => n(months[m])).filter(v => v !== null).slice(-3);
+  const vals = MONTHS.map(m => n(months[m])).filter(v => v !== null).slice(-3);
   if (!vals.length) return null;
   return vals.reduce((a,b)=>a+b,0) / vals.length;
 }
 function stockFor(med) {
   const key = normalizeText(med.glosaABG);
-  return Object.prototype.hasOwnProperty.call(stockMap, key) ? stockMap[key] : null;
+  return Object.prototype.hasOwnProperty.call(stockMap,key) ? stockMap[key] : null;
 }
 function programFor(m) {
   if (m.iaaps && m.fofar) return "IAAPS/FOFAR";
@@ -230,14 +247,14 @@ function stateFor(m) {
   const cpm = cpm3(m);
   if (stock === null) return "SIN STOCK";
   if (cpm === null || cpm <= 0) return "SIN CPM";
-  if (stock < cpm * 0.20) return "CRÍTICO";
-  if (stock < cpm * 0.40) return "REVISAR";
+  if (stock < cpm*0.20) return "CRÍTICO";
+  if (stock < cpm*0.40) return "REVISAR";
   return "OK";
 }
 function actionFor(m) {
   const state = stateFor(m);
   if (state !== "CRÍTICO") return state === "REVISAR" ? "VIGILAR" : "—";
-  if (m.controlado) return "INFORMAR";
+  if (m.controlado || m.disponibleBodega === false) return "INFORMAR";
   const decision = warehouseDecisions[normalizeText(m.glosaABG)];
   if (decision === "available") return "PEDIR";
   if (decision === "unavailable") return "INFORMAR";
@@ -245,147 +262,190 @@ function actionFor(m) {
 }
 function fmt(v) {
   if (v === null || v === undefined) return "—";
-  return Number(v).toLocaleString("es-CL", {maximumFractionDigits:1});
+  return Number(v).toLocaleString("es-CL",{maximumFractionDigits:1});
 }
 function badge(value) {
-  let cls = "neutral";
-  if (value === "CRÍTICO") cls="critical";
-  else if (value === "REVISAR" || value === "VIGILAR") cls="warning";
-  else if (value === "OK") cls="good";
-  else if (value === "REVISAR BODEGA" || value === "PEDIR") cls="storage";
-  else if (value === "INFORMAR") cls="notify";
+  let cls="neutral";
+  if (value==="CRÍTICO") cls="critical";
+  else if (value==="REVISAR" || value==="VIGILAR") cls="warning";
+  else if (value==="OK") cls="good";
+  else if (value==="REVISAR BODEGA" || value==="PEDIR") cls="storage";
+  else if (value==="INFORMAR") cls="notify";
   return `<span class="badge ${cls}">${value}</span>`;
 }
-function filteredRows() {
-  const q = normalizeText(els.searchInput.value);
-  const p = els.programFilter.value;
-  const s = els.stateFilter.value;
-  return master.filter(m => {
-    const program = programFor(m);
-    const state = stateFor(m);
-    const action = actionFor(m);
-    if (q && !normalizeText(m.glosaABG + " " + m.glosaBodega).includes(q)) return false;
-    if (p && program !== p) return false;
-    if (s && state !== s) return false;
-    if (activeActionFilter === "REVISAR BODEGA" && action !== "REVISAR BODEGA") return false;
-    if (activeActionFilter === "INFORMAR" && action !== "INFORMAR") return false;
-    if (activeActionFilter === "OK" && state !== "OK") return false;
-    if (activeActionFilter === "CRÍTICO" && state !== "CRÍTICO") return false;
-    if (activeActionFilter === "REVISAR" && state !== "REVISAR") return false;
-    return true;
-  });
-}
-function render() {
-  els.masterStatus.textContent = master.length ? `Maestro: ${master.length} fármacos cargados` : "Maestro: no cargado";
-  els.consumptionStatus.textContent = Object.keys(consumptionMap).length ? "Consumos: disponibles" : "Consumos: no cargados";
-  els.stockStatus.textContent = Object.keys(stockMap).length ? `Stock: ${Object.keys(stockMap).length} productos leídos` : "Stock: no cargado";
-
-  const last = localStorage.getItem(STORAGE.lastStock);
-  els.lastUpdate.textContent = last
-    ? "Último stock: " + new Date(last).toLocaleString("es-CL")
-    : "Sin stock cargado";
-
-  const all = master.map(m => ({m, state:stateFor(m), action:actionFor(m)}));
-  document.getElementById("countCritical").textContent = all.filter(x=>x.state==="CRÍTICO").length;
-  document.getElementById("countReview").textContent = all.filter(x=>x.state==="REVISAR").length;
-  document.getElementById("countWarehouse").textContent = all.filter(x=>x.action==="REVISAR BODEGA").length;
-  document.getElementById("countNotify").textContent = all.filter(x=>x.action==="INFORMAR").length;
-  document.getElementById("countOk").textContent = all.filter(x=>x.state==="OK").length;
-
-  const rows = filteredRows();
-  els.summaryText.textContent = master.length
-    ? `${rows.length} de ${master.length} medicamentos mostrados.`
-    : "Carga el maestro y el stock para comenzar.";
-
-  els.medTable.innerHTML = rows.map(m => {
-    const cpm = cpm3(m);
-    const stock = stockFor(m);
-    const state = stateFor(m);
-    const action = actionFor(m);
-    const actionCell = action === "REVISAR BODEGA"
-      ? `<button class="action-button" data-review="${encodeURIComponent(m.glosaABG)}">Revisar bodega</button>`
-      : badge(action);
-    return `<tr>
-      <td><strong>${escapeHtml(m.glosaABG)}</strong>${m.controlado ? '<br><span class="badge neutral">Controlado</span>' : ''}</td>
-      <td>${badge(programFor(m))}</td>
-      <td>${fmt(stock)}</td>
-      <td>${fmt(cpm)}</td>
-      <td>${fmt(cpm === null ? null : cpm*.20)}</td>
-      <td>${fmt(cpm === null ? null : cpm*.40)}</td>
-      <td>${badge(state)}</td>
-      <td>${actionCell}</td>
-      <td class="glosa">${escapeHtml(m.glosaBodega || "—")}</td>
-    </tr>`;
-  }).join("");
-
-  document.querySelectorAll("[data-review]").forEach(btn => {
-    btn.addEventListener("click", () => openWarehouseReview(decodeURIComponent(btn.dataset.review)));
-  });
-
-  if (unmatchedStock.length) {
-    els.unmatchedBox.classList.remove("hidden");
-    els.unmatchedList.innerHTML = unmatchedStock.slice(0,100).map(x=>`<div class="unmatched-item">${escapeHtml(x)}</div>`).join("");
-  } else {
-    els.unmatchedBox.classList.add("hidden");
-  }
-}
-function openWarehouseReview(glosa) {
-  const med = master.find(m => m.glosaABG === glosa);
-  if (!med) return;
-  els.dialogTitle.textContent = med.glosaABG;
-  els.dialogWarehouseName.innerHTML = `<strong>Buscar en bodega como:</strong><br>${escapeHtml(med.glosaBodega || "Sin glosa de bodega registrada")}`;
-  els.dialog.dataset.med = glosa;
-  els.dialog.showModal();
-}
-els.dialog.addEventListener("close", () => {
-  const result = els.dialog.returnValue;
-  if (!["available","unavailable"].includes(result)) return;
-  warehouseDecisions[normalizeText(els.dialog.dataset.med)] = result;
-  saveJSON(STORAGE.warehouse, warehouseDecisions);
-  render();
-});
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 }
 
-els.masterFile.addEventListener("change", async e => {
-  try { if (e.target.files[0]) await handleMaster(e.target.files[0]); }
-  catch(err){ alert("Error al cargar maestro: " + err.message); }
+function filteredRows() {
+  const q=normalizeText(els.searchInput.value);
+  const p=els.programFilter.value;
+  const s=els.stateFilter.value;
+  return master.filter(m => {
+    const program=programFor(m), state=stateFor(m), action=actionFor(m);
+    if (q && !normalizeText(m.glosaABG+" "+m.glosaBodega).includes(q)) return false;
+    if (p && program!==p) return false;
+    if (s && state!==s) return false;
+    if (activeActionFilter==="REVISAR BODEGA" && action!=="REVISAR BODEGA") return false;
+    if (activeActionFilter==="INFORMAR" && action!=="INFORMAR") return false;
+    if (activeActionFilter==="OK" && state!=="OK") return false;
+    if (activeActionFilter==="CRÍTICO" && state!=="CRÍTICO") return false;
+    if (activeActionFilter==="REVISAR" && state!=="REVISAR") return false;
+    return true;
+  });
+}
+
+function monthsPresent() {
+  const present = new Set();
+  Object.values(consumptionMap).forEach(obj => {
+    MONTHS.forEach(m => { if (obj && obj[m] !== undefined && obj[m] !== null) present.add(m); });
+  });
+  return MONTHS.filter(m => present.has(m));
+}
+
+function render() {
+  els.masterStatus.textContent = master.length ? `Maestro ABG: ${master.length} fármacos · v. ${masterVersion}` : "Cargando maestro…";
+  const present=monthsPresent();
+  els.consumptionStatus.textContent = present.length ? `Histórico disponible: ${present.join(", ")}` : "Histórico: sin consumos";
+  els.stockStatus.textContent = Object.keys(stockMap).length ? `Stock: ${Object.keys(stockMap).length} productos leídos` : "Stock: no cargado";
+
+  const last=localStorage.getItem(STORAGE.lastStock);
+  els.lastUpdate.textContent = last ? "Último stock: "+new Date(last).toLocaleString("es-CL") : "Sin stock cargado";
+
+  const all=master.map(m=>({m,state:stateFor(m),action:actionFor(m)}));
+  document.getElementById("countCritical").textContent=all.filter(x=>x.state==="CRÍTICO").length;
+  document.getElementById("countReview").textContent=all.filter(x=>x.state==="REVISAR").length;
+  document.getElementById("countWarehouse").textContent=all.filter(x=>x.action==="REVISAR BODEGA").length;
+  document.getElementById("countNotify").textContent=all.filter(x=>x.action==="INFORMAR").length;
+  document.getElementById("countOk").textContent=all.filter(x=>x.state==="OK").length;
+
+  const rows=filteredRows();
+  els.summaryText.textContent = master.length ? `${rows.length} de ${master.length} medicamentos mostrados.` : "Cargando maestro…";
+
+  els.medTable.innerHTML=rows.map(m=>{
+    const cpm=cpm3(m), stock=stockFor(m), state=stateFor(m), action=actionFor(m);
+    const actionCell=action==="REVISAR BODEGA"
+      ? `<button class="action-button" data-review="${encodeURIComponent(m.glosaABG)}">Revisar bodega</button>`
+      : badge(action);
+    return `<tr>
+      <td><strong>${escapeHtml(m.glosaABG)}</strong>${m.controlado?'<br><span class="badge neutral">Controlado</span>':''}</td>
+      <td>${badge(programFor(m))}</td>
+      <td>${fmt(stock)}</td>
+      <td>${fmt(cpm)}</td>
+      <td>${fmt(cpm===null?null:cpm*.20)}</td>
+      <td>${fmt(cpm===null?null:cpm*.40)}</td>
+      <td>${badge(state)}</td>
+      <td>${actionCell}</td>
+      <td class="glosa">${escapeHtml(m.glosaBodega||"—")}</td>
+    </tr>`;
+  }).join("");
+
+  document.querySelectorAll("[data-review]").forEach(btn => {
+    btn.addEventListener("click",()=>openWarehouseReview(decodeURIComponent(btn.dataset.review)));
+  });
+
+  if (unmatchedStock.length) {
+    els.unmatchedBox.classList.remove("hidden");
+    els.unmatchedList.innerHTML=unmatchedStock.slice(0,100).map(x=>`<div class="unmatched-item">${escapeHtml(x)}</div>`).join("");
+  } else els.unmatchedBox.classList.add("hidden");
+}
+
+function openWarehouseReview(glosa) {
+  const med=master.find(m=>m.glosaABG===glosa);
+  if (!med) return;
+  els.dialogTitle.textContent=med.glosaABG;
+  els.dialogWarehouseName.innerHTML=`<strong>Buscar en bodega como:</strong><br>${escapeHtml(med.glosaBodega||"Sin glosa de bodega registrada")}`;
+  els.dialog.dataset.med=glosa;
+  els.dialog.showModal();
+}
+
+function buildHistoryTable() {
+  const present=monthsPresent();
+  const header=["Medicamento",...present,"CPM 3M"];
+  const body=master.map(m=>{
+    const months=getMonthsFor(m);
+    return [m.glosaABG,...present.map(mm=>fmt(n(months[mm]))),fmt(cpm3(m))];
+  });
+  els.historyTable.innerHTML =
+    `<thead><tr>${header.map(h=>`<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>` +
+    `<tbody>${body.map(r=>`<tr>${r.map((x,i)=>`<td>${i===0?`<strong>${escapeHtml(x)}</strong>`:escapeHtml(x)}</td>`).join("")}</tr>`).join("")}</tbody>`;
+}
+
+function downloadJSON(obj, filename) {
+  const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+els.dialog.addEventListener("close",()=>{
+  const result=els.dialog.returnValue;
+  if (!["available","unavailable"].includes(result)) return;
+  warehouseDecisions[normalizeText(els.dialog.dataset.med)]=result;
+  saveJSON(STORAGE.warehouse,warehouseDecisions);
+  render();
+});
+
+els.stockFile.addEventListener("change",async e=>{
+  try { if(e.target.files[0]) await handleStock(e.target.files[0]); }
+  catch(err){ alert("Error al cargar stock: "+err.message); }
   e.target.value="";
 });
-els.stockFile.addEventListener("change", async e => {
-  try { if (e.target.files[0]) await handleStock(e.target.files[0]); }
-  catch(err){ alert("Error al cargar stock: " + err.message); }
+els.consumptionFile.addEventListener("change",async e=>{
+  try { if(e.target.files[0]) await handleMonthlyConsumption(e.target.files[0],els.monthSelect.value); }
+  catch(err){ alert("Error al cargar consumo: "+err.message); }
   e.target.value="";
 });
-els.consumptionFile.addEventListener("change", async e => {
-  try { if (e.target.files[0]) await handleConsumption(e.target.files[0]); }
-  catch(err){ alert("Error al cargar consumos: " + err.message); }
+els.exportBackupBtn.addEventListener("click",()=>{
+  downloadJSON({
+    tipo:"respaldo-consumos-abg",
+    fecha:new Date().toISOString(),
+    maestroVersion:masterVersion,
+    consumos:consumptionMap
+  },`respaldo_consumos_ABG_${new Date().toISOString().slice(0,10)}.json`);
+});
+els.importBackupFile.addEventListener("change",async e=>{
+  const file=e.target.files[0];
+  if (!file) return;
+  try {
+    const text=await file.text();
+    const data=JSON.parse(text);
+    if (!data.consumos || typeof data.consumos!=="object") throw new Error("El archivo no contiene un respaldo válido.");
+    if (!confirm("Esto reemplazará el histórico de consumos guardado en este navegador. ¿Continuar?")) return;
+    consumptionMap=data.consumos;
+    saveJSON(STORAGE.consumption,consumptionMap);
+    render();
+    alert("Respaldo importado correctamente.");
+  } catch(err){ alert("No fue posible importar el respaldo: "+err.message); }
   e.target.value="";
 });
-[els.searchInput, els.programFilter, els.stateFilter].forEach(el => el.addEventListener("input", () => { activeActionFilter=""; render(); }));
-els.clearFilters.addEventListener("click", () => {
+els.historyBtn.addEventListener("click",()=>{
+  buildHistoryTable();
+  els.historyDialog.showModal();
+});
+[els.searchInput,els.programFilter,els.stateFilter].forEach(el=>el.addEventListener("input",()=>{activeActionFilter="";render();}));
+els.clearFilters.addEventListener("click",()=>{
   els.searchInput.value=""; els.programFilter.value=""; els.stateFilter.value=""; activeActionFilter=""; render();
 });
-document.querySelectorAll(".metric").forEach(btn => btn.addEventListener("click", () => {
-  const f = btn.dataset.filter;
-  activeActionFilter = activeActionFilter === f ? "" : f;
-  if (["CRÍTICO","REVISAR","OK"].includes(f)) {
-    els.stateFilter.value = activeActionFilter ? f : "";
-  } else {
-    els.stateFilter.value = "";
-  }
+document.querySelectorAll(".metric").forEach(btn=>btn.addEventListener("click",()=>{
+  const f=btn.dataset.filter;
+  activeActionFilter=activeActionFilter===f?"":f;
+  if(["CRÍTICO","REVISAR","OK"].includes(f)) els.stateFilter.value=activeActionFilter?f:"";
+  else els.stateFilter.value="";
   render();
 }));
-els.resetBtn.addEventListener("click", () => {
-  if (!confirm("¿Seguro que quieres borrar maestro, consumos, stock y decisiones guardadas en este navegador?")) return;
-  Object.values(STORAGE).forEach(k => localStorage.removeItem(k));
-  master=[]; consumptionMap={}; stockMap={}; warehouseDecisions={}; unmatchedStock=[];
-  render();
+els.resetOperationalBtn.addEventListener("click",()=>{
+  if(!confirm("¿Borrar el stock cargado y las decisiones de bodega? El histórico de consumos se conservará.")) return;
+  localStorage.removeItem(STORAGE.stock);
+  localStorage.removeItem(STORAGE.lastStock);
+  localStorage.removeItem(STORAGE.warehouse);
+  stockMap={}; warehouseDecisions={}; unmatchedStock=[]; render();
 });
-els.exportBtn.addEventListener("click", () => {
-  if (!master.length) return alert("No hay datos para exportar.");
-  const rows = filteredRows().map(m => {
+els.exportBtn.addEventListener("click",()=>{
+  if(!master.length) return;
+  const rows=filteredRows().map(m=>{
     const cpm=cpm3(m);
     return {
       "Medicamento":m.glosaABG,
@@ -401,13 +461,14 @@ els.exportBtn.addEventListener("click", () => {
     };
   });
   const ws=XLSX.utils.json_to_sheet(rows);
-  const csv=XLSX.utils.sheet_to_csv(ws, {FS:";"});
-  const blob=new Blob(["\ufeff"+csv], {type:"text/csv;charset=utf-8;"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="control_stock_ABG.csv";
-  a.click();
-  URL.revokeObjectURL(a.href);
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,"Control stock");
+  XLSX.writeFile(wb,`Control_stock_ABG_${new Date().toISOString().slice(0,10)}.xlsx`);
 });
 
-render();
+populateMonthSelect();
+loadMaster().catch(err=>{
+  els.masterStatus.textContent="Error al cargar maestro";
+  els.summaryText.textContent=err.message;
+  console.error(err);
+});

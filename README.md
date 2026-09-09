@@ -2,17 +2,20 @@
 
 Aplicación web estática para monitoreo de stock de fármacos en Farmacia ABG.
 
-## Flujo de uso
-1. Cargar el maestro ABG una vez por navegador.
-2. Cargar stock Rayen lunes y jueves.
-3. Cargar planilla de consumos al inicio de cada mes.
-4. Revisar alertas y acciones.
+## Versión 2
+- El maestro ABG se carga automáticamente desde `maestro.json`.
+- El usuario carga stock Rayen lunes y jueves.
+- A inicio de mes se carga solo el consumo del mes anterior.
+- El histórico de consumos queda guardado en el navegador.
+- Se puede exportar/importar un respaldo JSON del histórico.
+- CPM = promedio de los últimos 3 meses disponibles.
+- Crítico = <20% del CPM.
+- Bajo mínimo = 20% a <40% del CPM.
+- Controlados críticos: informar directamente, sin revisar bodega.
+- Otros críticos: revisar bodega; luego registrar pedir o informar.
 
-## Reglas
-- Crítico: stock < 20% del CPM de los últimos 3 meses.
-- Bajo mínimo: stock entre 20% y 40%.
-- OK: stock >= 40%.
-- Controlados configurados en el maestro: si están críticos, informar directamente, sin revisión de bodega.
-- Resto de críticos: revisar bodega; si hay stock, pedir; si no hay, informar.
-
-Los archivos cargados se procesan en el navegador y el estado se guarda en localStorage del navegador.
+## Archivos
+- `index.html`
+- `styles.css`
+- `app.js`
+- `maestro.json`
