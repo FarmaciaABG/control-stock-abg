@@ -158,3 +158,28 @@ footer { text-align: center; color: var(--muted); padding: 24px; font-size: 12px
   .topbar { padding: 20px; }
   .container { padding: 0 12px 30px; }
 }
+
+
+.month-check {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid var(--line);
+}
+.month-check.ok {
+  background: var(--good-bg);
+  color: var(--good);
+  border-color: #a6e3c1;
+}
+.month-check.pending {
+  background: var(--warning-bg);
+  color: var(--warning);
+  border-color: #f3cf8c;
+}
+.month-check.partial {
+  background: #fff8e8;
+  color: #8a4b08;
+  border-color: #efc66f;
+}

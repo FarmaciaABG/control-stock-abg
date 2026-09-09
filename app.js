@@ -43,7 +43,8 @@ const els = {
   dialogWarehouseName: document.getElementById("dialogWarehouseName"),
   historyBtn: document.getElementById("historyBtn"),
   historyDialog: document.getElementById("historyDialog"),
-  historyTable: document.getElementById("historyTable")
+  historyTable: document.getElementById("historyTable"),
+  monthlyConsumptionCheck: document.getElementById("monthlyConsumptionCheck")
 };
 
 function loadJSON(key, fallback) {
@@ -134,6 +135,57 @@ function previousMonthName() {
   const d = new Date();
   return MONTHS[(d.getMonth() + 11) % 12];
 }
+
+function previousMonthInfo() {
+  const d = new Date();
+  const prev = new Date(d.getFullYear(), d.getMonth() - 1, 1);
+  return {
+    name: MONTHS[prev.getMonth()],
+    label: MONTHS[prev.getMonth()][0].toUpperCase() + MONTHS[prev.getMonth()].slice(1),
+    year: prev.getFullYear()
+  };
+}
+
+function previousMonthCoverage() {
+  const info = previousMonthInfo();
+  let withValue = 0;
+  let total = master.length;
+
+  master.forEach(m => {
+    const months = getMonthsFor(m);
+    if (months && Object.prototype.hasOwnProperty.call(months, info.name)) {
+      const value = n(months[info.name]);
+      if (value !== null) withValue++;
+    }
+  });
+
+  return { ...info, withValue, total };
+}
+
+function renderPreviousMonthStatus() {
+  if (!els.monthlyConsumptionCheck) return;
+  if (!master.length) {
+    els.monthlyConsumptionCheck.className = "month-check pending";
+    els.monthlyConsumptionCheck.textContent = "Verificando consumo del mes anterior…";
+    return;
+  }
+
+  const c = previousMonthCoverage();
+
+  if (c.withValue === 0) {
+    els.monthlyConsumptionCheck.className = "month-check pending";
+    els.monthlyConsumptionCheck.textContent =
+      `⚠️ Falta cargar el consumo de ${c.label} ${c.year}.`;
+  } else if (c.withValue < c.total) {
+    els.monthlyConsumptionCheck.className = "month-check partial";
+    els.monthlyConsumptionCheck.textContent =
+      `⚠️ Consumo de ${c.label} ${c.year} cargado parcialmente: ${c.withValue} de ${c.total} fármacos.`;
+  } else {
+    els.monthlyConsumptionCheck.className = "month-check ok";
+    els.monthlyConsumptionCheck.textContent =
+      `✅ Consumo de ${c.label} ${c.year} cargado correctamente (${c.withValue} fármacos).`;
+  }
+}
 function populateMonthSelect() {
   els.monthSelect.innerHTML = MONTHS.map(m => `<option value="${m}">${m[0].toUpperCase()+m.slice(1)}</option>`).join("");
   els.monthSelect.value = previousMonthName();
@@ -221,6 +273,7 @@ async function handleMonthlyConsumption(file, month) {
   let message = `Consumo de ${month} incorporado para ${updated} medicamentos.`;
   if (unmatched.length) message += `\n\n${unmatched.length} glosas no coincidieron exactamente con el maestro y no se incorporaron.`;
   alert(message);
+  renderPreviousMonthStatus();
 }
 
 function getMonthsFor(med) {
@@ -304,6 +357,7 @@ function monthsPresent() {
 }
 
 function render() {
+  renderPreviousMonthStatus();
   els.masterStatus.textContent = master.length ? `Maestro ABG: ${master.length} fármacos · v. ${masterVersion}` : "Cargando maestro…";
   const present=monthsPresent();
   els.consumptionStatus.textContent = present.length ? `Histórico disponible: ${present.join(", ")}` : "Histórico: sin consumos";

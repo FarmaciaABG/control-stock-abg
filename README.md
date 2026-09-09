@@ -19,3 +19,5 @@ Aplicación web estática para monitoreo de stock de fármacos en Farmacia ABG.
 - `styles.css`
 - `app.js`
 - `maestro.json`
+
+- La versión 2.2 verifica automáticamente si el consumo del mes anterior está cargado y muestra su cobertura.
