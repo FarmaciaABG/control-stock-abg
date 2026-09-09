@@ -183,3 +183,75 @@ footer { text-align: center; color: var(--muted); padding: 24px; font-size: 12px
   color: #8a4b08;
   border-color: #efc66f;
 }
+
+
+.management-bar {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.management-bar > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 260px;
+}
+.management-bar span, .helper {
+  color: var(--muted);
+  font-size: 13px;
+}
+.management-dialog { max-width: 1100px; }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+.form-grid.three { grid-template-columns: 2fr 1fr 1fr; }
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.form-grid input, .form-grid select, #arsenalSearch {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 10px 11px;
+  background: white;
+  width: 100%;
+}
+.check-row {
+  flex-direction: row !important;
+  align-items: center;
+  font-weight: 600 !important;
+}
+.check-row input { width: auto; }
+.arsenal-list-wrap {
+  margin-top: 22px;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.arsenal-list-wrap h4 { margin: 0 0 10px; }
+.compact-table { margin-top: 10px; max-height: 360px; }
+.compact-table table { min-width: 800px; }
+.small-btn {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 5px;
+}
+.small-btn.remove { color: var(--critical); }
+
+@media (max-width: 700px) {
+  .form-grid, .form-grid.three { grid-template-columns: 1fr; }
+}

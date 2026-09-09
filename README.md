@@ -21,3 +21,7 @@ Aplicación web estática para monitoreo de stock de fármacos en Farmacia ABG.
 - `maestro.json`
 
 - La versión 2.2 verifica automáticamente si el consumo del mes anterior está cargado y muestra su cobertura.
+
+- Versión 2.3: permite gestionar el arsenal desde la propia web (agregar, editar o retirar medicamentos).
+- Versión 2.3: permite agregar o corregir el consumo de un solo medicamento para un mes específico.
+- Los cambios manuales del arsenal se guardan localmente en el navegador.

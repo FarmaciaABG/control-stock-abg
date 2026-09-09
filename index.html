@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Control de Stock Farmacia ABG</title>
-  <link rel="stylesheet" href="styles.css?v=2.2" />
+  <link rel="stylesheet" href="styles.css?v=2.3" />
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
@@ -54,6 +54,17 @@
       <div class="load-status">
         <span id="consumptionStatus">Histórico: cargando…</span>
         <span id="stockStatus">Stock: no cargado</span>
+      </div>
+
+      <div class="management-bar">
+        <div>
+          <strong>Gestión manual</strong>
+          <span>Para cambios puntuales sin tener que modificar archivos.</span>
+        </div>
+        <div class="actions">
+          <button id="arsenalBtn" class="secondary">Gestionar arsenal</button>
+          <button id="singleConsumptionBtn" class="secondary">Agregar consumo de 1 producto</button>
+        </div>
       </div>
 
       <div class="backup-bar">
@@ -181,7 +192,110 @@
     </form>
   </dialog>
 
+
+  <dialog id="arsenalDialog" class="management-dialog">
+    <form method="dialog" id="arsenalForm">
+      <div class="toolbar">
+        <div>
+          <h3>Gestionar arsenal</h3>
+          <p>Agrega, edita o retira medicamentos del listado local de la herramienta.</p>
+        </div>
+        <button value="close" class="secondary">Cerrar</button>
+      </div>
+
+      <div class="form-grid">
+        <label>
+          Glosa ABG *
+          <input id="arsenalGlosaABG" type="text" required placeholder="Ej.: Amlodipino Comprimidos 5 Mg" />
+        </label>
+        <label>
+          Glosa Bodega
+          <input id="arsenalGlosaBodega" type="text" placeholder="Nombre exacto en bodega" />
+        </label>
+        <label>
+          Categoría
+          <input id="arsenalCategoria" type="text" placeholder="MEDICAMENTO" />
+        </label>
+        <label>
+          Programa
+          <select id="arsenalPrograma">
+            <option value="">No trazador</option>
+            <option value="IAAPS">IAAPS</option>
+            <option value="FOFAR">FOFAR</option>
+            <option value="IAAPS/FOFAR">IAAPS/FOFAR</option>
+          </select>
+        </label>
+        <label class="check-row">
+          <input id="arsenalControlado" type="checkbox" />
+          Medicamento controlado
+        </label>
+        <label class="check-row">
+          <input id="arsenalDisponibleBodega" type="checkbox" checked />
+          Disponible en bodega
+        </label>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" id="saveArsenalBtn" class="good-btn">Guardar medicamento</button>
+        <button type="button" id="clearArsenalFormBtn" class="secondary">Limpiar formulario</button>
+      </div>
+
+      <div class="arsenal-list-wrap">
+        <h4>Medicamentos del arsenal</h4>
+        <input id="arsenalSearch" type="search" placeholder="Buscar en el arsenal…" />
+        <div class="table-wrap compact-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Medicamento</th>
+                <th>Programa</th>
+                <th>Controlado</th>
+                <th>Origen</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="arsenalTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="singleConsumptionDialog" class="management-dialog">
+    <form method="dialog" id="singleConsumptionForm">
+      <div class="toolbar">
+        <div>
+          <h3>Agregar consumo de un producto</h3>
+          <p>Útil para corregir o incorporar un consumo puntual sin cargar una planilla completa.</p>
+        </div>
+        <button value="close" class="secondary">Cerrar</button>
+      </div>
+
+      <div class="form-grid three">
+        <label>
+          Medicamento *
+          <input id="singleConsumptionProduct" list="medicineOptions" type="text" required placeholder="Escribe para buscar…" />
+          <datalist id="medicineOptions"></datalist>
+        </label>
+        <label>
+          Mes *
+          <select id="singleConsumptionMonth"></select>
+        </label>
+        <label>
+          Consumo *
+          <input id="singleConsumptionValue" type="number" min="0" step="1" required placeholder="0" />
+        </label>
+      </div>
+
+      <div class="dialog-actions">
+        <button type="button" id="saveSingleConsumptionBtn" class="good-btn">Guardar consumo</button>
+        <button value="cancel" class="secondary">Cancelar</button>
+      </div>
+      <p class="helper">Si ya existía un consumo para ese medicamento y mes, se reemplazará por el nuevo valor.</p>
+    </form>
+  </dialog>
+
   <footer>Farmacia ABG · Los archivos de stock y consumo se procesan localmente en el navegador.</footer>
-  <script src="app.js?v=2.2"></script>
+  <script src="app.js?v=2.3"></script>
 </body>
 </html>

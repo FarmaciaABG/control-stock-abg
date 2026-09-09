@@ -2,7 +2,10 @@ const STORAGE = {
   consumption: "abg_consumption_v2",
   stock: "abg_stock_v2",
   lastStock: "abg_last_stock_v2",
-  warehouse: "abg_warehouse_decisions_v2"
+  warehouse: "abg_warehouse_decisions_v2",
+  arsenalAdditions: "abg_arsenal_additions_v1",
+  arsenalOverrides: "abg_arsenal_overrides_v1",
+  arsenalRemoved: "abg_arsenal_removed_v1"
 };
 
 const MONTHS = [
@@ -11,7 +14,11 @@ const MONTHS = [
 ];
 
 let master = [];
+let baseMaster = [];
 let masterVersion = "";
+let arsenalAdditions = loadJSON(STORAGE.arsenalAdditions, []);
+let arsenalOverrides = loadJSON(STORAGE.arsenalOverrides, {});
+let arsenalRemoved = loadJSON(STORAGE.arsenalRemoved, []);
 let consumptionMap = loadJSON(STORAGE.consumption, {});
 let stockMap = loadJSON(STORAGE.stock, {});
 let warehouseDecisions = loadJSON(STORAGE.warehouse, {});
@@ -44,7 +51,26 @@ const els = {
   historyBtn: document.getElementById("historyBtn"),
   historyDialog: document.getElementById("historyDialog"),
   historyTable: document.getElementById("historyTable"),
-  monthlyConsumptionCheck: document.getElementById("monthlyConsumptionCheck")
+  monthlyConsumptionCheck: document.getElementById("monthlyConsumptionCheck"),
+  arsenalBtn: document.getElementById("arsenalBtn"),
+  arsenalDialog: document.getElementById("arsenalDialog"),
+  arsenalGlosaABG: document.getElementById("arsenalGlosaABG"),
+  arsenalGlosaBodega: document.getElementById("arsenalGlosaBodega"),
+  arsenalCategoria: document.getElementById("arsenalCategoria"),
+  arsenalPrograma: document.getElementById("arsenalPrograma"),
+  arsenalControlado: document.getElementById("arsenalControlado"),
+  arsenalDisponibleBodega: document.getElementById("arsenalDisponibleBodega"),
+  saveArsenalBtn: document.getElementById("saveArsenalBtn"),
+  clearArsenalFormBtn: document.getElementById("clearArsenalFormBtn"),
+  arsenalSearch: document.getElementById("arsenalSearch"),
+  arsenalTable: document.getElementById("arsenalTable"),
+  singleConsumptionBtn: document.getElementById("singleConsumptionBtn"),
+  singleConsumptionDialog: document.getElementById("singleConsumptionDialog"),
+  singleConsumptionProduct: document.getElementById("singleConsumptionProduct"),
+  singleConsumptionMonth: document.getElementById("singleConsumptionMonth"),
+  singleConsumptionValue: document.getElementById("singleConsumptionValue"),
+  medicineOptions: document.getElementById("medicineOptions"),
+  saveSingleConsumptionBtn: document.getElementById("saveSingleConsumptionBtn")
 };
 
 function loadJSON(key, fallback) {
@@ -105,12 +131,201 @@ function sheetToRows(wb) {
   return XLSX.utils.sheet_to_json(wb.Sheets[name], {defval:null, raw:true});
 }
 
+
+function applyLocalArsenalChanges() {
+  const removed = new Set(arsenalRemoved.map(normalizeText));
+  const combined = [];
+
+  baseMaster.forEach(m => {
+    const key = normalizeText(m.glosaABG);
+    if (removed.has(key)) return;
+    combined.push({...m, ...(arsenalOverrides[key] || {}), source: "maestro"});
+  });
+
+  arsenalAdditions.forEach(m => {
+    const key = normalizeText(m.glosaABG);
+    if (removed.has(key)) return;
+    const existingIndex = combined.findIndex(x => normalizeText(x.glosaABG) === key);
+    const finalMed = {...m, ...(arsenalOverrides[key] || {}), source: "local"};
+    if (existingIndex >= 0) combined[existingIndex] = finalMed;
+    else combined.push(finalMed);
+  });
+
+  master = combined.sort((a,b) => a.glosaABG.localeCompare(b.glosaABG, "es"));
+}
+
+function saveArsenalState() {
+  saveJSON(STORAGE.arsenalAdditions, arsenalAdditions);
+  saveJSON(STORAGE.arsenalOverrides, arsenalOverrides);
+  saveJSON(STORAGE.arsenalRemoved, arsenalRemoved);
+}
+
+function programFlags(program) {
+  return {
+    iaaps: program === "IAAPS" || program === "IAAPS/FOFAR",
+    fofar: program === "FOFAR" || program === "IAAPS/FOFAR",
+    trazador: ["IAAPS","FOFAR","IAAPS/FOFAR"].includes(program)
+  };
+}
+
+function clearArsenalForm() {
+  els.arsenalGlosaABG.value = "";
+  els.arsenalGlosaABG.dataset.editKey = "";
+  els.arsenalGlosaBodega.value = "";
+  els.arsenalCategoria.value = "";
+  els.arsenalPrograma.value = "";
+  els.arsenalControlado.checked = false;
+  els.arsenalDisponibleBodega.checked = true;
+  els.saveArsenalBtn.textContent = "Guardar medicamento";
+}
+
+function renderArsenalTable() {
+  const q = normalizeText(els.arsenalSearch.value);
+  const rows = master.filter(m => !q || normalizeText(m.glosaABG + " " + (m.glosaBodega || "")).includes(q));
+
+  els.arsenalTable.innerHTML = rows.map(m => {
+    const source = m.source === "local" ? "Agregado localmente" : "Maestro";
+    return `<tr>
+      <td><strong>${escapeHtml(m.glosaABG)}</strong><br><span class="glosa">${escapeHtml(m.glosaBodega || "—")}</span></td>
+      <td>${badge(programFor(m))}</td>
+      <td>${m.controlado ? "Sí" : "No"}</td>
+      <td>${source}</td>
+      <td>
+        <button type="button" class="small-btn" data-edit-med="${encodeURIComponent(m.glosaABG)}">Editar</button>
+        <button type="button" class="small-btn remove" data-remove-med="${encodeURIComponent(m.glosaABG)}">Retirar</button>
+      </td>
+    </tr>`;
+  }).join("");
+
+  document.querySelectorAll("[data-edit-med]").forEach(btn => {
+    btn.addEventListener("click", () => editArsenalMedication(decodeURIComponent(btn.dataset.editMed)));
+  });
+  document.querySelectorAll("[data-remove-med]").forEach(btn => {
+    btn.addEventListener("click", () => removeArsenalMedication(decodeURIComponent(btn.dataset.removeMed)));
+  });
+}
+
+function editArsenalMedication(glosa) {
+  const med = master.find(m => m.glosaABG === glosa);
+  if (!med) return;
+  els.arsenalGlosaABG.value = med.glosaABG;
+  els.arsenalGlosaABG.dataset.editKey = normalizeText(med.glosaABG);
+  els.arsenalGlosaBodega.value = med.glosaBodega || "";
+  els.arsenalCategoria.value = med.categoria || "";
+  els.arsenalPrograma.value = programFor(med) === "NO TRAZADOR" ? "" : programFor(med);
+  els.arsenalControlado.checked = !!med.controlado;
+  els.arsenalDisponibleBodega.checked = med.disponibleBodega !== false;
+  els.saveArsenalBtn.textContent = "Guardar cambios";
+}
+
+function removeArsenalMedication(glosa) {
+  if (!confirm(`¿Retirar “${glosa}” del arsenal de esta herramienta?`)) return;
+  const key = normalizeText(glosa);
+  if (!arsenalRemoved.includes(key)) arsenalRemoved.push(key);
+  arsenalAdditions = arsenalAdditions.filter(m => normalizeText(m.glosaABG) !== key);
+  delete arsenalOverrides[key];
+  saveArsenalState();
+  applyLocalArsenalChanges();
+  renderArsenalTable();
+  populateMedicineOptions();
+  render();
+}
+
+function upsertArsenalMedication() {
+  const glosaABG = els.arsenalGlosaABG.value.trim();
+  if (!glosaABG) return alert("La Glosa ABG es obligatoria.");
+
+  const oldKey = els.arsenalGlosaABG.dataset.editKey || "";
+  const newKey = normalizeText(glosaABG);
+  const flags = programFlags(els.arsenalPrograma.value);
+
+  const record = {
+    glosaABG,
+    glosaBodega: els.arsenalGlosaBodega.value.trim(),
+    categoria: els.arsenalCategoria.value.trim() || "MEDICAMENTO",
+    ...flags,
+    programa: els.arsenalPrograma.value,
+    controlado: els.arsenalControlado.checked,
+    disponibleBodega: els.arsenalDisponibleBodega.checked,
+    accionSiCritico: els.arsenalControlado.checked || !els.arsenalDisponibleBodega.checked
+      ? "INFORMAR QUIEBRE / NO REVISAR BODEGA"
+      : "REVISAR BODEGA",
+    initialConsumption: {}
+  };
+
+  const baseExists = baseMaster.some(m => normalizeText(m.glosaABG) === oldKey || normalizeText(m.glosaABG) === newKey);
+
+  if (oldKey && oldKey !== newKey) {
+    if (!arsenalRemoved.includes(oldKey)) arsenalRemoved.push(oldKey);
+    arsenalAdditions = arsenalAdditions.filter(m => normalizeText(m.glosaABG) !== oldKey);
+    delete arsenalOverrides[oldKey];
+  }
+
+  if (baseExists && (!oldKey || oldKey === newKey)) {
+    arsenalOverrides[newKey] = record;
+  } else {
+    const idx = arsenalAdditions.findIndex(m => normalizeText(m.glosaABG) === newKey);
+    if (idx >= 0) arsenalAdditions[idx] = record;
+    else arsenalAdditions.push(record);
+  }
+
+  arsenalRemoved = arsenalRemoved.filter(k => k !== newKey);
+  saveArsenalState();
+  applyLocalArsenalChanges();
+
+  if (!consumptionMap[newKey]) consumptionMap[newKey] = {};
+  saveJSON(STORAGE.consumption, consumptionMap);
+
+  clearArsenalForm();
+  renderArsenalTable();
+  populateMedicineOptions();
+  render();
+  alert("Arsenal actualizado.");
+}
+
+function populateMedicineOptions() {
+  if (!els.medicineOptions) return;
+  els.medicineOptions.innerHTML = master.map(m =>
+    `<option value="${escapeHtml(m.glosaABG)}"></option>`
+  ).join("");
+}
+
+function saveSingleConsumption() {
+  const name = els.singleConsumptionProduct.value.trim();
+  const month = els.singleConsumptionMonth.value;
+  const value = n(els.singleConsumptionValue.value);
+
+  if (!name) return alert("Selecciona un medicamento.");
+  if (!month) return alert("Selecciona el mes.");
+  if (value === null || value < 0) return alert("Ingresa un consumo válido.");
+
+  const med = master.find(m => normalizeText(m.glosaABG) === normalizeText(name));
+  if (!med) return alert("El medicamento no está en el arsenal. Agrégalo primero desde “Gestionar arsenal”.");
+
+  const key = normalizeText(med.glosaABG);
+  if (!consumptionMap[key]) consumptionMap[key] = {};
+
+  const previous = consumptionMap[key][month];
+  if (previous !== undefined && previous !== null) {
+    if (!confirm(`Ya existe un consumo de ${month} para ${med.glosaABG}: ${previous}. ¿Reemplazarlo por ${value}?`)) return;
+  }
+
+  consumptionMap[key][month] = value;
+  saveJSON(STORAGE.consumption, consumptionMap);
+  els.singleConsumptionDialog.close();
+  els.singleConsumptionProduct.value = "";
+  els.singleConsumptionValue.value = "";
+  render();
+  alert(`Consumo de ${month} guardado para ${med.glosaABG}.`);
+}
+
 async function loadMaster() {
   const response = await fetch("./maestro.json", {cache:"no-store"});
   if (!response.ok) throw new Error("No fue posible cargar maestro.json.");
   const payload = await response.json();
-  master = payload.medicamentos || [];
+  baseMaster = payload.medicamentos || [];
   masterVersion = payload.version || "";
+  applyLocalArsenalChanges();
 
   // Primera vez: sembrar histórico con los consumos que ya venían en el maestro.
   if (!Object.keys(consumptionMap).length) {
@@ -128,6 +343,7 @@ async function loadMaster() {
     saveJSON(STORAGE.consumption, consumptionMap);
   }
 
+  populateMedicineOptions();
   render();
 }
 
@@ -187,8 +403,13 @@ function renderPreviousMonthStatus() {
   }
 }
 function populateMonthSelect() {
-  els.monthSelect.innerHTML = MONTHS.map(m => `<option value="${m}">${m[0].toUpperCase()+m.slice(1)}</option>`).join("");
+  const options = MONTHS.map(m => `<option value="${m}">${m[0].toUpperCase()+m.slice(1)}</option>`).join("");
+  els.monthSelect.innerHTML = options;
   els.monthSelect.value = previousMonthName();
+  if (els.singleConsumptionMonth) {
+    els.singleConsumptionMonth.innerHTML = options;
+    els.singleConsumptionMonth.value = previousMonthName();
+  }
 }
 
 async function handleStock(file) {
@@ -519,6 +740,23 @@ els.exportBtn.addEventListener("click",()=>{
   XLSX.utils.book_append_sheet(wb,ws,"Control stock");
   XLSX.writeFile(wb,`Control_stock_ABG_${new Date().toISOString().slice(0,10)}.xlsx`);
 });
+
+
+els.arsenalBtn.addEventListener("click", () => {
+  clearArsenalForm();
+  renderArsenalTable();
+  els.arsenalDialog.showModal();
+});
+els.arsenalSearch.addEventListener("input", renderArsenalTable);
+els.saveArsenalBtn.addEventListener("click", upsertArsenalMedication);
+els.clearArsenalFormBtn.addEventListener("click", clearArsenalForm);
+
+els.singleConsumptionBtn.addEventListener("click", () => {
+  populateMedicineOptions();
+  els.singleConsumptionMonth.value = previousMonthName();
+  els.singleConsumptionDialog.showModal();
+});
+els.saveSingleConsumptionBtn.addEventListener("click", saveSingleConsumption);
 
 populateMonthSelect();
 loadMaster().catch(err=>{
