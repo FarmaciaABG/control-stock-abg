@@ -246,7 +246,72 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.2 · Datos operativos guardados localmente en este navegador</footer>
-<script src="app-v3.js?v=3.0.0"></script>
+
+<dialog id="annualConfigDialog" class="large-dialog">
+  <form method="dialog">
+    <div class="dialog-head">
+      <div>
+        <h3>Configuración anual</h3>
+        <p>Define las fechas operativas del año sin modificar el código.</p>
+      </div>
+      <button value="close" class="secondary">Cerrar</button>
+    </div>
+
+    <div class="config-year-row">
+      <label><strong>Año</strong>
+        <select id="annualYear"></select>
+      </label>
+      <span id="annualYearStatus" class="muted"></span>
+    </div>
+
+    <div class="annual-grid">
+      <section class="subpanel">
+        <div class="subpanel-head">
+          <div>
+            <h4>Pedidos mensuales</h4>
+            <p>Se habilitan 3 días antes y exigen stock Rayen cargado el mismo día.</p>
+          </div>
+          <button type="button" id="addOrderDate" class="secondary">Agregar fecha</button>
+        </div>
+        <div id="annualOrderDates"></div>
+      </section>
+
+      <section class="subpanel">
+        <div class="subpanel-head">
+          <div>
+            <h4>Inventarios generales</h4>
+            <p>Estado: Programado, Postergado o Realizado.</p>
+          </div>
+          <button type="button" id="addAnnualGeneralDate" class="secondary">Agregar fecha</button>
+        </div>
+        <div id="annualGeneralDates"></div>
+      </section>
+    </div>
+
+    <div class="dialog-actions">
+      <button type="button" id="saveAnnualConfig" class="primary-btn">Guardar configuración anual</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="tracerReportDialog" class="large-dialog">
+  <form method="dialog">
+    <div class="dialog-head">
+      <div>
+        <h3>Reporte de trazadores IAAPS / FOFAR</h3>
+        <p>Validación previa antes de generar el archivo.</p>
+      </div>
+      <button value="close" class="secondary">Cerrar</button>
+    </div>
+    <div id="tracerValidationStatus" class="status-strip">Verificando datos…</div>
+    <div id="tracerValidationDetails"></div>
+    <div class="dialog-actions">
+      <button type="button" id="generateTracerReport" class="primary-btn">Generar informe</button>
+    </div>
+  </form>
+</dialog>
+
+<footer>Farmacia ABG · v3.2.1 · Datos operativos guardados localmente en este navegador</footer>
+<script src="app-v3.2.1.js"></script>
 </body>
 </html>

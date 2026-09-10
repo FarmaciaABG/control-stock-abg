@@ -33,3 +33,8 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Informe de trazadores con validación previa obligatoria: consumo del mes anterior, CPM 3M, reconocimiento de stock y stock Rayen cargado el mismo día.
 - El botón de generación queda bloqueado hasta que todos los requisitos estén completos.
 - Se muestra el listado de trazadores pendientes antes de descargar el Excel.
+
+- v3.2.1 corrige la carga inicial del maestro: index.html ahora referencia el archivo JavaScript correcto.
+- Se incorpora validación previa obligatoria para el reporte de trazadores.
+- El reporte exige stock Rayen cargado el mismo día, consumo del mes anterior, CPM 3M y stock reconocido para todos los trazadores.
+- Se corrige el diálogo de Configuración anual para que funcione correctamente.
