@@ -46,3 +46,5 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - v3.2.3 agrega protección contra duplicación de consumos mensuales.
 - Si el mes ya tiene datos, la carga masiva avisa antes de reemplazarlos.
 - Al finalizar informa cuántos valores fueron nuevos y cuántos fueron reemplazados.
+
+- v3.3: ficha clickeable por medicamento, histórico mensual, curva de consumo, CPM móvil 3 meses y clasificación editable GES/programa ministerial/arsenal general/IAAPS/FOFAR.

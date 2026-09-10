@@ -309,7 +309,35 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.2.3 · Datos operativos guardados localmente en este navegador</footer>
-<script src="app-v3.2.3.js"></script>
+<dialog id="medicineDetailDialog" class="large-dialog medicine-detail-dialog">
+  <form method="dialog">
+    <div class="dialog-head"><div><h3 id="medicineDetailTitle">Ficha del medicamento</h3><p id="medicineDetailSubtitle">Información operativa e histórica</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div id="medicineDetailSummary" class="detail-summary-grid"></div>
+    <section class="detail-section">
+      <div class="section-head compact"><div><h4>Curva de consumo</h4><p>Consumo mensual histórico y promedio móvil de 3 meses.</p></div></div>
+      <div class="chart-wrap"><canvas id="consumptionChart" width="900" height="320"></canvas></div>
+      <div id="consumptionTrendSummary" class="status-strip"></div>
+    </section>
+    <section class="detail-section">
+      <h4>Histórico de consumos</h4>
+      <div class="table-wrap compact"><table><thead><tr><th>Mes</th><th>Consumo</th><th>CPM 3M</th></tr></thead><tbody id="medicineHistoryTable"></tbody></table></div>
+    </section>
+    <section class="detail-section">
+      <div class="section-head compact"><div><h4>Clasificación administrativa</h4><p>Puedes guardar información complementaria del medicamento.</p></div></div>
+      <div class="detail-form-grid">
+        <label>Subcategoría GES<input id="detailGES" type="text" placeholder="Ej: GES HTA, GES Diabetes"></label>
+        <label>Programa ministerial<input id="detailProgram" type="text" placeholder="Ej: Salud cardiovascular"></label>
+        <label class="check-line"><input id="detailGeneralArsenal" type="checkbox"> Arsenal general</label>
+        <label class="check-line"><input id="detailIAAPS" type="checkbox"> IAAPS</label>
+        <label class="check-line"><input id="detailFOFAR" type="checkbox"> FOFAR</label>
+      </div>
+      <div class="dialog-actions"><button type="button" id="saveMedicineClassification" class="primary-btn">Guardar clasificación</button></div>
+    </section>
+    <section class="detail-section"><h4>Inventarios y vencimientos</h4><div id="medicineOperationalHistory"></div></section>
+  </form>
+</dialog>
+
+<footer>Farmacia ABG · v3.3 · Datos operativos guardados localmente en este navegador</footer>
+<script src="app-v3.3.js"></script>
 </body>
 </html>
