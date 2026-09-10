@@ -42,3 +42,7 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - v3.2.2 corrige el arranque: el maestro carga sin esperar librerías externas de Excel.
 - SheetJS y ExcelJS se cargan solo al importar/exportar archivos.
 - pedido_template.json ya no bloquea el inicio de la aplicación si falla.
+
+- v3.2.3 agrega protección contra duplicación de consumos mensuales.
+- Si el mes ya tiene datos, la carga masiva avisa antes de reemplazarlos.
+- Al finalizar informa cuántos valores fueron nuevos y cuántos fueron reemplazados.
