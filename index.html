@@ -64,6 +64,7 @@
         <div class="actions">
           <button id="arsenalBtn" class="secondary">Gestionar arsenal</button>
           <button id="singleConsumptionBtn" class="secondary">Agregar consumo de 1 producto</button>
+          <button id="weeklyInventoryBtn" class="secondary">Generar inventario semanal</button>
         </div>
       </div>
 
@@ -292,6 +293,33 @@
         <button value="cancel" class="secondary">Cancelar</button>
       </div>
       <p class="helper">Si ya existía un consumo para ese medicamento y mes, se reemplazará por el nuevo valor.</p>
+    </form>
+  </dialog>
+
+  <dialog id="weeklyInventoryDialog" class="inventory-dialog">
+    <form method="dialog">
+      <div class="toolbar">
+        <div>
+          <h3>Inventario rotativo semanal</h3>
+          <p>Selección aleatoria ponderada por Pareto/ABC con prioridad para trazadores IAAPS/FOFAR.</p>
+        </div>
+        <button value="close" class="secondary">Cerrar</button>
+      </div>
+      <div class="inventory-controls">
+        <div class="inventory-summary" id="inventorySummary">Aún no se ha generado un listado.</div>
+        <div class="actions">
+          <button type="button" id="generateInventoryBtn" class="good-btn">Generar 15 productos</button>
+          <button type="button" id="exportInventoryBtn" class="secondary">Exportar Excel</button>
+          <button type="button" id="saveInventoryBtn" class="secondary">Guardar inventario</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>N°</th><th>Medicamento</th><th>Clase ABC</th><th>IAAPS/FOFAR</th><th>Stock sistema</th><th>Stock físico</th><th>Diferencia</th><th>Resultado</th></tr></thead>
+          <tbody id="inventoryTable"></tbody>
+        </table>
+      </div>
+      <div class="inventory-history"><h4>Historial reciente</h4><div id="inventoryHistoryList"></div></div>
     </form>
   </dialog>
 

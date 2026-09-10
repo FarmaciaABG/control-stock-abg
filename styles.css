@@ -255,3 +255,12 @@ footer { text-align: center; color: var(--muted); padding: 24px; font-size: 12px
 @media (max-width: 700px) {
   .form-grid, .form-grid.three { grid-template-columns: 1fr; }
 }
+
+.inventory-dialog { max-width: 1350px; }
+.inventory-controls { display:flex; justify-content:space-between; gap:14px; align-items:center; flex-wrap:wrap; margin:10px 0 16px; }
+.inventory-summary { color:var(--muted); font-size:14px; flex:1; min-width:260px; }
+.inventory-input { width:95px; border:1px solid var(--line); border-radius:8px; padding:7px 8px; }
+.inventory-history { margin-top:20px; border-top:1px solid var(--line); padding-top:16px; }
+.history-card { border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fafcfc; font-size:13px; }
+.result-ok { color:var(--good); font-weight:700; }
+.result-diff { color:var(--critical); font-weight:700; }

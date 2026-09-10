@@ -25,3 +25,7 @@ Aplicación web estática para monitoreo de stock de fármacos en Farmacia ABG.
 - Versión 2.3: permite gestionar el arsenal desde la propia web (agregar, editar o retirar medicamentos).
 - Versión 2.3: permite agregar o corregir el consumo de un solo medicamento para un mes específico.
 - Los cambios manuales del arsenal se guardan localmente en el navegador.
+
+- Versión 2.4: inventario rotativo semanal de 15 medicamentos con Pareto/ABC y prioridad IAAPS/FOFAR.
+- Distribución objetivo 9 A, 4 B y 2 C; evita repetir productos de las últimas 4 semanas.
+- Permite registrar stock físico, diferencia, guardar historial y exportar a Excel.

@@ -5,7 +5,8 @@ const STORAGE = {
   warehouse: "abg_warehouse_decisions_v2",
   arsenalAdditions: "abg_arsenal_additions_v1",
   arsenalOverrides: "abg_arsenal_overrides_v1",
-  arsenalRemoved: "abg_arsenal_removed_v1"
+  arsenalRemoved: "abg_arsenal_removed_v1",
+  inventoryHistory: "abg_inventory_history_v1"
 };
 
 const MONTHS = [
@@ -24,6 +25,8 @@ let stockMap = loadJSON(STORAGE.stock, {});
 let warehouseDecisions = loadJSON(STORAGE.warehouse, {});
 let unmatchedStock = [];
 let activeActionFilter = "";
+let currentInventory = [];
+let inventoryHistory = loadJSON(STORAGE.inventoryHistory, []);
 
 const els = {
   masterStatus: document.getElementById("masterStatus"),
@@ -70,7 +73,15 @@ const els = {
   singleConsumptionMonth: document.getElementById("singleConsumptionMonth"),
   singleConsumptionValue: document.getElementById("singleConsumptionValue"),
   medicineOptions: document.getElementById("medicineOptions"),
-  saveSingleConsumptionBtn: document.getElementById("saveSingleConsumptionBtn")
+  saveSingleConsumptionBtn: document.getElementById("saveSingleConsumptionBtn"),
+  weeklyInventoryBtn: document.getElementById("weeklyInventoryBtn"),
+  weeklyInventoryDialog: document.getElementById("weeklyInventoryDialog"),
+  generateInventoryBtn: document.getElementById("generateInventoryBtn"),
+  exportInventoryBtn: document.getElementById("exportInventoryBtn"),
+  saveInventoryBtn: document.getElementById("saveInventoryBtn"),
+  inventorySummary: document.getElementById("inventorySummary"),
+  inventoryTable: document.getElementById("inventoryTable"),
+  inventoryHistoryList: document.getElementById("inventoryHistoryList")
 };
 
 function loadJSON(key, fallback) {
@@ -412,6 +423,22 @@ function populateMonthSelect() {
   }
 }
 
+
+function classifyABC() {
+  const items = master.map(m => ({med:m, cpm:cpm3(m) ?? 0})).filter(x => x.cpm > 0).sort((a,b) => b.cpm - a.cpm);
+  const total = items.reduce((s,x)=>s+x.cpm,0); let acc=0; const classes={};
+  items.forEach(x => { acc += x.cpm; const share = total>0 ? acc/total : 1; classes[normalizeText(x.med.glosaABG)] = share<=0.80 ? "A" : (share<=0.95 ? "B" : "C"); });
+  master.forEach(m => { const k=normalizeText(m.glosaABG); if(!classes[k]) classes[k]="C"; });
+  return classes;
+}
+function recentInventoryKeys(weeks=4){ const s=new Set(); inventoryHistory.slice(0,weeks).forEach(h=>(h.items||[]).forEach(i=>s.add(normalizeText(i.glosaABG)))); return s; }
+function weightedPick(pool,count,abc,recent){ const chosen=[], candidates=[...pool]; function weight(m){ const k=normalizeText(m.glosaABG), cls=abc[k]||"C"; let w=cls==="A"?5:cls==="B"?3:1; if(m.iaaps||m.fofar) w*=2.2; if(recent.has(k)) w*=0.18; return Math.max(w,.01);} while(chosen.length<count&&candidates.length){ const ws=candidates.map(weight), total=ws.reduce((a,b)=>a+b,0); let r=Math.random()*total, idx=0; for(;idx<candidates.length;idx++){r-=ws[idx]; if(r<=0) break;} idx=Math.min(idx,candidates.length-1); chosen.push(candidates[idx]); candidates.splice(idx,1);} return chosen; }
+function generateWeeklyInventory(){ const abc=classifyABC(), recent=recentInventoryKeys(4); const g={A:master.filter(m=>(abc[normalizeText(m.glosaABG)]||"C")==="A"),B:master.filter(m=>(abc[normalizeText(m.glosaABG)]||"C")==="B"),C:master.filter(m=>(abc[normalizeText(m.glosaABG)]||"C")==="C")}; let sel=[...weightedPick(g.A,Math.min(9,g.A.length),abc,recent),...weightedPick(g.B,Math.min(4,g.B.length),abc,recent),...weightedPick(g.C,Math.min(2,g.C.length),abc,recent)]; if(sel.length<15){const ks=new Set(sel.map(m=>normalizeText(m.glosaABG))); sel=sel.concat(weightedPick(master.filter(m=>!ks.has(normalizeText(m.glosaABG))),15-sel.length,abc,recent));} currentInventory=sel.slice(0,15).map((m,i)=>({numero:i+1,glosaABG:m.glosaABG,abc:abc[normalizeText(m.glosaABG)]||"C",programa:programFor(m),stockSistema:stockFor(m),stockFisico:null})); renderInventory(); }
+function renderInventory(){ if(!currentInventory.length){els.inventoryTable.innerHTML=""; els.inventorySummary.textContent="Aún no se ha generado un listado."; return;} const counts=currentInventory.reduce((a,i)=>(a[i.abc]=(a[i.abc]||0)+1,a),{}); const tracer=currentInventory.filter(i=>i.programa!=="NO TRAZADOR").length; els.inventorySummary.textContent=`15 productos · A: ${counts.A||0} · B: ${counts.B||0} · C: ${counts.C||0} · Trazadores: ${tracer}`; els.inventoryTable.innerHTML=currentInventory.map((i,idx)=>{ const diff=i.stockFisico===null||i.stockSistema===null?null:i.stockFisico-i.stockSistema; const result=diff===null?"":diff===0?"Concordante":"Diferencia"; return `<tr><td>${i.numero}</td><td><strong>${escapeHtml(i.glosaABG)}</strong></td><td>${badge(i.abc)}</td><td>${i.programa==="NO TRAZADOR"?"No":escapeHtml(i.programa)}</td><td>${fmt(i.stockSistema)}</td><td><input class="inventory-input" type="number" min="0" step="1" data-inv-index="${idx}" value="${i.stockFisico ?? ""}" placeholder="Conteo"></td><td>${diff===null?"—":fmt(diff)}</td><td class="${result==="Concordante"?"result-ok":result?"result-diff":""}">${result||"—"}</td></tr>`; }).join(""); document.querySelectorAll("[data-inv-index]").forEach(inp=>inp.addEventListener("input",()=>{ currentInventory[Number(inp.dataset.invIndex)].stockFisico=inp.value===""?null:n(inp.value); renderInventory(); })); }
+function saveCurrentInventory(){ if(!currentInventory.length) return alert("Primero genera un inventario."); inventoryHistory.unshift({fecha:new Date().toISOString(),items:currentInventory.map(x=>({...x}))}); inventoryHistory=inventoryHistory.slice(0,52); saveJSON(STORAGE.inventoryHistory,inventoryHistory); renderInventoryHistory(); alert("Inventario semanal guardado."); }
+function renderInventoryHistory(){ els.inventoryHistoryList.innerHTML=inventoryHistory.length?inventoryHistory.slice(0,8).map(h=>`<div class="history-card"><strong>${new Date(h.fecha).toLocaleDateString("es-CL")}</strong> · ${(h.items||[]).length} productos</div>`).join(""):'<div class="history-card">Sin inventarios guardados todavía.</div>'; }
+function exportCurrentInventory(){ if(!currentInventory.length) return alert("Primero genera un inventario."); const rows=currentInventory.map(i=>{const diff=i.stockFisico===null||i.stockSistema===null?null:i.stockFisico-i.stockSistema; return {"N°":i.numero,"Medicamento":i.glosaABG,"Clase ABC":i.abc,"Programa":i.programa,"Stock sistema":i.stockSistema,"Stock físico":i.stockFisico,"Diferencia":diff,"Resultado":diff===null?"":diff===0?"Concordante":"Diferencia"};}); const ws=XLSX.utils.json_to_sheet(rows), wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb,ws,"Inventario semanal"); XLSX.writeFile(wb,`Inventario_rotativo_ABG_${new Date().toISOString().slice(0,10)}.xlsx`); }
+
 async function handleStock(file) {
   if (!master.length) throw new Error("El maestro aún no termina de cargar.");
   const wb = await readWorkbook(file);
@@ -545,6 +572,7 @@ function badge(value) {
   else if (value==="OK") cls="good";
   else if (value==="REVISAR BODEGA" || value==="PEDIR") cls="storage";
   else if (value==="INFORMAR") cls="notify";
+  else if (["A","B","C"].includes(value)) cls="neutral";
   return `<span class="badge ${cls}">${value}</span>`;
 }
 function escapeHtml(value) {
@@ -757,6 +785,11 @@ els.singleConsumptionBtn.addEventListener("click", () => {
   els.singleConsumptionDialog.showModal();
 });
 els.saveSingleConsumptionBtn.addEventListener("click", saveSingleConsumption);
+
+els.weeklyInventoryBtn.addEventListener("click",()=>{ renderInventoryHistory(); renderInventory(); els.weeklyInventoryDialog.showModal(); });
+els.generateInventoryBtn.addEventListener("click",generateWeeklyInventory);
+els.exportInventoryBtn.addEventListener("click",exportCurrentInventory);
+els.saveInventoryBtn.addEventListener("click",saveCurrentInventory);
 
 populateMonthSelect();
 loadMaster().catch(err=>{
