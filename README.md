@@ -29,3 +29,5 @@ Aplicación web estática para monitoreo de stock de fármacos en Farmacia ABG.
 - Versión 2.4: inventario rotativo semanal de 15 medicamentos con Pareto/ABC y prioridad IAAPS/FOFAR.
 - Distribución objetivo 9 A, 4 B y 2 C; evita repetir productos de las últimas 4 semanas.
 - Permite registrar stock físico, diferencia, guardar historial y exportar a Excel.
+
+- Versión 2.4.1: corregido ingreso de stock físico; ya no se pierde el foco al escribir cifras completas.
