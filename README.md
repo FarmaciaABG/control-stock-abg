@@ -38,3 +38,7 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Se incorpora validación previa obligatoria para el reporte de trazadores.
 - El reporte exige stock Rayen cargado el mismo día, consumo del mes anterior, CPM 3M y stock reconocido para todos los trazadores.
 - Se corrige el diálogo de Configuración anual para que funcione correctamente.
+
+- v3.2.2 corrige el arranque: el maestro carga sin esperar librerías externas de Excel.
+- SheetJS y ExcelJS se cargan solo al importar/exportar archivos.
+- pedido_template.json ya no bloquea el inicio de la aplicación si falla.
