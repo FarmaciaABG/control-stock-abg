@@ -1,4 +1,4 @@
-# Gestión de Inventario Farmacia ABG — v3.0.1
+# Gestión de Inventario Farmacia ABG — v3.2
 
 Versión consolidada de la herramienta web.
 
@@ -25,3 +25,11 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - El pedido mensual ahora se descarga sobre la plantilla oficial original, conservando su estructura y formato.
 - El archivo final de pedido conserva solo las hojas MEDICAMENTOS y PATERNIDAD.
 - Los selectores de consumo mensual se generan dinámicamente para años futuros.
+
+- Configuración anual: permite editar fechas de pedidos e inventarios generales por año desde la propia web.
+- El cambio de año es automático: los selectores de consumos se adaptan al año actual y la web avisa si el nuevo año no tiene fechas operativas configuradas.
+- Enero reconoce correctamente diciembre del año anterior como último mes de consumo.
+
+- Informe de trazadores con validación previa obligatoria: consumo del mes anterior, CPM 3M, reconocimiento de stock y stock Rayen cargado el mismo día.
+- El botón de generación queda bloqueado hasta que todos los requisitos estén completos.
+- Se muestra el listado de trazadores pendientes antes de descargar el Excel.

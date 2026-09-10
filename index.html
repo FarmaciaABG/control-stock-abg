@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-v3.css?v=3.0.1">
+  <link rel="stylesheet" href="styles-v3.css?v=3.2">
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
 </head>
@@ -94,6 +94,9 @@
       </button>
       <button id="exceptionsBtn" class="module-card">
         <span>⚠️</span><strong>Excepciones</strong><small>Datos faltantes, sin CPM, sin glosa o sin stock</small>
+      </button>
+      <button id="annualConfigBtn" class="module-card">
+        <span>🗓️</span><strong>Configuración anual</strong><small>Fechas de pedidos e inventarios generales por año</small>
       </button>
     </div>
   </section>
@@ -243,7 +246,7 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.0.1 · Datos operativos guardados localmente en este navegador</footer>
+<footer>Farmacia ABG · v3.2 · Datos operativos guardados localmente en este navegador</footer>
 <script src="app-v3.js?v=3.0.0"></script>
 </body>
 </html>

@@ -24,3 +24,34 @@ dialog{border:0;border-radius:16px;padding:21px;box-shadow:0 24px 70px rgba(0,0,
 footer{text-align:center;color:var(--muted);font-size:12px;padding:23px}
 @media(max-width:1150px){.kpi-grid{grid-template-columns:repeat(4,1fr)}.module-grid{grid-template-columns:1fr 1fr}.form-grid.four{grid-template-columns:1fr 1fr}}
 @media(max-width:760px){.topbar{flex-direction:column;align-items:flex-start}.top-status{align-items:flex-start}.upload-grid,.module-grid,.filters,.inline-fields,.form-grid,.form-grid.three,.form-grid.four{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr 1fr}.section-head,.dialog-head,.table-head{flex-direction:column}}
+
+
+.config-year-row{
+  display:flex;align-items:end;gap:14px;flex-wrap:wrap;margin:12px 0 18px;
+}
+.config-year-row label{display:flex;flex-direction:column;gap:6px}
+.config-year-row select{min-width:140px}
+.annual-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.subpanel{
+  border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfcfd;
+}
+.subpanel-head{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:12px;
+}
+.subpanel-head h4{margin:0 0 4px}
+.subpanel-head p{margin:0;color:var(--muted);font-size:13px}
+.annual-row{
+  display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--line);
+}
+.annual-row:last-child{border-bottom:0}
+.annual-row input,.annual-row select{
+  border:1px solid var(--line);border-radius:8px;padding:8px 9px;background:white;
+}
+.annual-empty{padding:12px;color:var(--muted);font-size:13px}
+.muted{color:var(--muted);font-size:13px}
+@media(max-width:850px){.annual-grid{grid-template-columns:1fr}}
+
+.tracer-checks{display:grid;gap:10px;margin-top:12px}.tracer-check{padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:#fff}.tracer-check strong{display:block;margin-bottom:4px}.tracer-check ul{margin:8px 0 0 18px;padding:0;max-height:220px;overflow:auto}.tracer-ok{border-left:5px solid #2f855a}.tracer-warn{border-left:5px solid #b7791f}.tracer-bad{border-left:5px solid #c53030}.primary-btn:disabled{opacity:.45;cursor:not-allowed}
