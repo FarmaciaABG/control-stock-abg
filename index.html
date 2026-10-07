@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-v3.css?v=3.2">
+  <link rel="stylesheet" href="styles-abg-v3.4.css?v=3.2">
 </head>
 <body>
 <header class="topbar">
@@ -102,7 +102,7 @@
   <section class="panel">
     <div class="section-head table-head">
       <div>
-        <h2>Panel de medicamentos</h2>
+        <h2>Panel de productos</h2>
         <p id="summaryText">Cargando…</p>
       </div>
       <div class="button-row">
@@ -111,7 +111,23 @@
     </div>
 
     <div class="filters">
-      <input id="searchInput" type="search" placeholder="Buscar medicamento…">
+      <input id="searchInput" type="search" placeholder="Buscar producto…">
+      <select id="productTypeFilter">
+        <option value="">Todos los tipos</option>
+        <option value="Medicamento">Medicamento</option>
+        <option value="Insumo">Insumo</option>
+        <option value="Dental">Dental</option>
+        <option value="Curación avanzada">Curación avanzada</option>
+      </select>
+      <select id="adminCategoryFilter">
+        <option value="">Todas las subcategorías</option>
+        <option value="GES">GES</option>
+        <option value="Programa Ministerial">Programa Ministerial</option>
+        <option value="Arsenal general">Arsenal general</option>
+        <option value="FOFAR">FOFAR</option>
+        <option value="IAAPS">IAAPS</option>
+      </select>
+      <input id="adminDetailFilter" type="search" placeholder="Detalle GES / programa…">
       <select id="programFilter">
         <option value="">Todos los programas</option>
         <option value="IAAPS">IAAPS</option>
@@ -157,15 +173,20 @@
   </form>
 </dialog>
 
+
 <dialog id="singleConsumptionDialog" class="medium-dialog">
   <form method="dialog">
-    <div class="dialog-head"><div><h3>Agregar consumo de un producto</h3><p>Corrige o incorpora un valor puntual.</p></div><button value="close" class="secondary">Cerrar</button></div>
-    <div class="form-grid three">
-      <label>Medicamento<input id="singleProduct" list="medicineOptions" type="text" placeholder="Buscar…"><datalist id="medicineOptions"></datalist></label>
-      <label>Mes<select id="singleMonth"></select></label>
-      <label>Consumo<input id="singleValue" type="number" min="0" step="1"></label>
+    <div class="dialog-head"><div><h3>Agregar consumos de un producto</h3><p>Selecciona el producto una sola vez y registra uno o varios meses.</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div class="form-grid">
+      <label>Producto<input id="singleProduct" list="medicineOptions" type="text" placeholder="Buscar…"><datalist id="medicineOptions"></datalist></label>
     </div>
-    <div class="button-row"><button type="button" id="saveSingleConsumption" class="good-btn">Guardar</button></div>
+    <div class="table-wrap compact multi-consumption-wrap">
+      <table><thead><tr><th>Mes</th><th>Consumo</th><th></th></tr></thead><tbody id="multiConsumptionRows"></tbody></table>
+    </div>
+    <div class="button-row wrap">
+      <button type="button" id="addConsumptionMonth" class="secondary">+ Agregar otro mes</button>
+      <button type="button" id="saveSingleConsumption" class="good-btn">Guardar consumos</button>
+    </div>
   </form>
 </dialog>
 
@@ -323,13 +344,18 @@
       <div class="table-wrap compact"><table><thead><tr><th>Mes</th><th>Consumo</th><th>CPM 3M</th></tr></thead><tbody id="medicineHistoryTable"></tbody></table></div>
     </section>
     <section class="detail-section">
-      <div class="section-head compact"><div><h4>Clasificación administrativa</h4><p>Puedes guardar información complementaria del medicamento.</p></div></div>
+      <div class="section-head compact"><div><h4>Clasificación del producto</h4><p>El tipo de producto y las subcategorías pueden usarse luego como filtros combinados.</p></div></div>
       <div class="detail-form-grid">
-        <label>Subcategoría GES<input id="detailGES" type="text" placeholder="Ej: GES HTA, GES Diabetes"></label>
-        <label>Programa ministerial<input id="detailProgram" type="text" placeholder="Ej: Salud cardiovascular"></label>
+        <label>Tipo de producto<select id="detailProductType">
+          <option value="Medicamento">Medicamento</option><option value="Insumo">Insumo</option><option value="Dental">Dental</option><option value="Curación avanzada">Curación avanzada</option>
+        </select></label>
+        <label class="check-line"><input id="detailGESCategory" type="checkbox"> GES</label>
+        <label>Detalle GES<input id="detailGES" type="text" placeholder="Ej: Diabetes mellitus tipo 2"></label>
+        <label class="check-line"><input id="detailProgramCategory" type="checkbox"> Programa Ministerial</label>
+        <label>Programa ministerial<input id="detailProgram" type="text" placeholder="Ej: Automonitoreo DM2"></label>
         <label class="check-line"><input id="detailGeneralArsenal" type="checkbox"> Arsenal general</label>
-        <label class="check-line"><input id="detailIAAPS" type="checkbox"> IAAPS</label>
         <label class="check-line"><input id="detailFOFAR" type="checkbox"> FOFAR</label>
+        <label class="check-line"><input id="detailIAAPS" type="checkbox"> IAAPS</label>
       </div>
       <div class="dialog-actions"><button type="button" id="saveMedicineClassification" class="primary-btn">Guardar clasificación</button></div>
     </section>
@@ -337,7 +363,7 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.3 · Datos operativos guardados localmente en este navegador</footer>
-<script src="app-v3.3.js"></script>
+<footer>Farmacia ABG · v3.4 · Clasificación y consumos actualizados</footer>
+<script src="app-v3.4.js"></script>
 </body>
 </html>

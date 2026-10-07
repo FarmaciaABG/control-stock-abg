@@ -48,3 +48,8 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Al finalizar informa cuántos valores fueron nuevos y cuántos fueron reemplazados.
 
 - v3.3: ficha clickeable por medicamento, histórico mensual, curva de consumo, CPM móvil 3 meses y clasificación editable GES/programa ministerial/arsenal general/IAAPS/FOFAR.
+
+- v3.4: permite registrar varios meses de consumo sin cerrar la ventana.
+- Tipo de producto: Medicamento, Insumo, Dental y Curación avanzada.
+- Subcategorías filtrables: GES, Programa Ministerial, Arsenal general, FOFAR e IAAPS.
+- Filtro adicional por detalle GES / programa ministerial.
