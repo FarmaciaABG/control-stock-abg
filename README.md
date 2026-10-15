@@ -57,3 +57,8 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - v3.4.1: corrige #REF! en la columna SOLICITUD TEÓRICA del pedido mensual.
 - La fórmula ahora usa referencias directas por fila: MAX(0, CONSUMO MENSUAL × 1,15 - STOCK ACTUAL).
 - Se eliminó la dependencia de referencias estructuradas de tabla que Excel podía romper al generar el archivo.
+
+- v3.4.3: corrige la generación del pedido mensual.
+- Se restauró la plantilla oficial ABG original, compatible con ExcelJS.
+- Se mantiene la fórmula directa por fila en SOLICITUD TEÓRICA para evitar #REF!.
+- No se usa la plantilla reconstruida que provocaba el error "Cannot read properties of undefined (reading 'sheets')".
