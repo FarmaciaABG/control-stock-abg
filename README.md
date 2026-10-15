@@ -53,3 +53,7 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Tipo de producto: Medicamento, Insumo, Dental y Curación avanzada.
 - Subcategorías filtrables: GES, Programa Ministerial, Arsenal general, FOFAR e IAAPS.
 - Filtro adicional por detalle GES / programa ministerial.
+
+- v3.4.1: corrige #REF! en la columna SOLICITUD TEÓRICA del pedido mensual.
+- La fórmula ahora usa referencias directas por fila: MAX(0, CONSUMO MENSUAL × 1,15 - STOCK ACTUAL).
+- Se eliminó la dependencia de referencias estructuradas de tabla que Excel podía romper al generar el archivo.
