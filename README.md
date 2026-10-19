@@ -62,3 +62,8 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Se restauró la plantilla oficial ABG original, compatible con ExcelJS.
 - Se mantiene la fórmula directa por fila en SOLICITUD TEÓRICA para evitar #REF!.
 - No se usa la plantilla reconstruida que provocaba el error "Cannot read properties of undefined (reading 'sheets')".
+
+- v3.5.0: prioridad manual para inventarios rotativos.
+- Prioridades: Normal, Media, Alta y Siempre incluir.
+- Motivos múltiples: Alta rotación, Diferencias frecuentes de inventario, IAAPS, FOFAR, GES, PPMM, Alto costo y Otro.
+- Excel rotativo rediseñado con título, datos del inventario, filtros, anchos legibles, fórmulas, formato condicional y configuración de impresión.

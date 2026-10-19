@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.4.3.css?v=3.4.1">
-<meta name="app-build" content="v3.4.3"></head>
+  <link rel="stylesheet" href="styles-abg-v3.5.0.css?v=3.4.1">
+<meta name="app-build" content="v3.5.0"></head>
 <body>
 <header class="topbar">
   <div>
@@ -207,15 +207,15 @@
 
 <dialog id="weeklyInventoryDialog" class="xlarge-dialog">
   <form method="dialog">
-    <div class="dialog-head"><div><h3>Inventario rotativo semanal</h3><p>15 productos con selección Pareto/ABC y prioridad IAAPS/FOFAR.</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div class="dialog-head"><div><h3>Inventario rotativo semanal</h3><p>15 productos con Pareto/ABC, prioridad manual, motivos de prioridad y menor repetición de productos recientemente inventariados.</p></div><button value="close" class="secondary">Cerrar</button></div>
     <div class="form-grid three inventory-meta">
       <label>Funcionario responsable<input id="weeklyResponsible" type="text" placeholder="Nombre funcionario"></label>
       <label>Fecha<input id="weeklyDate" type="date"></label>
-      <label>Regla<input value="9 A · 4 B · 2 C" disabled></label>
+      <label>Regla base<input value="9 A · 4 B · 2 C · ajustable por prioridad" disabled></label>
     </div>
     <div class="button-row wrap"><button type="button" id="generateWeekly" class="good-btn">Generar 15 productos</button><button type="button" id="saveWeekly" class="secondary">Guardar inventario</button><button type="button" id="exportWeekly" class="secondary">Exportar Excel</button></div>
     <div id="weeklySummary" class="info-strip">Aún no se genera listado.</div>
-    <div class="table-wrap"><table><thead><tr><th>N°</th><th>Medicamento</th><th>ABC</th><th>Trazador</th><th>Stock sistema</th><th>Stock físico</th><th>Diferencia</th><th>Resultado</th></tr></thead><tbody id="weeklyTable"></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>N°</th><th>Medicamento</th><th>ABC</th><th>Prioridad</th><th>Motivos</th><th>Trazador</th><th>Stock sistema</th><th>Stock físico</th><th>Diferencia</th><th>Resultado</th></tr></thead><tbody id="weeklyTable"></tbody></table></div>
     <h4>Historial reciente</h4><div id="weeklyHistory"></div>
   </form>
 </dialog>
@@ -357,13 +357,29 @@
         <label class="check-line"><input id="detailFOFAR" type="checkbox"> FOFAR</label>
         <label class="check-line"><input id="detailIAAPS" type="checkbox"> IAAPS</label>
       </div>
-      <div class="dialog-actions"><button type="button" id="saveMedicineClassification" class="primary-btn">Guardar clasificación</button></div>
+      <div class="priority-panel">
+        <div class="section-head compact"><div><h4>Prioridad para inventario rotativo</h4><p>Define qué tan frecuentemente debe considerarse este producto al generar los 15 productos semanales.</p></div></div>
+        <div class="detail-form-grid"><label>Prioridad<select id="detailInventoryPriority"><option>Normal</option><option>Media</option><option>Alta</option><option>Siempre incluir</option></select></label></div>
+        <div class="priority-reasons">
+          <span class="priority-reasons-title">Motivo de prioridad · selección múltiple</span>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="Alta rotación"> Alta rotación</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="Diferencias frecuentes de inventario"> Diferencias frecuentes de inventario</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="IAAPS"> IAAPS</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="FOFAR"> FOFAR</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="GES"> GES</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="PPMM"> PPMM</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="Alto costo"> Alto costo</label>
+          <label class="check-line"><input type="checkbox" class="inventory-reason" value="Otro"> Otro</label>
+          <label id="inventoryOtherReasonWrap" class="inventory-other-reason">Especificar “Otro”<input id="detailInventoryOtherReason" type="text" placeholder="Motivo adicional"></label>
+        </div>
+      </div>
+      <div class="dialog-actions"><button type="button" id="saveMedicineClassification" class="primary-btn">Guardar clasificación y prioridad</button></div>
     </section>
     <section class="detail-section"><h4>Inventarios y vencimientos</h4><div id="medicineOperationalHistory"></div></section>
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.4.3 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.4.3.js"></script>
+<footer>Farmacia ABG · v3.5.0 · Clasificación y consumos actualizados</footer>
+<script src="app-v3.5.0.js"></script>
 </body>
 </html>
