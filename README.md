@@ -67,3 +67,8 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Prioridades: Normal, Media, Alta y Siempre incluir.
 - Motivos múltiples: Alta rotación, Diferencias frecuentes de inventario, IAAPS, FOFAR, GES, PPMM, Alto costo y Otro.
 - Excel rotativo rediseñado con título, datos del inventario, filtros, anchos legibles, fórmulas, formato condicional y configuración de impresión.
+
+- v3.5.1: en inventario rotativo, STOCK SISTEMA queda vacío al generar los 15 productos.
+- STOCK SISTEMA y STOCK FÍSICO se completan manualmente al momento del inventario.
+- La diferencia y el resultado se calculan solo cuando ambos campos están informados.
+- En el Excel, STOCK SISTEMA y STOCK FÍSICO quedan vacíos por defecto y resaltados como campos de llenado.
