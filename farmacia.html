@@ -1,0 +1,795 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Control Farmacia</title><style>:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#6b7280;--line:#dfe5ee;--brand:#1f5b8f;--brand2:#0f416d;--soft:#eaf3fb;--warn:#fff5cc;--warnb:#d6a600;--danger:#fde8e8;--dangerb:#d64545;--ok:#e8f7ec;--okb:#2f8f4e}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;padding:18px 26px}header h1{margin:0;font-size:22px}header p{margin:4px 0 0;opacity:.9;font-size:13px}
+.shell{max-width:1450px;margin:auto;padding:24px}.card,.meta,.metric{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 2px 10px rgba(24,39,75,.05)}.card{padding:18px;margin-bottom:18px}
+.topbar{display:grid;grid-template-columns:repeat(4,minmax(180px,1fr));gap:12px;margin-bottom:18px}.meta,.metric{padding:14px 16px}.meta b,.metric b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}.meta span{font-weight:700}.metric strong{font-size:24px}
+input,select,textarea,button{font:inherit}input,select,textarea{border:1px solid #cfd7e3;border-radius:9px;padding:9px 10px;background:white;color:var(--text)}input[type=number]{width:105px}textarea{width:100%;min-height:74px}
+button,.btn{border:0;border-radius:9px;padding:10px 14px;cursor:pointer;font-weight:700;background:var(--brand);color:#fff;text-decoration:none;display:inline-block}.secondary{background:#eef2f7;color:#23324b}.dangerBtn{background:#b42318;color:#fff}.ghost{background:#fff;border:1px solid var(--line);color:#23324b}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}th{position:sticky;top:0;background:#edf3f8;color:#334155;text-align:left;padding:10px;border-bottom:1px solid var(--line);z-index:1}td{padding:9px 10px;border-bottom:1px solid #edf0f4;vertical-align:top}tbody tr:hover{background:#fafcff}.table-wrap{max-height:540px;overflow:auto;border:1px solid var(--line);border-radius:12px}
+.small{font-size:12px;color:var(--muted)}.tag{display:inline-flex;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:700}.ok{background:var(--ok);color:#246d3a}.warnTag{background:var(--warn);color:#7a5a00}.muted{background:#eef2f7;color:#586275}.sent{background:#e8f2fb;color:#225f8e}.review{background:#fff3d1;color:#7c5c00}.closed{background:#e7f6ec;color:#277242}.partialStatus{background:#fff3d1;color:#7c5c00}.coverage{min-width:92px;text-align:center;cursor:pointer}.coverage.has{background:#e8f7ec}.coverage.partial{background:#fff5cc}.coverage.none{background:#f5f6f8;color:#9aa3af}.coverage.selected{outline:3px solid #1f5b8f;outline-offset:-3px}.coverage strong{display:block;font-size:13px}.coverage small{display:block;font-size:10px;color:#6b7280;margin-top:2px}.legend{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}.legend span{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:#586275}.dot{width:12px;height:12px;border-radius:3px;display:inline-block}.dot.green{background:#e8f7ec;border:1px solid #a9d9b7}.dot.yellow{background:#fff5cc;border:1px solid #e6d074}.dot.gray{background:#f5f6f8;border:1px solid #dfe5ee}
+.alert{margin-top:7px;padding:8px 10px;border-radius:8px;font-size:12px}.alert.warn{background:var(--warn);border-left:4px solid var(--warnb)}.alert.info{background:var(--soft);border-left:4px solid var(--brand)}.alert.danger{background:var(--danger);border-left:4px solid var(--dangerb)}
+.filters,.toolbar,.footer{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.pill{padding:7px 11px;border-radius:999px;background:#eef2f7;color:#314158;font-size:12px;font-weight:700;cursor:pointer}.pill.active{background:var(--brand);color:#fff}.footer{justify-content:flex-end;margin-top:16px}
+.hidden{display:none!important}.grid4{display:grid;grid-template-columns:repeat(4,minmax(160px,1fr));gap:10px}.box{border:1px solid var(--line);border-radius:10px;padding:11px;background:#fafcff}.box b{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.login{max-width:500px;margin:48px auto}.status{padding:10px 12px;border-radius:10px;margin:10px 0;background:var(--ok)}.late{background:var(--warn)}
+@media(max-width:900px){.topbar,.grid4{grid-template-columns:1fr 1fr}.table-wrap{max-height:none}}@media(max-width:600px){.topbar,.grid4{grid-template-columns:1fr}}
+@media print{header,.no-print{display:none!important}.shell{padding:0}.card{box-shadow:none;border:0}}</style></head>
+<body><header><div style="display:flex;justify-content:space-between;align-items:center"><div><h1>Control Farmacia</h1><p>Pedido mensual de servicios</p></div><button class="secondary" id="logoutBtn">Salir</button></div></header>
+<div class="shell">
+<div class="filters no-print" style="margin-bottom:18px"><span class="pill active" data-view="current">Pedidos</span><span class="pill" data-view="consolidated">Pedido consolidado</span><span class="pill" data-view="review">Revisión historial</span><span class="pill" data-view="history">Historial</span><span class="pill" data-view="consumption">Control de consumo</span><span class="pill" data-view="config">Configuración</span></div>
+<section id="current"><div class="grid4" id="metrics"></div><div class="card"><h2>Pedidos</h2><div class="table-wrap"><table><thead><tr><th>Servicio</th><th>Periodo</th><th>Realizado por</th><th>Fecha</th><th>Estado</th><th>Plazo</th><th>Acción</th></tr></thead><tbody id="ordersBody"></tbody></table></div></div><div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap"><div><h2 style="margin-bottom:4px">Pendientes de entrega</h2><div class="small">Saldos de pedidos con entregas parciales. Desde aquí puede volver al mismo pedido y registrar una entrega adicional.</div></div><span id="pendingDeliveryCount" class="tag warnTag">0 pendientes</span></div><div class="table-wrap" style="margin-top:12px"><table><thead><tr><th>Servicio</th><th>Periodo</th><th>Insumo</th><th>Solicitado</th><th>Autorizado</th><th>Entregado</th><th>Saldo pendiente</th><th>Acción</th></tr></thead><tbody id="pendingDeliveryBody"></tbody></table></div></div></section>
+<section id="consolidated" class="hidden">
+<div class="card">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap">
+    <div><h2 style="margin-bottom:4px">Pedido consolidado</h2><div class="small">Suma automática de todo lo solicitado por los servicios para el periodo seleccionado. El detalle original de cada servicio se conserva.</div></div>
+    <div class="filters no-print">
+      <select id="conPeriod" style="min-width:200px"></select>
+      <input id="conSearch" placeholder="Buscar insumo" style="min-width:240px">
+      <button class="secondary" id="conPrint">Imprimir consolidado</button>
+      <button class="secondary" id="conExport">Exportar Excel/CSV</button>
+    </div>
+  </div>
+  <div class="grid4" id="conMetrics" style="margin-top:14px"></div>
+  <div id="conStatus"></div>
+  <div class="table-wrap" style="margin-top:14px;max-height:620px"><table><thead><tr><th>Insumo</th><th>Unidad</th><th>Total solicitado</th><th>Servicios que solicitan</th><th class="no-print">Detalle</th></tr></thead><tbody id="conBody"></tbody></table></div>
+</div>
+<div class="card" id="conDetailCard"><h3 id="conDetailTitle">Detalle por servicio</h3><div class="small" id="conDetailSub">Seleccione “Ver detalle” en un insumo para revisar qué cantidad pidió cada servicio.</div><div class="table-wrap" style="margin-top:12px;max-height:430px"><table><thead><tr><th>Servicio</th><th>Realizado por</th><th>Estado</th><th>Stock informado</th><th>Solicitado</th></tr></thead><tbody id="conDetailBody"><tr><td colspan="5" class="small">Sin selección.</td></tr></tbody></table></div></div>
+</section>
+<section id="detail" class="hidden"></section>
+<section id="review" class="hidden"><div class="card"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap"><div><h2 style="margin-bottom:4px">Revisión de historial</h2><div class="small">Cobertura por servicio y mes, integrando histórico importado y pedidos realizados en el sistema. Esta vista es de revisión; no modifica datos.</div></div><div><label class="small" for="reviewYear">Año</label><br><select id="reviewYear"></select></div></div><div class="grid4" id="reviewMetrics" style="margin-top:14px"></div><div class="legend"><span><i class="dot green"></i>Con stock informado</span><span><i class="dot yellow"></i>Solo solicitud / stock parcial</span><span><i class="dot gray"></i>Sin registros históricos</span></div><div class="table-wrap" style="max-height:none"><table id="coverageTable"><thead id="coverageHead"></thead><tbody id="coverageBody"></tbody></table></div></div><div class="card" id="reviewDetailCard"><h3 id="reviewDetailTitle">Detalle del periodo</h3><div class="small" id="reviewDetailSub">Seleccione una celda con registros para revisar los insumos cargados.</div><div class="table-wrap" style="margin-top:12px;max-height:430px"><table><thead><tr><th>Insumo</th><th>Unidad</th><th>Stock informado</th><th>Solicitud</th><th>Autorizado</th><th>Fuente</th></tr></thead><tbody id="reviewDetailBody"><tr><td colspan="6" class="small">Sin selección.</td></tr></tbody></table></div></div></section>
+<section id="history" class="hidden"><div class="card"><h2>Historial de pedidos cerrados</h2><div class="table-wrap"><table><thead><tr><th>Periodo</th><th>Servicio</th><th>Insumo</th><th>Unidad</th><th>Stock</th><th>Solicitado</th><th>Autorizado</th><th>Entregado</th><th>Saldo</th><th>Última entrega</th></tr></thead><tbody id="historyBody"></tbody></table></div></div></section>
+<section id="consumption" class="hidden">
+<div class="card">
+  <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-end;flex-wrap:wrap">
+    <div><h2 style="margin-bottom:4px">Control de consumo</h2><div class="small">Calculado solo con periodos que tienen stock inicial, stock posterior y entregas efectivamente registradas.</div></div>
+    <div class="filters">
+      <select id="consService" style="min-width:230px"><option value="all">Todos los servicios</option></select>
+      <input id="consSearch" placeholder="Buscar insumo" style="min-width:240px">
+    </div>
+  </div>
+  <div class="grid4" id="consMetrics" style="margin-top:14px"></div>
+  <div class="alert info"><b>Regla:</b> consumo = stock anterior + entregas efectivamente registradas − stock posterior. Los históricos sin cantidad entregada conocida no se usan para promedios.</div>
+  <div class="table-wrap" style="margin-top:14px;max-height:620px"><table><thead><tr><th>Servicio</th><th>Insumo</th><th>Último stock</th><th>Última entrega autorizada</th><th>Consumo último periodo</th><th>Promedio 3M</th><th>Cobertura</th><th>Motivo / estado</th></tr></thead><tbody id="consBody"></tbody></table></div>
+</div>
+</section>
+<section id="config" class="hidden">
+<div class="card"><h2>Configuración</h2><h3>Calendario</h3><p class="small">Puede modificar las fechas de apertura y cierre de cada periodo. Los cambios afectan el plazo mostrado al solicitante y la programación de avisos automáticos.</p><div class="box" style="margin-bottom:14px"><div style="display:flex;gap:10px;align-items:end;flex-wrap:wrap"><label style="min-width:150px">Crear año completo<input id="fullYear" type="number" min="2000" max="2100" step="1" style="width:100%"></label><button class="secondary" id="createFullYear">Crear año completo</button><div class="small" style="max-width:620px">Crea automáticamente los meses que falten del año seleccionado. Los periodos ya existentes no se duplican. Revise las fechas propuestas antes de utilizar cada periodo.</div></div></div><div id="periods"></div><div class="footer"><button class="secondary" id="addPeriod">+ Agregar periodo</button></div><div id="periodMsg"></div></div>
+<div class="card"><h3>Catálogo de insumos</h3><p class="small">Cree nuevos insumos, corrija su unidad de medida o elimínelos del catálogo activo. Al eliminar un insumo no se borran sus pedidos ni su historial: queda inactivo y deja de estar disponible para nuevas solicitudes.</p><div class="box" style="margin-bottom:14px"><div style="display:grid;grid-template-columns:minmax(260px,2fr) minmax(180px,1fr) auto;gap:12px;align-items:end"><label>Nombre del nuevo insumo<input id="newItemName" placeholder="Ej.: Venda elástica 10 cm" style="width:100%"></label><label>Unidad<input id="newItemUnit" list="unitSuggestions" placeholder="Ej.: unidades" style="width:100%"></label><button id="createItem">Crear insumo</button></div><datalist id="unitSuggestions"><option value="unidades"><option value="caja (x100)"><option value="cajas"><option value="frascos"><option value="pares"><option value="rollos"><option value="sobres"><option value="litros"><option value="ml"><option value="kits"></datalist><div id="newItemMsg"></div></div><div class="toolbar"><input id="itemCatalogSearch" placeholder="Buscar insumo" style="min-width:280px"><label class="small"><input id="showInactiveItems" type="checkbox"> Mostrar eliminados/inactivos</label></div><div class="table-wrap" style="margin-top:12px;max-height:520px"><table><thead><tr><th>Insumo</th><th>Unidad actual</th><th>Cambiar unidad</th><th>Estado</th><th>Acción</th></tr></thead><tbody id="itemCatalogBody"></tbody></table></div><div id="itemCatalogMsg"></div></div>
+<div class="card"><h3>Insumos autorizados por servicio</h3><p class="small">Define qué insumos podrá ver y solicitar cada servicio. Los cambios se aplican inmediatamente al formulario de solicitud y no modifican pedidos ya enviados.</p><div class="toolbar" style="margin-top:12px"><select id="permService" style="min-width:260px"></select><input id="permSearch" placeholder="Buscar insumo" style="min-width:260px"><button class="secondary" id="permCheckVisible">Autorizar visibles</button><button class="secondary" id="permUncheckVisible">Quitar visibles</button></div><div class="table-wrap" style="margin-top:12px;max-height:520px"><table><thead><tr><th>Autorizar</th><th>Insumo</th><th>Unidad</th></tr></thead><tbody id="permBody"></tbody></table></div><div class="footer"><button id="savePermissions">Guardar autorizaciones</button></div><div id="permMsg"></div></div>
+<div class="card"><h3>Correos automáticos</h3><div class="alert info">Los correos se preparan según el calendario. El recordatorio de cierre se enviará solo a servicios que aún no hayan enviado su pedido.</div>
+<div class="grid4">
+<div class="box"><b>Aviso apertura</b><label><input id="openActive" type="checkbox"> Activo</label><br><input id="openDays" type="number" min="0" style="width:80px"> día(s) antes<br><select id="openType" style="margin-top:8px"><option value="business">Hábiles</option><option value="calendar">Corridos</option></select></div>
+<div class="box" style="grid-column:span 3"><b>Asunto apertura</b><input id="openSubject" style="width:100%"><b style="margin-top:8px">Mensaje</b><textarea id="openBody"></textarea></div>
+<div class="box"><b>Recordatorio cierre</b><label><input id="closeActive" type="checkbox"> Activo</label><br><input id="closeDays" type="number" min="0" style="width:80px"> día(s) antes<br><select id="closeType" style="margin-top:8px"><option value="business">Hábiles</option><option value="calendar">Corridos</option></select></div>
+<div class="box" style="grid-column:span 3"><b>Asunto cierre</b><input id="closeSubject" style="width:100%"><b style="margin-top:8px">Mensaje</b><textarea id="closeBody"></textarea></div>
+</div><div class="small" style="margin-top:8px">Variables disponibles: {servicio}, {mes}, {fecha_apertura}, {fecha_cierre}</div>
+<div class="footer"><button id="saveConfig">Guardar configuración</button></div><div id="cfgmsg"></div></div>
+<div class="card"><h3>Destinatarios por servicio</h3><div class="small">Puede registrar un responsable principal y un reemplazo. Si ambos correos son iguales, se enviará solo una vez.</div><div class="table-wrap" style="margin-top:12px;max-height:none"><table><thead><tr><th>Servicio</th><th>Principal</th><th>Correo principal</th><th>Reemplazo</th><th>Correo reemplazo</th><th>Activo</th></tr></thead><tbody id="respBody"></tbody></table></div><div class="footer"><button id="saveRecipients">Guardar destinatarios</button></div><div id="respMsg"></div></div>
+<div class="card"><h3>Estado de automatización</h3><div id="emailAutoStatus" class="alert warn">Motor de envío pendiente de conexión con proveedor de correo.</div><div class="footer"><button class="secondary" id="previewDueEmails">Ver correos que corresponderían hoy</button></div><div id="duePreview" style="margin-top:12px"></div></div>
+</section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://qomszvnpuhtlnrykcyxb.supabase.co";
+const SUPABASE_KEY = "sb_publishable_zhMUi-mweEAwW1Wpr4N6Dw_PGv8QNTN";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+function esc(s){
+  return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+function fmtDateTime(s){
+  if(!s) return "—";
+  return new Date(s).toLocaleString("es-CL");
+}
+function todayISO(){
+  const d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+</script>
+
+<script>
+let orders=[], periods=[], emailConfig={}, historical=[], services=[], items=[], serviceItems=[], serviceResponsibles=[], deliveryEvents=[], deliveryLines=[], activeOrder=null, reviewSelection=null;
+
+async function ensureAuth(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){location.href="farmacia-login.html";return false;}
+  return true;
+}
+async function loadAll(){
+  const [o,p,e,h,srv,it,si,de,dl,resp] = await Promise.all([
+    sb.from("orders").select("*,services(name),periods(label,year,month),order_lines(*,items(name,unit))").order("submitted_at",{ascending:false}),
+    sb.from("periods").select("*").order("year").order("month"),
+    sb.from("email_config").select("*"),
+    sb.from("historical_service_records").select("*").order("year").order("month"),
+    sb.from("services").select("id,name,active").eq("active",true).order("id"),
+    sb.from("items").select("id,name,unit,active").order("name"),
+    sb.from("service_items").select("service_id,item_id,enabled"),
+    sb.from("delivery_events").select("*").order("delivered_at",{ascending:true}),
+    sb.from("delivery_lines").select("*").order("id",{ascending:true}),
+    sb.from("service_responsibles").select("*").order("service_id")
+  ]);
+  for(const r of [o,p,e,h,srv,it,si,de,dl,resp]) if(r.error) throw r.error;
+  orders=o.data||[]; periods=p.data||[]; emailConfig=Object.fromEntries((e.data||[]).map(x=>[x.key,x])); services=srv.data||[];
+  items=it.data||[]; serviceItems=si.data||[];
+  deliveryEvents=de.data||[]; deliveryLines=dl.data||[]; serviceResponsibles=resp.data||[];
+  const itemsById=Object.fromEntries(items.map(x=>[String(x.id),x]));
+  const servicesById=Object.fromEntries(services.map(x=>[String(x.id),x]));
+  historical=(h.data||[]).map(r=>({...r,items:itemsById[String(r.item_id)]||null,services:servicesById[String(r.service_id)]||null}));
+  renderAll();
+}
+function renderAll(){renderMetrics();renderOrders();renderPendingDeliveries();renderConsolidated();renderReview();renderHistory();renderConsumption();renderConfig();}
+function getDashboardPeriod(){
+  const activePeriods=periods
+    .filter(p=>p.active!==false)
+    .slice()
+    .sort((a,b)=>(Number(a.year)-Number(b.year))||(Number(a.month)-Number(b.month)));
+  if(!activePeriods.length)return null;
+
+  const today=todayISO();
+  // El periodo cambia cuando comienza la apertura del siguiente periodo.
+  // Entre el cierre de un mes y la apertura del siguiente, se mantiene el último periodo abierto.
+  const opened=activePeriods.filter(p=>!p.open_date || p.open_date<=today);
+  if(opened.length)return opened[opened.length-1];
+
+  // Si aún no abre ningún periodo configurado, mostrar el primero próximo.
+  return activePeriods[0];
+}
+function renderMetrics(){
+  const currentPeriod=getDashboardPeriod();
+  const expected=services.length||13;
+  const currentOrders=currentPeriod
+    ? orders.filter(o=>Number(o.period_id)===Number(currentPeriod.id))
+    : [];
+  const received=currentOrders.length;
+  const late=currentOrders.filter(o=>o.late).length;
+  const closed=currentOrders.filter(o=>o.status==="Cerrado").length;
+  const pending=Math.max(0,expected-received);
+  const periodLabel=currentPeriod?.label||"Sin periodo configurado";
+  document.getElementById("metrics").innerHTML=[
+    ["Periodo",periodLabel],
+    ["Esperados",expected],
+    ["Recibidos",received],
+    ["Pendientes",pending],
+    ["Fuera de plazo",late],
+    ["Cerrados",closed]
+  ].map(v=>`<div class="metric"><b>${v[0]}</b><strong>${v[1]}</strong></div>`).join("");
+}
+function getConsolidatedPeriodId(){
+  const sel=document.getElementById("conPeriod");
+  if(sel && sel.value)return Number(sel.value);
+  return Number(getDashboardPeriod()?.id||0);
+}
+function getConsolidatedRows(periodId){
+  const map=new Map();
+  orders.filter(o=>Number(o.period_id)===Number(periodId)).forEach(o=>{
+    (o.order_lines||[]).forEach(l=>{
+      const itemId=Number(l.item_id), requested=Number(l.requested||0);
+      if(requested<=0)return;
+      const key=String(itemId);
+      if(!map.has(key))map.set(key,{item_id:itemId,name:l.items?.name||"Insumo",unit:l.items?.unit||"—",total:0,services:[]});
+      const row=map.get(key);
+      row.total+=requested;
+      row.services.push({order_id:o.id,service:o.services?.name||"—",requester:o.requester_name||"—",status:o.status||"—",stock:l.current_stock,requested});
+    });
+  });
+  return [...map.values()].sort((a,b)=>a.name.localeCompare(b.name,"es"));
+}
+function renderConsolidated(){
+  const sel=document.getElementById("conPeriod"); if(!sel)return;
+  const currentId=String(getDashboardPeriod()?.id||"");
+  const prior=sel.value;
+  sel.innerHTML=periods.filter(p=>p.active!==false).map(p=>`<option value="${p.id}">${esc(p.label)}</option>`).join("");
+  sel.value=prior && [...sel.options].some(o=>o.value===prior)?prior:currentId;
+  if(!sel.value && sel.options.length)sel.selectedIndex=0;
+  renderConsolidatedTable();
+  sel.onchange=()=>renderConsolidatedTable();
+  const search=document.getElementById("conSearch"); if(search)search.oninput=()=>renderConsolidatedTable();
+  const print=document.getElementById("conPrint"); if(print)print.onclick=()=>window.print();
+  const exp=document.getElementById("conExport"); if(exp)exp.onclick=exportConsolidatedCsv;
+}
+function renderConsolidatedTable(){
+  const periodId=getConsolidatedPeriodId();
+  const period=periods.find(p=>Number(p.id)===periodId);
+  const periodOrders=orders.filter(o=>Number(o.period_id)===periodId);
+  const rows=getConsolidatedRows(periodId);
+  const q=(document.getElementById("conSearch")?.value||"").trim().toLowerCase();
+  const visible=q?rows.filter(r=>r.name.toLowerCase().includes(q)):rows;
+  const received=new Set(periodOrders.map(o=>Number(o.service_id))).size;
+  const expected=services.length||13;
+  const complete=received>=expected;
+  document.getElementById("conMetrics").innerHTML=[
+    ["Periodo",period?.label||"—"],["Servicios recibidos",`${received} / ${expected}`],["Insumos consolidados",rows.length],["Estado",complete?"Completo":"En curso"]
+  ].map(v=>`<div class="metric"><b>${v[0]}</b><strong>${esc(v[1])}</strong></div>`).join("");
+  document.getElementById("conStatus").innerHTML=complete?'<div class="status">Todos los servicios han enviado su pedido para este periodo.</div>':`<div class="alert warn"><b>Consolidado aún incompleto:</b> han enviado ${received} de ${expected} servicios. La tabla se actualizará automáticamente cuando ingresen nuevos pedidos.</div>`;
+  const body=document.getElementById("conBody");
+  if(!visible.length){body.innerHTML='<tr><td colspan="5" class="small">No hay insumos solicitados para este periodo.</td></tr>';return;}
+  body.innerHTML=visible.map(r=>`<tr><td><b>${esc(r.name)}</b></td><td>${esc(r.unit)}</td><td><b>${r.total}</b></td><td>${r.services.length}</td><td class="no-print"><button class="secondary conDetailBtn" data-item="${r.item_id}">Ver detalle</button></td></tr>`).join("");
+  document.querySelectorAll(".conDetailBtn").forEach(b=>b.onclick=()=>showConsolidatedDetail(Number(b.dataset.item)));
+}
+function showConsolidatedDetail(itemId){
+  const row=getConsolidatedRows(getConsolidatedPeriodId()).find(r=>Number(r.item_id)===Number(itemId)); if(!row)return;
+  document.getElementById("conDetailTitle").textContent=`Detalle — ${row.name}`;
+  document.getElementById("conDetailSub").textContent=`Total consolidado: ${row.total} ${row.unit}.`;
+  document.getElementById("conDetailBody").innerHTML=row.services.sort((a,b)=>a.service.localeCompare(b.service,"es")).map(x=>`<tr><td><b>${esc(x.service)}</b></td><td>${esc(x.requester)}</td><td>${esc(x.status)}</td><td>${x.stock??"—"}</td><td><b>${x.requested}</b></td></tr>`).join("");
+  document.getElementById("conDetailCard").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function exportConsolidatedCsv(){
+  const periodId=getConsolidatedPeriodId(), period=periods.find(p=>Number(p.id)===periodId), rows=getConsolidatedRows(periodId);
+  const lines=[["Periodo","Insumo","Unidad","Total solicitado","Servicios que solicitan","Detalle por servicio"]];
+  rows.forEach(r=>lines.push([period?.label||"",r.name,r.unit,r.total,r.services.length,r.services.map(x=>`${x.service}: ${x.requested}`).join(" | ")]));
+  const csv="\ufeff"+lines.map(cols=>cols.map(v=>`"${String(v??"").replace(/"/g,'""')}"`).join(";")).join("\r\n");
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"}); const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download=`pedido_consolidado_${(period?.label||"periodo").replace(/\s+/g,"_")}.csv`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+function eventById(id){return deliveryEvents.find(e=>e.id===id)||null;}
+function deliveredForLine(lineId){return deliveryLines.filter(x=>Number(x.order_line_id)===Number(lineId)).reduce((a,x)=>a+Number(x.quantity||0),0);}
+function deliveryRowsForOrder(orderId){
+  const eventIds=new Set(deliveryEvents.filter(e=>e.order_id===orderId).map(e=>e.id));
+  return deliveryLines.filter(l=>eventIds.has(l.delivery_event_id));
+}
+function pendingForLine(l){const auth=Number(l.authorized??l.requested??0),del=deliveredForLine(l.id);return Math.max(0,auth-del);}
+function renderPendingDeliveries(){
+  const rows=[];
+  orders.forEach(o=>(o.order_lines||[]).forEach(l=>{const delivered=deliveredForLine(l.id),auth=Number(l.authorized??l.requested??0),pending=Math.max(0,auth-delivered);if(pending>0&&delivered>0)rows.push({o,l,delivered,auth,pending});}));
+  document.getElementById("pendingDeliveryCount").textContent=`${rows.length} pendiente${rows.length===1?"":"s"}`;
+  const body=document.getElementById("pendingDeliveryBody");
+  if(!rows.length){body.innerHTML='<tr><td colspan="8" class="small">No hay saldos pendientes de entrega.</td></tr>';return;}
+  body.innerHTML=rows.map(x=>`<tr><td><b>${esc(x.o.services?.name||"—")}</b></td><td>${esc(x.o.periods?.label||"—")}</td><td>${esc(x.l.items?.name||"—")}</td><td>${x.l.requested}</td><td>${x.auth}</td><td><b>${x.delivered}</b></td><td><span class="tag warnTag">${x.pending}</span></td><td><button data-order="${x.o.id}">Abrir pedido</button></td></tr>`).join("");
+  document.querySelectorAll("#pendingDeliveryBody button").forEach(b=>b.onclick=()=>openOrder(b.dataset.order));
+}
+function renderOrders(){
+  document.getElementById("ordersBody").innerHTML=orders.map(o=>{const cls=o.status==="Cerrado"?"closed":o.status==="Entrega parcial"?"partialStatus":o.status==="En revisión"?"review":"sent";return `<tr><td><b>${esc(o.services?.name)}</b></td><td>${esc(o.periods?.label)}</td><td>${esc(o.requester_name)}</td><td>${fmtDateTime(o.submitted_at)}</td><td><span class="tag ${cls}">${esc(o.status)}</span></td><td>${o.late?'<span class="tag warnTag">FUERA DE PLAZO</span>':'<span class="tag ok">Dentro de plazo</span>'}</td><td><button data-id="${o.id}">Abrir</button></td></tr>`}).join("");
+  document.querySelectorAll("#ordersBody button").forEach(b=>b.onclick=()=>openOrder(b.dataset.id));
+}
+async function openOrder(id){
+  activeOrder=orders.find(o=>o.id===id); if(!activeOrder)return;
+  showSection("detail");
+  const o=activeOrder, sent=o.status==="Enviado", closed=o.status==="Cerrado";
+  const deliveryHistory=deliveryEvents.filter(e=>e.order_id===o.id).sort((a,b)=>new Date(a.delivered_at)-new Date(b.delivered_at));
+  document.getElementById("detail").innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start"><div><h2>Pedido — ${esc(o.services.name)}</h2><div class="small">${esc(o.periods.label)} · ${esc(o.status)}</div></div><button class="secondary" id="backDash">← Volver</button></div>
+  ${sent?'<div class="alert info"><b>Pedido recibido, aún no en revisión.</b> Abrir este pedido no bloquea al servicio. Mientras permanezca en estado Enviado, el servicio todavía puede complementarlo. Cuando vaya a comenzar a autorizar cantidades, cambie el estado a <b>En revisión</b>.</div>':'<div class="alert info"><b>Entregas parciales:</b> "Autorizado total" corresponde a lo que Farmacia compromete para este pedido. Registre en "Entregar ahora" solo lo que efectivamente se entrega en esta ocasión. El saldo queda disponible para una entrega posterior.</div>'}
+  ${(o.status==="Enviado"||o.status==="En revisión")?`<div class="box" style="margin-top:14px"><b>Estado de revisión</b><div class="small" style="margin:6px 0 10px">Puede cambiar entre <b>Enviado</b> y <b>En revisión</b>. Volver a <b>Enviado</b> vuelve a permitir que el servicio complemente el pedido.</div><div class="filters"><select id="reviewStatusSelect" style="min-width:190px"><option value="Enviado" ${o.status==="Enviado"?'selected':''}>Enviado</option><option value="En revisión" ${o.status==="En revisión"?'selected':''}>En revisión</option></select><button class="secondary" id="saveReviewStatusBtn">Guardar estado</button></div></div>`:''}
+  ${(!closed&&!sent)?`<div class="box" style="margin-top:14px"><b>Agregar insumo desde Farmacia</b><div class="small" style="margin-bottom:8px">Use esta opción si, durante la revisión, Farmacia decide incorporar un insumo que el servicio no había solicitado. No aumenta el total solicitado por los servicios en el consolidado.</div><div class="filters"><select id="phAddItem" style="min-width:360px"><option value="">Seleccione un insumo…</option>${items.filter(it=>it.active!==false&&!(o.order_lines||[]).some(l=>Number(l.item_id)===Number(it.id))).map(it=>`<option value="${it.id}">${esc(it.name)} · ${esc(it.unit)}</option>`).join("")}</select><input id="phAddQty" type="number" min="0.01" step="any" placeholder="Cantidad autorizada"><button id="phAddBtn">Agregar al pedido</button></div></div>`:''}
+  <div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Insumo</th><th>Unidad</th><th>Stock actual</th><th>Solicitado</th><th>Autorizado total</th><th>Entregado acumulado</th><th>Saldo pendiente</th>${(!closed&&!sent)?'<th>Entregar ahora</th>':''}</tr></thead><tbody>${o.order_lines.map(l=>{const del=deliveredForLine(l.id),auth=Number(l.authorized??l.requested??0),pend=Math.max(0,auth-del);const pharmacyAdded=!!l.added_by_pharmacy;return `<tr data-id="${l.id}" data-delivered="${del}" data-requested="${l.requested}"><td>${esc(l.items.name)}${pharmacyAdded?' <span class="tag sent">Agregado por Farmacia</span>':''}</td><td>${esc(l.items.unit)}</td><td>${l.current_stock===null||l.current_stock===undefined?'<span class="small">No informado</span>':l.current_stock}</td><td>${pharmacyAdded?'<span class="small">No solicitado</span>':l.requested}</td><td>${(closed||sent)?`<b>${auth}</b>`:`<input class="auth" type="number" min="0" value="${auth}">`}</td><td><b>${del}</b></td><td class="pendingCell">${pend?`<span class="tag warnTag">${pend}</span>`:'<span class="tag ok">0</span>'}</td>${(!closed&&!sent)?`<td><input class="deliverNow" type="number" min="0" value="0"></td>`:''}</tr>`}).join("")}</tbody></table></div>
+  <br><label>Observación Farmacia</label><textarea id="obs" ${(closed||sent)?'disabled':''}>${esc(o.pharmacy_observation||"")}</textarea>
+  ${(!closed&&!sent)?`<br><br><label>Nombre de quien recibe esta entrega</label><input id="receiver" style="width:320px" value="">`:''}
+  <div class="footer">${closed?'<button class="secondary" id="guideBtn">Generar / ver guía de entrega</button>':sent?'<button id="startReviewBtn">Iniciar revisión</button>':'<button class="secondary" id="saveAuthBtn">Guardar autorización</button><button id="deliverBtn">Registrar entrega</button><button class="secondary" id="guideBtn">Generar / ver guía de entrega</button>'}<button class="dangerBtn" id="deleteOrderBtn">Eliminar pedido</button></div><div class="small" style="margin-top:8px">${sent?'El pedido continuará disponible para complementos del servicio hasta que presione Iniciar revisión.':'La guía puede visualizarse e imprimirse aun cuando el pedido tenga entregas parciales.'} Eliminar está disponible solo en Control Farmacia. Al confirmar se borran también las líneas y entregas asociadas, y el servicio queda habilitado para enviar un nuevo pedido del mismo periodo.</div><div id="detailMsg"></div></div>
+  <div class="card"><h3>Registro de entregas</h3><div class="small" style="margin-bottom:10px">Si una entrega se registró dos veces por error, puede eliminar el registro incorrecto. El sistema recalculará automáticamente lo entregado, el saldo pendiente y el estado del pedido.</div><div class="table-wrap"><table><thead><tr><th>Fecha/hora</th><th>Recibido por</th><th>Detalle</th><th>Observación</th><th class="no-print">Acción</th></tr></thead><tbody>${deliveryHistory.length?deliveryHistory.map(ev=>{const lines=deliveryLines.filter(dl=>dl.delivery_event_id===ev.id);const detail=lines.map(dl=>{const ol=o.order_lines.find(x=>Number(x.id)===Number(dl.order_line_id));return `${esc(ol?.items?.name||"Insumo")}: <b>${Number(dl.quantity)}</b>`}).join("<br>");return `<tr><td>${fmtDateTime(ev.delivered_at)}</td><td>${esc(ev.receiver_name)}</td><td>${detail||"—"}</td><td>${esc(ev.pharmacy_observation||"—")}</td><td class="no-print"><button class="dangerBtn deleteDeliveryBtn" data-event-id="${ev.id}" data-event-time="${esc(fmtDateTime(ev.delivered_at))}">Eliminar</button></td></tr>`}).join(""):'<tr><td colspan="5" class="small">Todavía no se han registrado entregas.</td></tr>'}</tbody></table></div></div>`;
+  document.getElementById("backDash").onclick=()=>{showSection("current");loadAll();};
+  document.getElementById("deleteOrderBtn").onclick=deleteActiveOrder;
+  const guideBtn=document.getElementById("guideBtn"); if(guideBtn) guideBtn.onclick=showGuide;
+  const startBtn=document.getElementById("startReviewBtn"); if(startBtn) startBtn.onclick=startReview;
+  const reviewStatusBtn=document.getElementById("saveReviewStatusBtn"); if(reviewStatusBtn) reviewStatusBtn.onclick=saveReviewStatus;
+  document.querySelectorAll("#detail .deleteDeliveryBtn").forEach(btn=>btn.onclick=()=>deleteDeliveryEvent(btn.dataset.eventId,btn.dataset.eventTime));
+  if(!closed&&!sent){
+    const saveBtn=document.getElementById("saveAuthBtn"); if(saveBtn) saveBtn.onclick=saveAuthorization;
+    const deliverBtn=document.getElementById("deliverBtn"); if(deliverBtn) deliverBtn.onclick=registerDelivery;
+    const addBtn=document.getElementById("phAddBtn"); if(addBtn) addBtn.onclick=addPharmacyItem;
+    document.querySelectorAll("#detail .auth").forEach(inp=>inp.oninput=refreshPendingPreview);
+    document.querySelectorAll("#detail .deliverNow").forEach(inp=>inp.oninput=refreshPendingPreview);
+  }
+}
+async function saveReviewStatus(){
+  if(!activeOrder)return;
+  const newStatus=document.getElementById("reviewStatusSelect")?.value;
+  if(!newStatus||newStatus===activeOrder.status){
+    document.getElementById("detailMsg").innerHTML='<div class="status">El pedido ya se encuentra en ese estado.</div>';
+    return;
+  }
+  if(newStatus==="Enviado"){
+    const ok=confirm('¿Volver el pedido a Enviado?\n\nEl servicio podrá volver a complementarlo mientras permanezca en este estado.');
+    if(!ok)return;
+  }
+  const btn=document.getElementById("saveReviewStatusBtn"); if(btn)btn.disabled=true;
+  try{
+    const {error}=await sb.rpc("pharmacy_set_review_status",{p_order_id:activeOrder.id,p_status:newStatus});
+    if(error)throw error;
+    const id=activeOrder.id;
+    await loadAll();
+    openOrder(id);
+  }catch(e){
+    if(btn)btn.disabled=false;
+    document.getElementById("detailMsg").innerHTML=`<div class="alert danger">No fue posible cambiar el estado: ${esc(e.message)}</div>`;
+  }
+}
+async function startReview(){
+  if(!activeOrder||activeOrder.status!=="Enviado")return;
+  const btn=document.getElementById("startReviewBtn"); if(btn)btn.disabled=true;
+  try{
+    const {error}=await sb.from("orders").update({status:"En revisión",reviewed_at:new Date().toISOString()}).eq("id",activeOrder.id).eq("status","Enviado");
+    if(error)throw error;
+    const id=activeOrder.id;
+    await loadAll();
+    openOrder(id);
+  }catch(e){
+    if(btn)btn.disabled=false;
+    document.getElementById("detailMsg").innerHTML=`<div class="alert danger">No fue posible iniciar la revisión: ${esc(e.message)}</div>`;
+  }
+}
+async function addPharmacyItem(){
+  if(!activeOrder)return;
+  const itemId=Number(document.getElementById("phAddItem")?.value||0);
+  const qty=Number(document.getElementById("phAddQty")?.value||0);
+  if(!itemId){document.getElementById("detailMsg").innerHTML='<div class="alert danger">Seleccione un insumo.</div>';return;}
+  if(!(qty>0)){document.getElementById("detailMsg").innerHTML='<div class="alert danger">Ingrese una cantidad autorizada mayor que cero.</div>';return;}
+  const btn=document.getElementById("phAddBtn"); if(btn)btn.disabled=true;
+  try{
+    const {error}=await sb.rpc("pharmacy_add_order_item",{p_order_id:activeOrder.id,p_item_id:itemId,p_authorized:qty});
+    if(error)throw error;
+    await loadAll();
+    openOrder(activeOrder.id);
+  }catch(e){
+    if(btn)btn.disabled=false;
+    document.getElementById("detailMsg").innerHTML=`<div class="alert danger">${esc(e.message)}</div>`;
+  }
+}
+async function deleteActiveOrder(){
+  if(!activeOrder)return;
+  const label=`${activeOrder.services?.name||"Servicio"} — ${activeOrder.periods?.label||"Periodo"}`;
+  const ok=confirm(`¿Eliminar definitivamente el pedido de ${label}?\n\nEsto borrará también sus entregas registradas y dejará al servicio habilitado para enviar un nuevo pedido del mismo periodo.`);
+  if(!ok)return;
+  const code=prompt('Para confirmar, escriba ELIMINAR:');
+  if(code!=="ELIMINAR"){
+    document.getElementById("detailMsg").innerHTML='<div class="alert warn">El pedido no fue eliminado.</div>';
+    return;
+  }
+  const btn=document.getElementById("deleteOrderBtn"); if(btn)btn.disabled=true;
+  const id=activeOrder.id;
+  try{
+    const {error}=await sb.from("orders").delete().eq("id",id);
+    if(error)throw error;
+    activeOrder=null;
+    await loadAll();
+    showSection("current");
+    const current=document.getElementById("current");
+    if(current)current.insertAdjacentHTML("afterbegin",'<div class="status">Pedido eliminado correctamente. El servicio puede volver a enviar un pedido para ese periodo.</div>');
+  }catch(e){
+    if(btn)btn.disabled=false;
+    document.getElementById("detailMsg").innerHTML=`<div class="alert danger">No fue posible eliminar el pedido: ${esc(e.message)}</div>`;
+  }
+}
+function refreshPendingPreview(){
+  document.querySelectorAll("#detail tbody tr[data-id]").forEach(tr=>{const del=Number(tr.dataset.delivered||0),auth=Number(tr.querySelector(".auth")?.value||0),now=Number(tr.querySelector(".deliverNow")?.value||0),pend=Math.max(0,auth-del-now);const cell=tr.querySelector(".pendingCell");if(cell)cell.innerHTML=pend?`<span class="tag warnTag">${pend}</span>`:'<span class="tag ok">0</span>';});
+}
+async function persistAuthorization(){
+  const rows=[...document.querySelectorAll("#detail tbody tr[data-id]")];
+  for(const tr of rows){const delivered=Number(tr.dataset.delivered||0),val=Number(tr.querySelector(".auth").value||0);if(val<delivered)throw new Error(`La cantidad autorizada no puede ser menor que lo ya entregado (${delivered}).`);const {error}=await sb.from("order_lines").update({authorized:val}).eq("id",tr.dataset.id);if(error)throw error;}
+  const {error}=await sb.from("orders").update({pharmacy_observation:document.getElementById("obs").value}).eq("id",activeOrder.id);if(error)throw error;
+}
+async function saveAuthorization(){
+  try{await persistAuthorization();document.getElementById("detailMsg").innerHTML='<div class="status">Autorización guardada.</div>';await loadAll();openOrder(activeOrder.id);}catch(e){document.getElementById("detailMsg").innerHTML=`<div class="alert danger">${esc(e.message)}</div>`;}
+}
+async function deleteDeliveryEvent(eventId,eventTime){
+  if(!activeOrder||!eventId)return;
+  const ok=confirm(`¿Eliminar la entrega registrada el ${eventTime||""}?
+
+Esta acción eliminará ese registro de entrega y recalculará automáticamente el saldo del pedido.`);
+  if(!ok)return;
+  const buttons=[...document.querySelectorAll(`.deleteDeliveryBtn[data-event-id="${eventId}"]`)];
+  buttons.forEach(b=>{b.disabled=true;b.textContent="Eliminando…";});
+  try{
+    const {error}=await sb.rpc("pharmacy_delete_delivery_event",{p_delivery_event_id:eventId});
+    if(error)throw error;
+    const orderId=activeOrder.id;
+    await loadAll();
+    openOrder(orderId);
+  }catch(e){
+    buttons.forEach(b=>{b.disabled=false;b.textContent="Eliminar";});
+    document.getElementById("detailMsg").innerHTML=`<div class="alert danger">No fue posible eliminar la entrega: ${esc(e.message)}</div>`;
+  }
+}
+async function registerDelivery(){
+  const deliverBtn=document.getElementById("deliverBtn");
+  if(deliverBtn?.disabled)return;
+  const receiver=document.getElementById("receiver").value.trim();if(!receiver){document.getElementById("detailMsg").innerHTML='<div class="alert danger">Ingrese el nombre de quien recibe esta entrega.</div>';return;}
+  const rows=[...document.querySelectorAll("#detail tbody tr[data-id]")];
+  const lines=[];
+  for(const tr of rows){const delivered=Number(tr.dataset.delivered||0),auth=Number(tr.querySelector(".auth").value||0),qty=Number(tr.querySelector(".deliverNow").value||0);if(auth<delivered){document.getElementById("detailMsg").innerHTML='<div class="alert danger">La cantidad autorizada no puede ser menor que lo ya entregado.</div>';return;}if(qty<0||qty>Math.max(0,auth-delivered)){document.getElementById("detailMsg").innerHTML='<div class="alert danger">La cantidad a entregar no puede superar el saldo pendiente autorizado.</div>';return;}if(qty>0)lines.push({order_line_id:Number(tr.dataset.id),quantity:qty});}
+  if(!lines.length){document.getElementById("detailMsg").innerHTML='<div class="alert danger">Ingrese al menos una cantidad en “Entregar ahora”.</div>';return;}
+  try{
+    if(deliverBtn){deliverBtn.disabled=true;deliverBtn.textContent="Registrando entrega…";}
+    document.getElementById("detailMsg").innerHTML='<div class="alert info">Guardando entrega. No vuelva a presionar el botón.</div>';
+    await persistAuthorization();
+    const now=new Date().toISOString();
+    const {data:ev,error:evErr}=await sb.from("delivery_events").insert({order_id:activeOrder.id,receiver_name:receiver,pharmacy_observation:document.getElementById("obs").value||null,delivered_at:now}).select().single();if(evErr)throw evErr;
+    const {error:lnErr}=await sb.from("delivery_lines").insert(lines.map(x=>({...x,delivery_event_id:ev.id})));if(lnErr)throw lnErr;
+    // Recalcular saldo usando autorización mostrada y esta entrega.
+    let remaining=0;
+    for(const tr of rows){const delivered=Number(tr.dataset.delivered||0),auth=Number(tr.querySelector(".auth").value||0),qty=Number(tr.querySelector(".deliverNow").value||0);remaining+=Math.max(0,auth-delivered-qty);}
+    const status=remaining>0?"Entrega parcial":"Cerrado";
+    const update={status,receiver_name:receiver,received_at:now,pharmacy_observation:document.getElementById("obs").value||null,closed_at:status==="Cerrado"?now:null};
+    const {error:oErr}=await sb.from("orders").update(update).eq("id",activeOrder.id);if(oErr)throw oErr;
+    await loadAll();openOrder(activeOrder.id);
+  }catch(e){if(deliverBtn){deliverBtn.disabled=false;deliverBtn.textContent="Registrar entrega";}document.getElementById("detailMsg").innerHTML=`<div class="alert danger">${esc(e.message)}</div>`;}
+}
+function showGuide(){
+  const o=activeOrder,events=deliveryEvents.filter(e=>e.order_id===o.id).sort((a,b)=>new Date(a.delivered_at)-new Date(b.delivered_at));
+  document.getElementById("detail").innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between"><div><h2>Guía de entrega de insumos</h2></div><button class="secondary no-print" id="backOrder">← Volver</button></div><div class="grid4"><div class="box"><b>Servicio</b>${esc(o.services.name)}</div><div class="box"><b>Periodo</b>${esc(o.periods.label)}</div><div class="box"><b>Realizado por</b>${esc(o.requester_name)}</div><div class="box"><b>Estado</b>${esc(o.status)}</div><div class="box"><b>Última recepción</b>${esc(o.receiver_name||"—")} · ${fmtDateTime(o.received_at)}</div></div><div class="table-wrap" style="margin-top:14px"><table><thead><tr><th>Insumo</th><th>Unidad</th><th>Solicitado</th><th>Autorizado</th><th>Entregado acumulado</th><th>Saldo pendiente</th></tr></thead><tbody>${o.order_lines.map(l=>{const del=deliveredForLine(l.id),auth=Number(l.authorized??l.requested??0),pend=Math.max(0,auth-del);return `<tr><td>${esc(l.items.name)}</td><td>${esc(l.items.unit)}</td><td>${l.added_by_pharmacy?'No solicitado':l.requested}</td><td>${auth}</td><td><b>${del}</b></td><td>${pend}</td></tr>`}).join("")}</tbody></table></div><h3>Detalle de entregas</h3><div class="table-wrap"><table><thead><tr><th>Fecha/hora</th><th>Recibido por</th><th>Detalle</th></tr></thead><tbody>${events.map(ev=>{const lines=deliveryLines.filter(dl=>dl.delivery_event_id===ev.id);return `<tr><td>${fmtDateTime(ev.delivered_at)}</td><td>${esc(ev.receiver_name)}</td><td>${lines.map(dl=>{const ol=o.order_lines.find(x=>Number(x.id)===Number(dl.order_line_id));return `${esc(ol?.items?.name||"Insumo")}: <b>${Number(dl.quantity)}</b>`}).join("<br>")}</td></tr>`}).join("")||'<tr><td colspan="3">Sin entregas registradas.</td></tr>'}</tbody></table></div><div class="footer no-print"><button onclick="window.print()">Imprimir guía</button></div></div>`;
+  document.getElementById("backOrder").onclick=()=>openOrder(o.id);
+}
+function monthName(m){return ["","Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"][Number(m)]||m;}
+
+function getReviewRecords(){
+  const live=[];
+  orders.forEach(o=>{
+    const year=Number(o.periods?.year), month=Number(o.periods?.month);
+    if(!year||!month)return;
+    (o.order_lines||[]).forEach(l=>live.push({
+      service_id:o.service_id, item_id:l.item_id, year, month, period_label:o.periods?.label||`${month}/${year}`,
+      current_stock:l.current_stock??null, requested:l.requested??null, authorized:l.authorized??null,
+      source_file:'Pedido sistema',
+      source_note:`${o.status} · ${fmtDateTime(o.submitted_at)}`,
+      items:l.items||null, services:o.services||null, _source:'live'
+    }));
+  });
+  const liveKeys=new Set(live.map(r=>`${r.service_id}-${r.item_id}-${r.year}-${r.month}`));
+  const imported=historical.filter(r=>!liveKeys.has(`${r.service_id}-${r.item_id}-${r.year}-${r.month}`));
+  return [...imported,...live];
+}
+function renderReview(){
+  const yearSel=document.getElementById("reviewYear"); if(!yearSel)return;
+  const reviewRecords=getReviewRecords();
+  const years=[...new Set(reviewRecords.map(r=>Number(r.year)).filter(Boolean))].sort((a,b)=>b-a);
+  if(!years.length)years.push(new Date().getFullYear());
+  const prev=Number(yearSel.value)||years[0];
+  yearSel.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join("");
+  yearSel.value=years.includes(prev)?String(prev):String(years[0]);
+  yearSel.onchange=()=>{reviewSelection=null;renderReview();};
+  const year=Number(yearSel.value);
+  const rows=reviewRecords.filter(r=>Number(r.year)===year);
+  const by={};
+  rows.forEach(r=>{const k=`${r.service_id}-${r.month}`;if(!by[k])by[k]={records:0,stock:0,requested:0,authorized:0};by[k].records++;if(r.current_stock!==null)by[k].stock++;if(r.requested!==null)by[k].requested++;if(r.authorized!==null)by[k].authorized++;});
+  const servicesWith=new Set(rows.map(r=>String(r.service_id))).size;
+  const coveredCells=Object.keys(by).length;
+  const stockCells=Object.values(by).filter(x=>x.stock>0).length;
+  document.getElementById("reviewMetrics").innerHTML=[
+    ["Servicios con histórico",`${servicesWith}/${services.length}`],
+    ["Registros cargados",rows.length],
+    ["Meses-servicio con datos",coveredCells],
+    ["Meses con algún stock",stockCells]
+  ].map(v=>`<div class="metric"><b>${v[0]}</b><strong>${v[1]}</strong></div>`).join("");
+  document.getElementById("coverageHead").innerHTML=`<tr><th style="min-width:210px">Servicio</th>${Array.from({length:12},(_,i)=>`<th>${monthName(i+1)}</th>`).join("")}</tr>`;
+  document.getElementById("coverageBody").innerHTML=services.map(srv=>{
+    const cells=Array.from({length:12},(_,i)=>{const m=i+1,k=`${srv.id}-${m}`,x=by[k];if(!x)return `<td class="coverage none" data-service="${srv.id}" data-month="${m}"><strong>—</strong><small>Sin datos</small></td>`;const cls=x.stock===x.records&&x.stock>0?"has":"partial";const sub=x.stock>0?`stock ${x.stock}/${x.records}`:"solo solicitud";const sel=reviewSelection&&Number(reviewSelection.service_id)===Number(srv.id)&&Number(reviewSelection.month)===m?" selected":"";return `<td class="coverage ${cls}${sel}" data-service="${srv.id}" data-month="${m}"><strong>${x.records}</strong><small>${sub}</small></td>`;}).join("");
+    return `<tr><td><b>${esc(srv.name)}</b></td>${cells}</tr>`;
+  }).join("");
+  document.querySelectorAll("#coverageBody .coverage").forEach(td=>td.onclick=()=>selectReviewCell(Number(td.dataset.service),Number(td.dataset.month),year));
+  if(reviewSelection&&Number(reviewSelection.year)===year)renderReviewDetail();else{document.getElementById("reviewDetailTitle").textContent="Detalle del periodo";document.getElementById("reviewDetailSub").textContent="Seleccione una celda con registros para revisar los insumos cargados.";document.getElementById("reviewDetailBody").innerHTML='<tr><td colspan="6" class="small">Sin selección.</td></tr>';}
+}
+function selectReviewCell(service_id,month,year){reviewSelection={service_id,month,year};renderReview();}
+function renderReviewDetail(){
+  const sel=reviewSelection;if(!sel)return;
+  const srv=services.find(s=>Number(s.id)===Number(sel.service_id));
+  const rows=getReviewRecords().filter(r=>Number(r.service_id)===Number(sel.service_id)&&Number(r.year)===Number(sel.year)&&Number(r.month)===Number(sel.month)).sort((a,b)=>(a.items?.name||"").localeCompare(b.items?.name||"","es"));
+  document.getElementById("reviewDetailTitle").textContent=`${srv?.name||"Servicio"} — ${monthName(sel.month)} ${sel.year}`;
+  if(!rows.length){document.getElementById("reviewDetailSub").textContent="No existen registros históricos cargados para este servicio y mes.";document.getElementById("reviewDetailBody").innerHTML='<tr><td colspan="6" class="small">Sin registros.</td></tr>';return;}
+  const stockN=rows.filter(r=>r.current_stock!==null).length,reqN=rows.filter(r=>r.requested!==null).length;
+  document.getElementById("reviewDetailSub").textContent=`${rows.length} registro(s) · ${stockN} con stock informado · ${reqN} con solicitud.`;
+  document.getElementById("reviewDetailBody").innerHTML=rows.map(r=>`<tr><td>${esc(r.items?.name||"—")}</td><td>${esc(r.items?.unit||"—")}</td><td>${r.current_stock===null?'<span class="tag muted">Sin dato</span>':esc(r.current_stock)}</td><td>${r.requested===null?'<span class="tag muted">Sin dato</span>':esc(r.requested)}</td><td>${r.authorized===null?'<span class="tag muted">No informado</span>':esc(r.authorized)}</td><td><div>${esc(r.source_file||"—")}</div>${r.source_note?`<div class="small">${esc(r.source_note)}</div>`:""}</td></tr>`).join("");
+}
+function renderHistory(){
+  const rows=[];
+  orders.filter(o=>o.status==="Cerrado"||o.status==="Entrega parcial").forEach(o=>(o.order_lines||[]).forEach(l=>{const delivered=deliveredForLine(l.id),auth=Number(l.authorized??l.requested??0),pending=Math.max(0,auth-delivered);const evs=deliveryEvents.filter(e=>e.order_id===o.id).sort((a,b)=>new Date(b.delivered_at)-new Date(a.delivered_at));const last=evs[0];rows.push(`<tr><td>${esc(o.periods.label)}</td><td>${esc(o.services.name)}</td><td>${esc(l.items.name)}</td><td>${esc(l.items.unit)}</td><td>${l.current_stock}</td><td>${l.added_by_pharmacy?'No solicitado':l.requested}</td><td>${auth}</td><td><b>${delivered}</b></td><td>${pending?`<span class="tag warnTag">${pending}</span>`:'0'}</td><td>${last?`${esc(last.receiver_name)} · ${fmtDateTime(last.delivered_at)}`:'—'}</td></tr>`)}));
+  document.getElementById("historyBody").innerHTML=rows.join("")||'<tr><td colspan="10" class="small">Sin entregas registradas.</td></tr>';
+}
+function periodIndex(year,month){return Number(year)*12+(Number(month)-1);}
+function periodLabelShort(year,month){return `${monthName(month)} ${year}`;}
+function buildConsumptionRows(){
+  const groups={};
+  const ensure=(service_id,item_id,name,unit)=>{
+    const k=`${service_id}-${item_id}`;
+    if(!groups[k])groups[k]={service_id:Number(service_id),item_id:Number(item_id),name:name||"—",unit:unit||"—",observations:[],deliveries:[],unknownHistorical:[]};
+    return groups[k];
+  };
+
+  historical.forEach(r=>{
+    const g=ensure(r.service_id,r.item_id,r.items?.name,r.items?.unit);
+    const idx=periodIndex(r.year,r.month);
+    if(r.current_stock!==null)g.observations.push({idx,year:Number(r.year),month:Number(r.month),stock:Number(r.current_stock),source:"Histórico"});
+    if(r.authorized!==null)g.deliveries.push({idx,qty:Number(r.authorized),source:"Histórico"});
+    else g.unknownHistorical.push({idx,requested:r.requested===null?null:Number(r.requested)});
+  });
+
+  // Todo pedido enviado aporta una observación de stock del mes en que fue solicitado.
+  orders.forEach(o=>{
+    const y=Number(o.periods?.year),m=Number(o.periods?.month),idx=periodIndex(y,m);
+    (o.order_lines||[]).forEach(l=>{const g=ensure(o.service_id,l.item_id,l.items?.name,l.items?.unit);if(l.current_stock!==null)g.observations.push({idx,year:y,month:m,stock:Number(l.current_stock),source:"Pedido"});});
+  });
+  // Las entregas nuevas se contabilizan por la fecha real en que fueron registradas.
+  deliveryLines.forEach(dl=>{
+    const ev=eventById(dl.delivery_event_id);if(!ev)return;const o=orders.find(x=>x.id===ev.order_id);if(!o)return;const ol=(o.order_lines||[]).find(x=>Number(x.id)===Number(dl.order_line_id));if(!ol)return;const d=new Date(ev.delivered_at),y=d.getFullYear(),m=d.getMonth()+1,idx=periodIndex(y,m);const g=ensure(o.service_id,ol.item_id,ol.items?.name,ol.items?.unit);g.deliveries.push({idx,qty:Number(dl.quantity),source:"Entrega registrada"});
+  });
+
+  const results=[];
+  Object.values(groups).forEach(g=>{
+    g.observations.sort((a,b)=>a.idx-b.idx);
+    g.deliveries.sort((a,b)=>a.idx-b.idx);
+    g.unknownHistorical.sort((a,b)=>a.idx-b.idx);
+    // Si hay dos observaciones del mismo periodo, conservar la más reciente agregada (pedido real sobre histórico).
+    const dedup=[];
+    g.observations.forEach(o=>{const pos=dedup.findIndex(x=>x.idx===o.idx);if(pos>=0)dedup[pos]=o;else dedup.push(o);});
+    g.observations=dedup.sort((a,b)=>a.idx-b.idx);
+    const intervals=[];
+    for(let i=0;i<g.observations.length-1;i++){
+      const a=g.observations[i],b=g.observations[i+1],months=b.idx-a.idx;
+      if(months<=0)continue;
+      const unknown=g.unknownHistorical.filter(x=>x.idx>=a.idx&&x.idx<b.idx);
+      if(unknown.length){intervals.push({valid:false,a,b,months,reason:"Entrega histórica no informada"});continue;}
+      const delivered=g.deliveries.filter(x=>x.idx>=a.idx&&x.idx<b.idx).reduce((sum,x)=>sum+x.qty,0);
+      const total=a.stock+delivered-b.stock;
+      if(total<0){intervals.push({valid:false,a,b,months,reason:"Resultado negativo; requiere revisión"});continue;}
+      intervals.push({valid:true,a,b,months,delivered,total,monthly:total/months});
+    }
+    const valid=intervals.filter(x=>x.valid);
+    // Cada intervalo válido representa N meses; se usa su equivalente mensual para completar hasta 3 meses válidos recientes.
+    const monthly=[];
+    valid.forEach(v=>{for(let j=0;j<v.months;j++)monthly.push({idx:v.a.idx+j+1,value:v.monthly});});
+    monthly.sort((a,b)=>a.idx-b.idx);
+    const last3=monthly.slice(-3);
+    const avg3=last3.length>=3?last3.reduce((s,x)=>s+x.value,0)/3:null;
+    const latestObs=g.observations.length?g.observations[g.observations.length-1]:null;
+    const lastDelivery=g.deliveries.length?g.deliveries[g.deliveries.length-1]:null;
+    const lastValid=valid.length?valid[valid.length-1]:null;
+    let status="Historial insuficiente para calcular promedio y cobertura.";
+    let statusClass="muted";
+    if(g.observations.length<2){
+      status=latestObs
+        ?`Pendiente próximo stock: existe stock de ${periodLabelShort(latestObs.year,latestObs.month)}, pero falta un stock posterior para calcular consumo.`
+        :"Sin stock informado: no existe una observación de stock válida para iniciar el cálculo.";
+    } else if(!valid.length){
+      const reason=intervals.length?intervals[intervals.length-1].reason:"Datos insuficientes";
+      if(reason==="Entrega histórica no informada") status="Entrega histórica no informada: entre los stocks disponibles existe al menos un periodo con cantidad autorizada/entregada desconocida.";
+      else if(reason.includes("negativo")) status="Resultado negativo: el stock posterior supera al stock inicial más las entregas conocidas; requiere revisión.";
+      else status=`${reason}: no existe un intervalo válido para calcular consumo.`;
+      statusClass=reason.includes("negativo")?"warnTag":"muted";
+    } else if(avg3===null){
+      status=`Historial insuficiente: ${monthly.length}/3 mes(es) válidos para calcular promedio 3M.`;
+    } else {
+      status="Cálculo disponible: existen al menos 3 meses válidos para promedio y cobertura.";
+      statusClass="ok";
+    }
+    const coverage=(avg3!==null&&avg3>0&&latestObs)?latestObs.stock/avg3:null;
+    if(avg3!==null&&avg3===0){status="Promedio 3M igual a 0: no es posible calcular cobertura en meses.";statusClass="muted";}
+    results.push({...g,latestObs,lastDelivery,lastValid,validMonths:monthly.length,avg3,coverage,status,statusClass,intervals});
+  });
+  return results;
+}
+function renderConsumption(){
+  const body=document.getElementById("consBody"),serviceSel=document.getElementById("consService"),search=document.getElementById("consSearch");
+  if(!body||!serviceSel||!search)return;
+  const all=buildConsumptionRows();
+  const previous=serviceSel.value||"all";
+  serviceSel.innerHTML='<option value="all">Todos los servicios</option>'+services.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  serviceSel.value=["all",...services.map(s=>String(s.id))].includes(previous)?previous:"all";
+  serviceSel.onchange=renderConsumption;search.oninput=renderConsumption;
+  const q=search.value.trim().toLowerCase(),sid=serviceSel.value;
+  const rows=all.filter(x=>(sid==="all"||String(x.service_id)===sid)&&(!q||x.name.toLowerCase().includes(q))).sort((a,b)=>{
+    const sa=services.find(s=>Number(s.id)===a.service_id)?.name||"",sb=services.find(s=>Number(s.id)===b.service_id)?.name||"";
+    return sa.localeCompare(sb,"es")||a.name.localeCompare(b.name,"es");
+  });
+  const available=all.filter(x=>x.avg3!==null).length;
+  const withValid=all.filter(x=>x.validMonths>0).length;
+  const pending=all.filter(x=>x.observations.length<2).length;
+  const review=all.filter(x=>x.intervals.some(i=>!i.valid)).length;
+  document.getElementById("consMetrics").innerHTML=[
+    ["Con promedio 3M",available],["Con consumo válido",withValid],["Pendiente próximo stock",pending],["Requieren revisión",review]
+  ].map(v=>`<div class="metric"><b>${v[0]}</b><strong>${v[1]}</strong></div>`).join("");
+  if(!rows.length){body.innerHTML='<tr><td colspan="8" class="small">No hay registros para el filtro seleccionado.</td></tr>';return;}
+  body.innerHTML=rows.map(x=>{
+    const srv=services.find(s=>Number(s.id)===x.service_id)?.name||"—";
+    const stock=x.latestObs?`<b>${Number(x.latestObs.stock).toLocaleString("es-CL")}</b><div class="small">${periodLabelShort(x.latestObs.year,x.latestObs.month)}</div>`:'<span class="tag muted">Sin stock informado</span>';
+    const delivery=x.lastDelivery?`<b>${Number(x.lastDelivery.qty).toLocaleString("es-CL")}</b><div class="small">${periodLabelShort(Math.floor(x.lastDelivery.idx/12),x.lastDelivery.idx%12+1)} · ${esc(x.lastDelivery.source)}</div>`:'<span class="tag muted">No informada</span>';
+    const last=x.lastValid?`<b>${x.lastValid.monthly.toLocaleString("es-CL",{maximumFractionDigits:2})}</b><div class="small">${periodLabelShort(x.lastValid.a.year,x.lastValid.a.month)} → ${periodLabelShort(x.lastValid.b.year,x.lastValid.b.month)} · equiv. mensual</div>`:'<span class="tag muted">No calculable</span>';
+    const avg=x.avg3===null?'<span class="tag muted">No disponible</span>':`<b>${x.avg3.toLocaleString("es-CL",{maximumFractionDigits:2})}</b><div class="small">promedio mensual</div>`;
+    let cov='<span class="tag muted">No disponible</span>';
+    if(x.coverage!==null){const c=x.coverage;cov=`<b>${c.toLocaleString("es-CL",{maximumFractionDigits:1})} meses</b>`;if(c>=3)cov+=`<div class="alert warn">Cobertura elevada</div>`;}
+    return `<tr><td><b>${esc(srv)}</b></td><td><div><b>${esc(x.name)}</b></div><div class="small">${esc(x.unit)}</div></td><td>${stock}</td><td>${delivery}</td><td>${last}</td><td>${avg}</td><td>${cov}</td><td><span class="tag ${x.statusClass}" style="white-space:normal;line-height:1.35">${esc(x.status)}</span></td></tr>`;
+  }).join("");
+}
+
+function renderItemCatalog(){
+  const body=document.getElementById("itemCatalogBody"),search=document.getElementById("itemCatalogSearch"),showInactive=document.getElementById("showInactiveItems");
+  if(!body||!search)return;
+  const q=search.value.trim().toLowerCase(),includeInactive=!!showInactive?.checked;
+  const rows=items.filter(i=>(includeInactive||i.active!==false)&&(!q||String(i.name||"").toLowerCase().includes(q)));
+  body.innerHTML=rows.map(i=>`<tr data-item="${i.id}"><td><b>${esc(i.name)}</b></td><td>${esc(i.unit||"—")}</td><td><div style="display:flex;gap:8px;align-items:center"><input class="catalogUnit" list="unitSuggestions" value="${esc(i.unit||"")}" style="min-width:170px" ${i.active===false?'disabled':''}><button class="secondary saveItemUnit" ${i.active===false?'disabled':''}>Guardar</button></div></td><td>${i.active===false?'<span class="tag muted">Eliminado / inactivo</span>':'<span class="tag ok">Activo</span>'}</td><td>${i.active===false?'<button class="secondary reactivateItem">Reactivar</button>':'<button class="dangerBtn deactivateItem">Eliminar</button>'}</td></tr>`).join("");
+  if(!rows.length)body.innerHTML='<tr><td colspan="5" class="small">No hay insumos que coincidan con la búsqueda.</td></tr>';
+  body.querySelectorAll(".saveItemUnit").forEach(btn=>btn.onclick=async()=>{
+    const tr=btn.closest("tr[data-item]"),id=Number(tr.dataset.item),unit=tr.querySelector(".catalogUnit").value.trim();
+    if(!unit){alert("Debe indicar una unidad.");return;}
+    const current=items.find(i=>Number(i.id)===id);
+    if(current&&String(current.unit||"").trim()===unit){document.getElementById("itemCatalogMsg").innerHTML='<div class="alert info">La unidad no cambió.</div>';return;}
+    btn.disabled=true;
+    const {error}=await sb.from("items").update({unit}).eq("id",id);
+    btn.disabled=false;
+    if(error){document.getElementById("itemCatalogMsg").innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+    document.getElementById("itemCatalogMsg").innerHTML='<div class="status">Unidad actualizada correctamente.</div>';
+    await loadAll();
+  });
+  body.querySelectorAll(".deactivateItem").forEach(btn=>btn.onclick=async()=>{
+    const tr=btn.closest("tr[data-item]"),id=Number(tr.dataset.item),current=items.find(i=>Number(i.id)===id);
+    if(!confirm(`¿Eliminar "${current?.name||'este insumo'}" del catálogo activo?\n\nNo se borrará su historial ni los pedidos anteriores. También dejará de estar autorizado para todos los servicios.`))return;
+    btn.disabled=true;
+    const {error}=await sb.rpc("pharmacy_set_item_active",{p_item_id:id,p_active:false});
+    if(error){btn.disabled=false;document.getElementById("itemCatalogMsg").innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+    document.getElementById("itemCatalogMsg").innerHTML='<div class="status">Insumo eliminado del catálogo activo. El historial se conserva.</div>';
+    await loadAll();
+  });
+  body.querySelectorAll(".reactivateItem").forEach(btn=>btn.onclick=async()=>{
+    const tr=btn.closest("tr[data-item]"),id=Number(tr.dataset.item);
+    btn.disabled=true;
+    const {error}=await sb.rpc("pharmacy_set_item_active",{p_item_id:id,p_active:true});
+    if(error){btn.disabled=false;document.getElementById("itemCatalogMsg").innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+    document.getElementById("itemCatalogMsg").innerHTML='<div class="status">Insumo reactivado. Debe volver a autorizarlo en los servicios que correspondan.</div>';
+    await loadAll();
+  });
+  search.oninput=renderItemCatalog;
+  if(showInactive)showInactive.onchange=renderItemCatalog;
+}
+async function createCatalogItem(){
+  const name=document.getElementById("newItemName").value.trim(),unit=document.getElementById("newItemUnit").value.trim();
+  const msg=document.getElementById("newItemMsg"),btn=document.getElementById("createItem");
+  if(name.length<2){msg.innerHTML='<div class="alert danger">Ingrese el nombre del insumo.</div>';return;}
+  if(!unit){msg.innerHTML='<div class="alert danger">Ingrese la unidad del insumo.</div>';return;}
+  const duplicate=items.find(i=>String(i.name||"").trim().toLowerCase()===name.toLowerCase());
+  if(duplicate){msg.innerHTML=duplicate.active===false?'<div class="alert warn">Ese insumo existe pero está eliminado/inactivo. Use “Mostrar eliminados/inactivos” y luego “Reactivar”.</div>':'<div class="alert warn">Ese insumo ya existe en el catálogo.</div>';return;}
+  btn.disabled=true;
+  const {error}=await sb.from("items").insert({name,unit,active:true});
+  btn.disabled=false;
+  if(error){msg.innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+  document.getElementById("newItemName").value="";document.getElementById("newItemUnit").value="";
+  msg.innerHTML='<div class="status">Insumo creado. Ahora puede autorizarlo para uno o más servicios en la sección siguiente.</div>';
+  await loadAll();
+}
+
+function permissionMapForService(serviceId){
+  const map={};
+  serviceItems.filter(x=>Number(x.service_id)===Number(serviceId)).forEach(x=>map[String(x.item_id)]=x.enabled!==false);
+  return map;
+}
+function renderPermissions(){
+  const sel=document.getElementById("permService"),body=document.getElementById("permBody"),search=document.getElementById("permSearch");
+  if(!sel||!body||!search)return;
+  const previous=sel.value;
+  sel.innerHTML=services.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  if(previous&&[...sel.options].some(o=>o.value===previous))sel.value=previous;
+  if(!sel.value&&sel.options.length)sel.selectedIndex=0;
+  const sid=Number(sel.value||0),q=search.value.trim().toLowerCase(),current=permissionMapForService(sid);
+  const rows=items.filter(i=>i.active!==false&&(!q||String(i.name||"").toLowerCase().includes(q)));
+  body.innerHTML=rows.map(i=>`<tr data-item="${i.id}"><td><input class="permToggle" type="checkbox" ${current[String(i.id)]?"checked":""}></td><td><b>${esc(i.name)}</b></td><td>${esc(i.unit||"—")}</td></tr>`).join("");
+  document.getElementById("permMsg").innerHTML=`<div class="small">${Object.values(current).filter(Boolean).length} insumo(s) autorizados actualmente para este servicio.</div>`;
+  sel.onchange=renderPermissions;
+  search.oninput=renderPermissions;
+}
+function setVisiblePermission(value){
+  document.querySelectorAll("#permBody .permToggle").forEach(c=>c.checked=value);
+}
+async function savePermissions(){
+  const sid=Number(document.getElementById("permService").value||0);
+  if(!sid)return;
+  const current=permissionMapForService(sid),changes=[];
+  document.querySelectorAll("#permBody tr[data-item]").forEach(tr=>{
+    const itemId=Number(tr.dataset.item),enabled=tr.querySelector(".permToggle").checked;
+    if(Boolean(current[String(itemId)])!==enabled)changes.push({service_id:sid,item_id:itemId,enabled});
+  });
+  if(!changes.length){document.getElementById("permMsg").innerHTML='<div class="alert info">No hay cambios para guardar.</div>';return;}
+  const btn=document.getElementById("savePermissions");btn.disabled=true;
+  const {error}=await sb.from("service_items").upsert(changes,{onConflict:"service_id,item_id"});
+  btn.disabled=false;
+  if(error){document.getElementById("permMsg").innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+  document.getElementById("permMsg").innerHTML=`<div class="status">Autorizaciones actualizadas: ${changes.length} cambio(s).</div>`;
+  await loadAll();
+}
+function renderConfig(){
+  const fullYearInput=document.getElementById("fullYear");
+  if(fullYearInput&&!fullYearInput.value){const years=periods.map(p=>Number(p.year)).filter(Boolean);fullYearInput.value=years.length?Math.max(...years)+1:new Date().getFullYear();}
+  document.getElementById("periods").innerHTML=periods.map(p=>`<div class="box" data-period="${p.id}" style="margin-bottom:10px"><div style="display:grid;grid-template-columns:minmax(150px,1.4fr) minmax(150px,1fr) minmax(150px,1fr) auto;gap:12px;align-items:end"><div><b>${esc(p.label)}</b><div class="small">${p.active===false?"Inactivo":"Activo"}</div></div><label>Apertura<input class="period-open" type="date" value="${esc(p.open_date||"")}" style="width:100%"></label><label>Cierre<input class="period-close" type="date" value="${esc(p.close_date||"")}" style="width:100%"></label><button class="savePeriod">Guardar fechas</button></div></div>`).join("");
+  document.querySelectorAll(".savePeriod").forEach(btn=>btn.onclick=async()=>{
+    const box=btn.closest("[data-period]"), id=Number(box.dataset.period), open=box.querySelector(".period-open").value, close=box.querySelector(".period-close").value;
+    if(!open||!close){alert("Debe indicar fecha de apertura y cierre.");return;}
+    if(close<open){alert("La fecha de cierre no puede ser anterior a la apertura.");return;}
+    btn.disabled=true;
+    const {error}=await sb.from("periods").update({open_date:open,close_date:close}).eq("id",id);
+    btn.disabled=false;
+    if(error){alert("No fue posible guardar las fechas: "+error.message);return;}
+    document.getElementById("periodMsg").innerHTML='<div class="status">Fechas del periodo actualizadas.</div>';
+    await loadAll();
+  });
+  renderItemCatalog();
+  renderPermissions();
+  const op=emailConfig.opening,cl=emailConfig.closing;
+  if(op){openActive.checked=op.active;openDays.value=op.days_before;openType.value=op.day_type;openSubject.value=op.subject||"";openBody.value=op.body||""}
+  if(cl){closeActive.checked=cl.active;closeDays.value=cl.days_before;closeType.value=cl.day_type;closeSubject.value=cl.subject||"";closeBody.value=cl.body||""}
+  const byService=Object.fromEntries(serviceResponsibles.map(r=>[String(r.service_id),r]));
+  document.getElementById("respBody").innerHTML=services.map(s=>{const r=byService[String(s.id)]||{};return `<tr data-service="${s.id}"><td><b>${esc(s.name)}</b></td><td><input class="pname" value="${esc(r.principal_name||"")}" style="width:180px"></td><td><input class="pemail" type="email" value="${esc(r.principal_email||"")}" style="width:240px"></td><td><input class="sname" value="${esc(r.substitute_name||"")}" style="width:180px"></td><td><input class="semail" type="email" value="${esc(r.substitute_email||"")}" style="width:240px"></td><td><input class="ractive" type="checkbox" ${r.active!==false?"checked":""}></td></tr>`}).join("");
+  document.getElementById("emailAutoStatus").innerHTML='<b>Configuración interna lista.</b> Falta conectar el proveedor que enviará físicamente los correos y activar la ejecución diaria.';
+}
+
+function dateForYearMonthDay(year,month,day){
+  const last=new Date(year,month,0).getDate();
+  return `${year}-${String(month).padStart(2,"0")}-${String(Math.min(day,last)).padStart(2,"0")}`;
+}
+function suggestedDatesForPeriod(year,month){
+  const previous=periods.find(p=>Number(p.year)===year-1&&Number(p.month)===month);
+  if(previous?.open_date&&previous?.close_date){
+    const openDay=Number(String(previous.open_date).slice(8,10))||15;
+    const closeDay=Number(String(previous.close_date).slice(8,10))||16;
+    return {open:dateForYearMonthDay(year,month,openDay),close:dateForYearMonthDay(year,month,Math.max(openDay,closeDay))};
+  }
+  return {open:dateForYearMonthDay(year,month,15),close:dateForYearMonthDay(year,month,16)};
+}
+document.getElementById("createFullYear").onclick=async()=>{
+  const input=document.getElementById("fullYear");
+  const fallback=(periods.length?Math.max(...periods.map(p=>Number(p.year)||0))+1:new Date().getFullYear());
+  const year=Number(input.value||prompt("Año a crear:",String(fallback)));
+  if(!year||year<2000||year>2100)return;
+  input.value=year;
+  const names=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  const existing=new Set(periods.filter(p=>Number(p.year)===year).map(p=>Number(p.month)));
+  const missing=[];
+  for(let month=1;month<=12;month++){
+    if(existing.has(month))continue;
+    const d=suggestedDatesForPeriod(year,month);
+    missing.push({year,month,label:`${names[month-1]} ${year}`,open_date:d.open,close_date:d.close,active:true});
+  }
+  if(!missing.length){
+    document.getElementById("periodMsg").innerHTML=`<div class="alert info">El año ${year} ya tiene sus 12 periodos creados. No se agregó ningún duplicado.</div>`;
+    return;
+  }
+  const btn=document.getElementById("createFullYear");btn.disabled=true;
+  const {error}=await sb.from("periods").insert(missing);
+  btn.disabled=false;
+  if(error){alert("No fue posible crear el año completo: "+error.message);return;}
+  document.getElementById("periodMsg").innerHTML=`<div class="status">Año ${year} creado: ${missing.length} periodo(s) nuevo(s). ${12-missing.length} ya existían y se conservaron sin cambios. Revise las fechas de apertura y cierre propuestas.</div>`;
+  await loadAll();
+};
+document.getElementById("addPeriod").onclick=async()=>{
+  const now=new Date();
+  const year=Number(prompt("Año del nuevo periodo:", String(now.getFullYear())));
+  if(!year||year<2000||year>2100)return;
+  const month=Number(prompt("Mes (1 a 12):", String(now.getMonth()+1)));
+  if(!month||month<1||month>12)return;
+  const names=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  const label=`${names[month-1]} ${year}`;
+  const open=prompt(`Fecha de apertura para ${label} (AAAA-MM-DD):`,`${year}-${String(month).padStart(2,"0")}-01`);
+  if(!open)return;
+  const close=prompt(`Fecha de cierre para ${label} (AAAA-MM-DD):`,open);
+  if(!close)return;
+  if(close<open){alert("La fecha de cierre no puede ser anterior a la apertura.");return;}
+  const {error}=await sb.from("periods").insert({year,month,label,open_date:open,close_date:close,active:true});
+  if(error){alert("No fue posible agregar el periodo: "+error.message);return;}
+  document.getElementById("periodMsg").innerHTML='<div class="status">Nuevo periodo agregado.</div>';
+  await loadAll();
+};
+document.getElementById("createItem").onclick=createCatalogItem;
+document.getElementById("itemCatalogSearch").oninput=renderItemCatalog;
+document.getElementById("permCheckVisible").onclick=()=>setVisiblePermission(true);
+document.getElementById("permUncheckVisible").onclick=()=>setVisiblePermission(false);
+document.getElementById("savePermissions").onclick=savePermissions;
+document.getElementById("saveConfig").onclick=async()=>{
+ const updates=[
+  {key:"opening",active:openActive.checked,days_before:Number(openDays.value||0),day_type:openType.value,subject:openSubject.value.trim(),body:openBody.value.trim(),updated_at:new Date().toISOString()},
+  {key:"closing",active:closeActive.checked,days_before:Number(closeDays.value||0),day_type:closeType.value,subject:closeSubject.value.trim(),body:closeBody.value.trim(),updated_at:new Date().toISOString()}
+ ];
+ for(const u of updates){const {error}=await sb.from("email_config").update(u).eq("key",u.key);if(error){alert(error.message);return;}}
+ document.getElementById("cfgmsg").innerHTML='<div class="status">Configuración de correos guardada.</div>';await loadAll();
+};
+document.getElementById("saveRecipients").onclick=async()=>{
+ const rows=[...document.querySelectorAll("#respBody tr")];
+ for(const tr of rows){
+  const payload={service_id:Number(tr.dataset.service),principal_name:tr.querySelector(".pname").value.trim()||null,principal_email:tr.querySelector(".pemail").value.trim()||null,substitute_name:tr.querySelector(".sname").value.trim()||null,substitute_email:tr.querySelector(".semail").value.trim()||null,active:tr.querySelector(".ractive").checked,updated_at:new Date().toISOString()};
+  const {error}=await sb.from("service_responsibles").upsert(payload,{onConflict:"service_id"});if(error){alert(error.message);return;}
+ }
+ document.getElementById("respMsg").innerHTML='<div class="status">Destinatarios guardados.</div>';await loadAll();
+};
+document.getElementById("previewDueEmails").onclick=async()=>{
+ const box=document.getElementById("duePreview");box.innerHTML='<div class="small">Consultando…</div>';
+ const {data,error}=await sb.rpc("get_due_email_notifications",{p_run_date:todayISO()});
+ if(error){box.innerHTML=`<div class="alert danger">${esc(error.message)}</div>`;return;}
+ if(!data?.length){box.innerHTML='<div class="alert info">Hoy no corresponde enviar ningún correo según el calendario y la configuración actual.</div>';return;}
+ box.innerHTML=`<div class="table-wrap"><table><thead><tr><th>Tipo</th><th>Servicio</th><th>Periodo</th><th>Destinatario</th><th>Asunto</th></tr></thead><tbody>${data.map(x=>`<tr><td>${x.email_type==="opening"?"Apertura":"Cierre"}</td><td>${esc(x.service_name)}</td><td>${esc(x.period_label)}</td><td>${esc(x.recipient_name||"")}<div class="small">${esc(x.recipient)}</div></td><td>${esc(x.subject)}</td></tr>`).join("")}</tbody></table></div>`;
+};
+function showSection(v){["current","detail","consolidated","review","history","consumption","config"].forEach(id=>document.getElementById(id).classList.toggle("hidden",id!==v));document.querySelectorAll(".pill").forEach(p=>p.classList.toggle("active",p.dataset.view===v));}
+document.querySelectorAll(".pill").forEach(p=>p.onclick=()=>showSection(p.dataset.view));
+document.getElementById("logoutBtn").onclick=async()=>{await sb.auth.signOut();location.href="index.html";};
+(async()=>{if(await ensureAuth()){try{await loadAll()}catch(e){console.error(e);alert("Error al cargar Control Farmacia: "+e.message);const m=document.getElementById("reviewMetrics");if(m)m.innerHTML=`<div class="alert danger" style="grid-column:1/-1">No fue posible cargar el historial: ${esc(e.message)}</div>`;}}})();
+</script></body></html>
