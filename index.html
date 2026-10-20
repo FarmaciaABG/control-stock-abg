@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.5.2.css?v=3.4.1">
-<meta name="app-build" content="v3.5.2"></head>
+  <link rel="stylesheet" href="styles-abg-v3.5.3.css?v=3.4.1">
+<meta name="app-build" content="v3.5.3"></head>
 <body>
 <header class="topbar">
   <div>
@@ -213,9 +213,9 @@
       <label>Fecha<input id="weeklyDate" type="date"></label>
       <label>Regla base<input value="9 A · 4 B · 2 C · ajustable por prioridad" disabled></label>
     </div>
-    <div class="button-row wrap"><button type="button" id="generateWeekly" class="good-btn">Generar 15 productos</button><button type="button" id="saveWeekly" class="secondary">Guardar inventario</button><button type="button" id="exportWeekly" class="secondary">Exportar Excel</button></div>
+    <div class="button-row wrap"><button type="button" id="generateWeekly" class="good-btn">Generar 15 productos</button><button type="button" id="saveWeekly" class="secondary">Guardar / actualizar</button><button type="button" id="exportWeekly" class="secondary">Exportar Excel</button></div>
     <div id="weeklySummary" class="info-strip">Aún no se genera listado.</div>
-    <div class="table-wrap"><table><thead><tr><th>N°</th><th>Medicamento</th><th>ABC</th><th>Prioridad</th><th>Motivos</th><th>Trazador</th><th>Stock sistema</th><th>Stock físico</th><th>Diferencia</th><th>Resultado</th></tr></thead><tbody id="weeklyTable"></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>N°</th><th>Medicamento</th><th>ABC</th><th>Prioridad</th><th>Motivos</th><th>Trazador</th><th>Stock sistema</th><th>1° conteo</th><th>2° conteo</th><th>Diferencia final</th><th>Resultado</th></tr></thead><tbody id="weeklyTable"></tbody></table></div>
     <h4>Historial reciente</h4><div id="weeklyHistory"></div>
   </form>
 </dialog>
@@ -379,7 +379,7 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.5.2 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.5.2.js"></script>
+<footer>Farmacia ABG · v3.5.3 · Clasificación y consumos actualizados</footer>
+<script src="app-v3.5.3.js"></script>
 </body>
 </html>

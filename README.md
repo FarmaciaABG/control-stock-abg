@@ -74,3 +74,11 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - En el Excel, STOCK SISTEMA y STOCK FÍSICO quedan vacíos por defecto y resaltados como campos de llenado.
 
 - v3.5.2: corrige el cálculo en vivo de Diferencia y Resultado al ingresar stock sistema y stock físico en inventario rotativo.
+
+- v3.5.3: los inventarios rotativos incompletos quedan guardados como PENDIENTES.
+- El historial muestra estado, avance y permite Abrir / continuar un inventario pendiente.
+- Un inventario completo puede abrirse nuevamente para ver su resumen.
+- Guardar / actualizar modifica el mismo inventario abierto y no crea duplicados.
+- Se agrega 2° conteo opcional por producto. Si se ingresa, pasa a ser el conteo usado para la diferencia final.
+- El inventario se considera completo cuando todos los productos tienen STOCK SISTEMA y 1° CONTEO.
+- El Excel incorpora 1° conteo, 2° conteo, diferencia del primer conteo, diferencia final, estado y avance.
