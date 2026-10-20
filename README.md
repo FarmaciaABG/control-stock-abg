@@ -72,3 +72,5 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - STOCK SISTEMA y STOCK FÍSICO se completan manualmente al momento del inventario.
 - La diferencia y el resultado se calculan solo cuando ambos campos están informados.
 - En el Excel, STOCK SISTEMA y STOCK FÍSICO quedan vacíos por defecto y resaltados como campos de llenado.
+
+- v3.5.2: corrige el cálculo en vivo de Diferencia y Resultado al ingresar stock sistema y stock físico en inventario rotativo.
