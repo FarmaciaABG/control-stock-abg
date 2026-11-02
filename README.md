@@ -156,3 +156,5 @@ Actualización v3.10.6: corregido el ingreso de Stock físico y Stock libro. La 
 - La tabla no se vuelve a dibujar mientras se escribe.
 - Diferencias y estado se recalculan en vivo sin perder el foco.
 - El valor Rayen editado se guarda y se incluye en el Excel.
+
+- v3.10.8: En cuadre de controlados, las diferencias ahora se calculan como Físico - Rayen y Físico - Libro, y se actualizan los encabezados y el Excel.

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-<meta name="app-build" content="v3.10.7">
+<meta name="app-build" content="v3.10.8">
 <style id="abg-inline-styles">
 :root{
   --bg:#f4f7f8;--panel:#fff;--text:#18333c;--muted:#697b83;--line:#dce6e9;
@@ -1466,7 +1466,7 @@ body{padding-left:0!important}
     <div class="dialog-head"><div><h3>Cuadre de medicamentos controlados</h3><p>Compara el stock registrado en Rayen con el conteo físico y el saldo del libro de control.</p></div><button value="close" class="secondary">Cerrar</button></div>
     <div class="form-grid three"><label>Fecha<input id="controlledDate" type="date"></label><div></div><div class="button-row"><button type="button" id="saveControlledReconciliation" class="good-btn">Guardar cuadre</button><button type="button" id="exportControlledReconciliation" class="secondary">Exportar Excel</button></div></div>
     <div id="controlledSummary" class="status-strip">Completa stock físico y stock libro.</div>
-    <div class="table-wrap"><table><thead><tr><th>Medicamento</th><th>Stock Rayen</th><th>Stock físico</th><th>Stock libro</th><th>Rayen - físico</th><th>Libro - físico</th><th>Estado</th></tr></thead><tbody id="controlledTable"></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>Medicamento</th><th>Stock Rayen</th><th>Stock físico</th><th>Stock libro</th><th>Físico - Rayen</th><th>Físico - Libro</th><th>Estado</th></tr></thead><tbody id="controlledTable"></tbody></table></div>
   </form>
 </dialog>
 
@@ -1597,7 +1597,7 @@ body{padding-left:0!important}
   </form>
 </dialog>
 
-<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.7 · Controlados con ingreso corregido</footer>
+<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.8 · Controlados con ingreso corregido</footer>
 <dialog id="kpiQuickDialog" class="xlarge-dialog kpi-quick-dialog">
   <div class="dialog-head quick-dialog-head">
     <div>
@@ -2287,8 +2287,8 @@ function renderControlledReconciliation(){
 
   $("controlledTable").innerHTML=meds.map((m,i)=>{
     const k=norm(m.glosaABG),r=rows[k]||{},rayen=rayenValue(m,r),physical=r.physical??null,book=r.book??null;
-    const dRay=rayen===null||physical===null?null:rayen-physical;
-    const dBook=book===null||physical===null?null:book-physical;
+    const dRay=rayen===null||physical===null?null:physical-rayen;
+    const dBook=book===null||physical===null?null:physical-book;
     const ok=dRay===0&&dBook===0,complete=physical!==null&&book!==null&&rayen!==null;
     return `<tr>
       <td>${esc(m.glosaABG)}</td>
@@ -2335,8 +2335,8 @@ function renderControlledReconciliation(){
       const m=meds.find(x=>norm(x.glosaABG)===k);
       const rayen=(r.rayen!==null&&r.rayen!==undefined)?r.rayen:(m?stockFor(m):null);
       const physical=r.physical??null,book=r.book??null;
-      const dRay=rayen===null||physical===null?null:rayen-physical;
-      const dBook=book===null||physical===null?null:book-physical;
+      const dRay=rayen===null||physical===null?null:physical-rayen;
+      const dBook=book===null||physical===null?null:physical-book;
       const complete=rayen!==null&&physical!==null&&book!==null;
       const ok=complete&&dRay===0&&dBook===0;
 
@@ -2373,8 +2373,8 @@ function exportControlledReconciliation(){
       "Stock Rayen":ray,
       "Stock físico":physical,
       "Stock libro":book,
-      "Rayen - físico":ray===null||physical===null?null:ray-physical,
-      "Libro - físico":book===null||physical===null?null:book-physical,
+      "Físico - Rayen":ray===null||physical===null?null:physical-ray,
+      "Físico - Libro":book===null||physical===null?null:physical-book,
       Estado:ray!==null&&physical!==null&&book!==null?(ray===physical&&book===physical?"Cuadrado":"Revisar"):"Pendiente"
     };
   });
