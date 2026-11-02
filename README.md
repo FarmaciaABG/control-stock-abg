@@ -111,3 +111,11 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - En escritorio el menú permanece siempre visible.
 - En tablet/celular se transforma en menú lateral desplegable.
 - La lógica funcional y los datos de v3.8.0 se mantienen sin cambios.
+
+- v3.10.0: reemplaza el menú lateral por una barra superior fija.
+- Secciones principales: Inventarios, Cuadratura, Pedido mensual y Reportes.
+- Los submódulos aparecen en menús desplegables bajo cada sección.
+- Pedido mensual queda como acceso directo destacado.
+- El dashboard mantiene todo el ancho disponible.
+- En pantallas pequeñas la barra superior permite desplazamiento horizontal y los menús se adaptan al ancho.
+- La lógica funcional de v3.9.0 se mantiene sin cambios.

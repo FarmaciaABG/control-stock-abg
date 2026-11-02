@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.9.0.css?v=3.9.0">
-<meta name="app-build" content="v3.9.0"></head>
+  <link rel="stylesheet" href="styles-abg-v3.10.0.css?v=3.9.0">
+<meta name="app-build" content="v3.10.0"></head>
 <body>
 <header class="topbar">
   <div class="brand-block">
@@ -24,78 +24,42 @@
     <span id="stockBadge">Sin stock cargado</span>
   </div>
 </header>
-<button type="button" id="mobileSidebarToggle" class="mobile-sidebar-toggle" aria-label="Abrir menú">☰</button>
-<div id="sidebarBackdrop" class="sidebar-backdrop" hidden></div>
+<nav id="moduleTopbar" class="module-topbar" aria-label="Módulos principales">
+  <div class="module-topbar-inner">
+    <button type="button" class="module-menu-btn active" data-top-menu="home"><span>⌂</span><strong>Resumen</strong></button>
 
-<aside id="appSidebar" class="app-sidebar" aria-label="Navegación principal">
-  <div class="sidebar-head">
-    <div class="sidebar-brand-mini">
-      <span class="sidebar-brand-icon">Rx</span>
-      <div>
-        <strong>Farmacia ABG</strong>
-        <small>Gestión operativa</small>
+    <div class="top-menu-group">
+      <button type="button" class="module-menu-btn" data-top-menu="inventarios"><span>📋</span><strong>Inventarios</strong><span class="chev">▾</span></button>
+      <div class="top-dropdown" data-dropdown="inventarios">
+        <button id="weeklyInventoryBtn" type="button"><span>🎲</span><div><strong>Inventario rotativo</strong><small>15 productos semanales</small></div></button>
+        <button id="generalInventoryBtn" type="button"><span>📋</span><div><strong>Inventario general</strong><small>Conteo y cuadratura QF</small></div></button>
+        <button id="annualConfigBtn" type="button"><span>🗓️</span><div><strong>Programación anual</strong><small>Fechas de pedidos e inventarios</small></div></button>
       </div>
     </div>
-    <button type="button" id="sidebarClose" class="sidebar-close" aria-label="Cerrar menú">×</button>
+
+    <div class="top-menu-group">
+      <button type="button" class="module-menu-btn" data-top-menu="cuadratura"><span>🔐</span><strong>Cuadratura</strong><span class="chev">▾</span></button>
+      <div class="top-dropdown" data-dropdown="cuadratura">
+        <button id="controlledReconciliationBtn" type="button"><span>🔐</span><div><strong>Controlados</strong><small>Rayen · físico · libro</small></div></button>
+        <button id="redistributionBtn" type="button"><span>↔️</span><div><strong>Redistribución ABG ↔ MH</strong><small>Stock, CPM y cobertura</small></div></button>
+      </div>
+    </div>
+
+    <button id="ordersBtn" type="button" class="module-menu-btn module-menu-primary"><span>📦</span><strong>Pedido mensual</strong></button>
+
+    <div class="top-menu-group">
+      <button type="button" class="module-menu-btn" data-top-menu="reportes"><span>📊</span><strong>Reportes</strong><span class="chev">▾</span></button>
+      <div class="top-dropdown top-dropdown-right" data-dropdown="reportes">
+        <button id="tracerReportBtn" type="button"><span>📊</span><div><strong>Trazadores</strong><small>IAAPS / FOFAR</small></div></button>
+        <button id="expiriesBtn" type="button"><span>⏳</span><div><strong>Vencimientos</strong><small>Fechas próximas</small></div></button>
+        <button id="exceptionsBtn" type="button"><span>⚠️</span><div><strong>Excepciones</strong><small>Datos que requieren revisión</small></div></button>
+        <button id="exportManagementTop" type="button"><span>⇩</span><div><strong>Exportar gestión</strong><small>Resumen Excel</small></div></button>
+      </div>
+    </div>
   </div>
+</nav>
 
-  <nav class="sidebar-nav">
-    <button type="button" class="sidebar-home active" data-sidebar-home>
-      <span>⌂</span>
-      <div><strong>Resumen</strong><small>Dashboard y productos</small></div>
-    </button>
 
-    <div class="sidebar-section">
-      <span class="sidebar-section-title">Inventarios</span>
-      <button id="weeklyInventoryBtn" type="button" class="sidebar-item">
-        <span>🎲</span><div><strong>Rotativo</strong><small>15 productos semanales</small></div>
-      </button>
-      <button id="generalInventoryBtn" type="button" class="sidebar-item">
-        <span>📋</span><div><strong>General</strong><small>Conteo y cuadratura QF</small></div>
-      </button>
-      <button id="annualConfigBtn" type="button" class="sidebar-item">
-        <span>🗓️</span><div><strong>Programación</strong><small>Fechas anuales</small></div>
-      </button>
-    </div>
-
-    <div class="sidebar-section">
-      <span class="sidebar-section-title">Cuadratura</span>
-      <button id="controlledReconciliationBtn" type="button" class="sidebar-item">
-        <span>🔐</span><div><strong>Controlados</strong><small>Rayen · físico · libro</small></div>
-      </button>
-      <button id="redistributionBtn" type="button" class="sidebar-item">
-        <span>↔️</span><div><strong>Redistribución</strong><small>ABG ↔ MH</small></div>
-      </button>
-    </div>
-
-    <div class="sidebar-section">
-      <span class="sidebar-section-title">Pedido mensual</span>
-      <button id="ordersBtn" type="button" class="sidebar-item sidebar-item-highlight">
-        <span>📦</span><div><strong>Preparar pedido</strong><small>MEDICAMENTOS + PATERNIDAD</small></div>
-      </button>
-    </div>
-
-    <div class="sidebar-section">
-      <span class="sidebar-section-title">Reportes</span>
-      <button id="tracerReportBtn" type="button" class="sidebar-item">
-        <span>📊</span><div><strong>Trazadores</strong><small>IAAPS / FOFAR</small></div>
-      </button>
-      <button id="expiriesBtn" type="button" class="sidebar-item">
-        <span>⏳</span><div><strong>Vencimientos</strong><small>Fechas próximas</small></div>
-      </button>
-      <button id="exceptionsBtn" type="button" class="sidebar-item">
-        <span>⚠️</span><div><strong>Excepciones</strong><small>Datos a revisar</small></div>
-      </button>
-      <button id="exportManagementSidebar" type="button" class="sidebar-item">
-        <span>⇩</span><div><strong>Exportar gestión</strong><small>Resumen Excel</small></div>
-      </button>
-    </div>
-  </nav>
-
-  <div class="sidebar-foot">
-    <span>ABG v3.9.0</span>
-  </div>
-</aside>
 
 
 <main class="container app-content">
@@ -458,7 +422,7 @@
 </dialog>
 
 <footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.9.0.js"></script>
+<script src="app-v3.10.0.js"></script>
 
 
 
