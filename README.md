@@ -119,3 +119,15 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - El dashboard mantiene todo el ancho disponible.
 - En pantallas pequeñas la barra superior permite desplazamiento horizontal y los menús se adaptan al ancho.
 - La lógica funcional de v3.9.0 se mantiene sin cambios.
+
+- v3.10.1: las vistas rápidas de KPI ahora se pueden descargar a Excel.
+- Exporta exactamente el listado filtrado visible en Críticos, Bajo mínimo, Riesgo alto, Sobrestock, Vencimientos, etc.
+- Columnas: Producto, Programa, Stock, CPM 3M, Cobertura, Estado y Acción.
+- El archivo incluye título, descripción, fecha de generación, autofiltro y encabezado congelado.
+
+- v3.10.2: el módulo Redistribución queda vinculado conceptualmente y técnicamente con la herramienta MH mediante la misma base Supabase.
+- Al abrir Redistribución, ABG intenta sincronizar automáticamente el último stock y consumos de MH.
+- Ya no depende de presionar primero el botón manual; el botón queda como reintento “Sincronizar con MH”.
+- La última sincronización MH válida queda almacenada localmente en ABG.
+- Si Supabase presenta una caída temporal, ABG muestra el último conjunto de datos MH disponible con su fecha, en vez de dejar el módulo vacío.
+- El estado distingue conexión actual versus datos en caché.

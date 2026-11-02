@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.10.0.css?v=3.9.0">
-<meta name="app-build" content="v3.10.0"></head>
+  <link rel="stylesheet" href="styles-abg-v3.10.2.css?v=3.9.0">
+<meta name="app-build" content="v3.10.2"></head>
 <body>
 <header class="topbar">
   <div class="brand-block">
@@ -300,9 +300,13 @@
 
 <dialog id="redistributionDialog" class="xlarge-dialog">
   <form method="dialog">
-    <div class="dialog-head"><div><h3>Redistribución de stock ABG ↔ MH</h3><p>Compara stock actual y consumo promedio de ambos centros y sugiere traspasos para equilibrar cobertura.</p></div><button value="close" class="secondary">Cerrar</button></div>
-    <div class="button-row wrap"><button type="button" id="refreshRedistribution" class="good-btn">Actualizar datos MH</button><button type="button" id="exportRedistribution" class="secondary">Exportar Excel</button><label class="check-line redistribution-check"><input type="checkbox" id="onlySuggestedRedistribution" checked> Mostrar solo sugerencias</label></div>
+    <div class="dialog-head"><div><h3>Redistribución de stock ABG ↔ MH</h3><p>Vinculado a la herramienta de MH: compara automáticamente el último stock y consumo sincronizados de ambos centros y sugiere traspasos para equilibrar cobertura.</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div class="button-row wrap"><button type="button" id="refreshRedistribution" class="good-btn">Sincronizar con MH</button><button type="button" id="exportRedistribution" class="secondary">Exportar Excel</button><label class="check-line redistribution-check"><input type="checkbox" id="onlySuggestedRedistribution" checked> Mostrar solo sugerencias</label></div>
     <div id="redistributionStatus" class="status-strip">Carga stock actual de ABG y luego actualiza los datos de MH.</div>
+      <div class="mh-link-note">
+        <span class="mh-link-dot"></span>
+        <span><strong>ABG ↔ MH vinculados por nube.</strong> MH guarda stock y consumos; ABG usa esa información para calcular redistribuciones.</span>
+      </div>
     <div class="table-wrap"><table><thead><tr><th>Producto</th><th>CPM ABG</th><th>Stock ABG</th><th>Cob. ABG</th><th>CPM MH</th><th>Stock MH</th><th>Cob. MH</th><th>Sugerencia</th><th>Cantidad</th><th>Prioridad</th></tr></thead><tbody id="redistributionTable"></tbody></table></div>
     <p class="muted">La sugerencia busca aproximar la cobertura en meses de ambos centros. No incluye controlados ni productos no dispensables en MH. Requiere revisión QF antes de efectuar cualquier traspaso.</p>
   </form>
@@ -422,7 +426,7 @@
 </dialog>
 
 <footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.10.0.js"></script>
+<script src="app-v3.10.2.js"></script>
 
 
 
@@ -435,7 +439,10 @@
       <h3 id="kpiQuickTitle">Productos</h3>
       <p id="kpiQuickSubtitle">Resumen filtrado.</p>
     </div>
-    <button value="close" class="secondary">Cerrar</button>
+    <div class="quick-dialog-actions">
+      <button type="button" id="exportKpiQuick" class="good-btn">Descargar Excel</button>
+      <button value="close" class="secondary">Cerrar</button>
+    </div>
   </div>
   <div id="kpiQuickStats" class="quick-stats"></div>
   <div class="table-wrap quick-table-wrap">
