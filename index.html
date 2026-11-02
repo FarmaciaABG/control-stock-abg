@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-<meta name="app-build" content="v3.10.5">
+<meta name="app-build" content="v3.10.6">
 <style id="abg-inline-styles">
 :root{
   --bg:#f4f7f8;--panel:#fff;--text:#18333c;--muted:#697b83;--line:#dce6e9;
@@ -1159,6 +1159,11 @@ body{padding-left:0!important}
 #controlledTable .result-ok{background:#ecfdf3;color:var(--good)}
 #controlledTable .result-diff{background:#fff1f0;color:var(--critical)}
 
+
+/* v3.10.6 · permite escritura continua sin perder foco */
+#controlledTable input.inventory-input{caret-color:var(--accent)}
+#controlledTable input.inventory-input:focus{background:#fff}
+
 </style>
 </head>
 <body>
@@ -1580,7 +1585,7 @@ body{padding-left:0!important}
   </form>
 </dialog>
 
-<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.5 · Controlados con diseño modernizado</footer>
+<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.6 · Controlados con ingreso corregido</footer>
 <dialog id="kpiQuickDialog" class="xlarge-dialog kpi-quick-dialog">
   <div class="dialog-head quick-dialog-head">
     <div>
@@ -2274,9 +2279,32 @@ function renderControlledReconciliation(){
     $("controlledSummary").textContent=`${complete}/${all.length} completos · ${ok} cuadrado(s) · ${Math.max(0,complete-ok)} con diferencia`;
   };
   document.querySelectorAll(".controlled-physical,.controlled-book").forEach(inp=>inp.oninput=()=>{
-    const k=inp.dataset.k,v=inp.value.replace(/\D/g,"");inp.value=v;controlledReconciliation.rows=controlledReconciliation.rows||{};controlledReconciliation.rows[k]=controlledReconciliation.rows[k]||{physical:null,book:null};
-    if(inp.classList.contains("controlled-physical"))controlledReconciliation.rows[k].physical=v===""?null:Number(v);else controlledReconciliation.rows[k].book=v===""?null:Number(v);
-    renderControlledReconciliation();
+    const k=inp.dataset.k,v=inp.value.replace(/\D/g,"");
+    inp.value=v;
+    controlledReconciliation.rows=controlledReconciliation.rows||{};
+    controlledReconciliation.rows[k]=controlledReconciliation.rows[k]||{physical:null,book:null};
+    if(inp.classList.contains("controlled-physical"))controlledReconciliation.rows[k].physical=v===""?null:Number(v);
+    else controlledReconciliation.rows[k].book=v===""?null:Number(v);
+
+    const row=inp.closest("tr");
+    const m=meds.find(x=>norm(x.glosaABG)===k);
+    const r=controlledReconciliation.rows[k]||{};
+    const rayen=m?stockFor(m):null;
+    const physical=r.physical??null,book=r.book??null;
+    const dRay=rayen===null||physical===null?null:rayen-physical;
+    const dBook=book===null||physical===null?null:book-physical;
+    const complete=rayen!==null&&physical!==null&&book!==null;
+    const ok=complete&&dRay===0&&dBook===0;
+    if(row){
+      const cells=row.querySelectorAll("td");
+      if(cells[4])cells[4].textContent=fmt(dRay,0);
+      if(cells[5])cells[5].textContent=fmt(dBook,0);
+      if(cells[6]){
+        cells[6].textContent=!complete?"Pendiente":ok?"Cuadrado":"Revisar";
+        cells[6].className=ok?"result-ok":complete?"result-diff":"";
+      }
+    }
+    recalc();
   });
   recalc();
 }

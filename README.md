@@ -147,3 +147,6 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 
 
 Actualización v3.10.5: se modernizó visualmente el ingreso de Stock físico y Stock libro en el módulo de cuadre de medicamentos controlados.
+
+
+Actualización v3.10.6: corregido el ingreso de Stock físico y Stock libro. La tabla ya no se redibuja en cada tecla, por lo que se pueden escribir números completos de forma normal y las diferencias se actualizan en vivo.
