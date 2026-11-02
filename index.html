@@ -4,13 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.6.0.css?v=3.4.1">
-<meta name="app-build" content="v3.6.0"></head>
+  <link rel="stylesheet" href="styles-abg-v3.7.0.css?v=3.7.0">
+<meta name="app-build" content="v3.7.0"></head>
 <body>
 <header class="topbar">
-  <div>
-    <h1>Gestión de Inventario Farmacia ABG</h1>
-    <p>Stock · consumos · trazadores · pedidos · inventarios · vencimientos</p>
+  <div class="brand-block">
+    <div class="brand-mark" aria-hidden="true">
+      <span class="brand-pill"></span>
+      <span class="brand-cross">+</span>
+    </div>
+    <div>
+      <span class="top-kicker">Farmacia APS · CESFAM Dr. Arturo Baeza Goñi</span>
+      <h1>Control de stock ABG</h1>
+      <p>Inventario, consumo, pedidos, trazabilidad y gestión operativa</p>
+    </div>
   </div>
   <div class="top-status">
     <span id="masterBadge">Cargando maestro…</span>
@@ -20,6 +27,15 @@
 
 <main class="container">
   <section id="alertsArea" class="alerts-area"></section>
+
+  <section class="dashboard-intro">
+    <div>
+      <span class="dashboard-eyebrow">Vista general</span>
+      <h2>Situación actual de Farmacia</h2>
+      <p>Prioriza alertas, revisa disponibilidad y accede a las tareas operativas desde un solo lugar.</p>
+    </div>
+    <div class="dashboard-chip">ABG · Gestión local</div>
+  </section>
 
   <section class="kpi-grid">
     <button class="kpi critical" data-kpi="critical"><strong id="kpiCritical">0</strong><span>Críticos</span></button>
@@ -35,7 +51,7 @@
   <section class="panel">
     <div class="section-head">
       <div>
-        <h2>Actualización de datos</h2>
+        <span class="section-eyebrow">Fuentes de información</span><h2>Actualización de datos</h2>
         <p>El maestro ABG se carga automáticamente.</p>
       </div>
     </div>
@@ -70,7 +86,7 @@
   <section class="panel">
     <div class="section-head">
       <div>
-        <h2>Gestión operativa</h2>
+        <span class="section-eyebrow">Accesos rápidos</span><h2>Gestión operativa</h2>
         <p>Accesos rápidos a tareas periódicas.</p>
       </div>
     </div>
@@ -108,7 +124,7 @@
   <section class="panel">
     <div class="section-head table-head">
       <div>
-        <h2>Panel de productos</h2>
+        <span class="section-eyebrow">Arsenal y seguimiento</span><h2>Panel de productos</h2>
         <p id="summaryText">Cargando…</p>
       </div>
       <div class="button-row">
@@ -404,7 +420,7 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.6.0.js"></script>
+<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
+<script src="app-v3.7.0.js"></script>
 </body>
 </html>

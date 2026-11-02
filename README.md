@@ -86,3 +86,11 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - v3.6.0: agrega módulo de Cuadre de controlados con stock Rayen, físico y libro, diferencias y exportación Excel.
 - Agrega módulo Redistribución ABG ↔ MH: consulta el último stock y consumo MH desde Supabase, cruza por glosa de bodega exacta y compara cobertura en meses.
 - La redistribución excluye controlados y productos no dispensables en MH y propone cantidad/dirección para aproximar la cobertura de ambos centros.
+
+- v3.7.0: rediseño visual completo de ABG.
+- No modifica la lógica ni los datos de v3.6.0.
+- Nuevo encabezado institucional tipo dashboard.
+- KPIs modernizados con mejor jerarquía visual.
+- Módulos operativos convertidos en tarjetas más limpias y navegables.
+- Filtros, tablas, diálogos, formularios y botones actualizados.
+- Mejoras responsivas para notebook, tablet y celular.
