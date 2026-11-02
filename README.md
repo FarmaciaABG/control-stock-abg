@@ -150,3 +150,9 @@ Actualización v3.10.5: se modernizó visualmente el ingreso de Stock físico y 
 
 
 Actualización v3.10.6: corregido el ingreso de Stock físico y Stock libro. La tabla ya no se redibuja en cada tecla, por lo que se pueden escribir números completos de forma normal y las diferencias se actualizan en vivo.
+
+- v3.10.7: Stock Rayen también es editable en el cuadre de controlados.
+- Se corrige la escritura continua en Stock Rayen, Stock físico y Stock libro.
+- La tabla no se vuelve a dibujar mientras se escribe.
+- Diferencias y estado se recalculan en vivo sin perder el foco.
+- El valor Rayen editado se guarda y se incluye en el Excel.

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-<meta name="app-build" content="v3.10.6">
+<meta name="app-build" content="v3.10.7">
 <style id="abg-inline-styles">
 :root{
   --bg:#f4f7f8;--panel:#fff;--text:#18333c;--muted:#697b83;--line:#dce6e9;
@@ -1164,6 +1164,18 @@ body{padding-left:0!important}
 #controlledTable input.inventory-input{caret-color:var(--accent)}
 #controlledTable input.inventory-input:focus{background:#fff}
 
+
+/* v3.10.7 · los tres stocks son editables y escritura continua */
+#controlledTable input.controlled-rayen{
+  background:linear-gradient(180deg,#f7fafc 0%,#edf2f7 100%);
+  border-color:#cbd5e1;
+}
+#controlledTable input.controlled-rayen,
+#controlledTable input.controlled-physical,
+#controlledTable input.controlled-book{
+  font-variant-numeric:tabular-nums;
+}
+
 </style>
 </head>
 <body>
@@ -1585,7 +1597,7 @@ body{padding-left:0!important}
   </form>
 </dialog>
 
-<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.6 · Controlados con ingreso corregido</footer>
+<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.7 · Controlados con ingreso corregido</footer>
 <dialog id="kpiQuickDialog" class="xlarge-dialog kpi-quick-dialog">
   <div class="dialog-head quick-dialog-head">
     <div>
@@ -2267,55 +2279,106 @@ function renderControlledReconciliation(){
   const meds=controlledProducts();
   const rows=controlledReconciliation.rows||{};
   $("controlledDate").value=controlledReconciliation.date||todayISO();
-  $("controlledTable").innerHTML=meds.map((m,i)=>{
-    const k=norm(m.glosaABG),r=rows[k]||{},rayen=stockFor(m),physical=r.physical??null,book=r.book??null;
-    const dRay=rayen===null||physical===null?null:rayen-physical,dBook=book===null||physical===null?null:book-physical;
-    const ok=dRay===0&&dBook===0,complete=physical!==null&&book!==null&&rayen!==null;
-    return `<tr><td>${esc(m.glosaABG)}</td><td>${fmt(rayen,0)}</td><td><input class="inventory-input controlled-physical" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${physical??""}"></td><td><input class="inventory-input controlled-book" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${book??""}"></td><td data-cr="${i}">${fmt(dRay,0)}</td><td data-cb="${i}">${fmt(dBook,0)}</td><td data-ce="${i}" class="${ok?"result-ok":complete?"result-diff":""}">${!complete?"Pendiente":ok?"Cuadrado":"Revisar"}</td></tr>`
-  }).join("")||'<tr><td colspan="7">No hay medicamentos marcados como controlados en el maestro.</td></tr>';
-  const recalc=()=>{
-    const all=controlledProducts(),rr=controlledReconciliation.rows||{};let complete=0,ok=0;
-    all.forEach(m=>{const r=rr[norm(m.glosaABG)]||{},ray=stockFor(m);if(ray!==null&&r.physical!==null&&r.physical!==undefined&&r.book!==null&&r.book!==undefined){complete++;if(ray===r.physical&&r.book===r.physical)ok++}});
-    $("controlledSummary").textContent=`${complete}/${all.length} completos · ${ok} cuadrado(s) · ${Math.max(0,complete-ok)} con diferencia`;
-  };
-  document.querySelectorAll(".controlled-physical,.controlled-book").forEach(inp=>inp.oninput=()=>{
-    const k=inp.dataset.k,v=inp.value.replace(/\D/g,"");
-    inp.value=v;
-    controlledReconciliation.rows=controlledReconciliation.rows||{};
-    controlledReconciliation.rows[k]=controlledReconciliation.rows[k]||{physical:null,book:null};
-    if(inp.classList.contains("controlled-physical"))controlledReconciliation.rows[k].physical=v===""?null:Number(v);
-    else controlledReconciliation.rows[k].book=v===""?null:Number(v);
 
-    const row=inp.closest("tr");
-    const m=meds.find(x=>norm(x.glosaABG)===k);
-    const r=controlledReconciliation.rows[k]||{};
-    const rayen=m?stockFor(m):null;
-    const physical=r.physical??null,book=r.book??null;
+  const rayenValue=(m,r)=>{
+    if(r&&r.rayen!==null&&r.rayen!==undefined)return r.rayen;
+    return stockFor(m);
+  };
+
+  $("controlledTable").innerHTML=meds.map((m,i)=>{
+    const k=norm(m.glosaABG),r=rows[k]||{},rayen=rayenValue(m,r),physical=r.physical??null,book=r.book??null;
     const dRay=rayen===null||physical===null?null:rayen-physical;
     const dBook=book===null||physical===null?null:book-physical;
-    const complete=rayen!==null&&physical!==null&&book!==null;
-    const ok=complete&&dRay===0&&dBook===0;
-    if(row){
-      const cells=row.querySelectorAll("td");
-      if(cells[4])cells[4].textContent=fmt(dRay,0);
-      if(cells[5])cells[5].textContent=fmt(dBook,0);
-      if(cells[6]){
-        cells[6].textContent=!complete?"Pendiente":ok?"Cuadrado":"Revisar";
-        cells[6].className=ok?"result-ok":complete?"result-diff":"";
+    const ok=dRay===0&&dBook===0,complete=physical!==null&&book!==null&&rayen!==null;
+    return `<tr>
+      <td>${esc(m.glosaABG)}</td>
+      <td><input class="inventory-input controlled-rayen" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${rayen??""}"></td>
+      <td><input class="inventory-input controlled-physical" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${physical??""}"></td>
+      <td><input class="inventory-input controlled-book" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${book??""}"></td>
+      <td>${fmt(dRay,0)}</td>
+      <td>${fmt(dBook,0)}</td>
+      <td class="${ok?"result-ok":complete?"result-diff":""}">${!complete?"Pendiente":ok?"Cuadrado":"Revisar"}</td>
+    </tr>`;
+  }).join("")||'<tr><td colspan="7">No hay medicamentos marcados como controlados en el maestro.</td></tr>';
+
+  const recalcSummary=()=>{
+    const all=controlledProducts(),rr=controlledReconciliation.rows||{};
+    let complete=0,ok=0;
+    all.forEach(m=>{
+      const r=rr[norm(m.glosaABG)]||{};
+      const ray=(r.rayen!==null&&r.rayen!==undefined)?r.rayen:stockFor(m);
+      const physical=r.physical??null,book=r.book??null;
+      if(ray!==null&&physical!==null&&book!==null){
+        complete++;
+        if(ray===physical&&book===physical)ok++;
       }
-    }
-    recalc();
+    });
+    $("controlledSummary").textContent=`${complete}/${all.length} completos · ${ok} cuadrado(s) · ${Math.max(0,complete-ok)} con diferencia`;
+  };
+
+  document.querySelectorAll(".controlled-rayen,.controlled-physical,.controlled-book").forEach(inp=>{
+    inp.addEventListener("input",()=>{
+      const k=inp.dataset.k;
+      const cleaned=inp.value.replace(/\D/g,"");
+      if(inp.value!==cleaned)inp.value=cleaned;
+
+      controlledReconciliation.rows=controlledReconciliation.rows||{};
+      controlledReconciliation.rows[k]=controlledReconciliation.rows[k]||{rayen:null,physical:null,book:null};
+
+      const r=controlledReconciliation.rows[k];
+      const value=cleaned===""?null:Number(cleaned);
+
+      if(inp.classList.contains("controlled-rayen"))r.rayen=value;
+      else if(inp.classList.contains("controlled-physical"))r.physical=value;
+      else r.book=value;
+
+      const m=meds.find(x=>norm(x.glosaABG)===k);
+      const rayen=(r.rayen!==null&&r.rayen!==undefined)?r.rayen:(m?stockFor(m):null);
+      const physical=r.physical??null,book=r.book??null;
+      const dRay=rayen===null||physical===null?null:rayen-physical;
+      const dBook=book===null||physical===null?null:book-physical;
+      const complete=rayen!==null&&physical!==null&&book!==null;
+      const ok=complete&&dRay===0&&dBook===0;
+
+      const tr=inp.closest("tr");
+      if(tr){
+        const tds=tr.querySelectorAll("td");
+        tds[4].textContent=fmt(dRay,0);
+        tds[5].textContent=fmt(dBook,0);
+        tds[6].textContent=!complete?"Pendiente":ok?"Cuadrado":"Revisar";
+        tds[6].className=ok?"result-ok":complete?"result-diff":"";
+      }
+
+      recalcSummary();
+    });
   });
-  recalc();
+
+  recalcSummary();
 }
+
 function saveControlledReconciliation(){
   controlledReconciliation.date=$("controlledDate").value||todayISO();
   save(STORAGE.controlledReconciliation,controlledReconciliation);
-  renderControlledReconciliation();alert("Cuadre de controlados guardado en este equipo.")
+  renderControlledReconciliation();
+  alert("Cuadre de controlados guardado en este equipo.");
 }
+
 function exportControlledReconciliation(){
-  const rows=controlledProducts().map(m=>{const r=(controlledReconciliation.rows||{})[norm(m.glosaABG)]||{},ray=stockFor(m),physical=r.physical??null,book=r.book??null;return {Medicamento:m.glosaABG,"Stock Rayen":ray,"Stock físico":physical,"Stock libro":book,"Rayen - físico":ray===null||physical===null?null:ray-physical,"Libro - físico":book===null||physical===null?null:book-physical,Estado:ray!==null&&physical!==null&&book!==null?(ray===physical&&book===physical?"Cuadrado":"Revisar"):"Pendiente"}});
-  exportWorkbook({"Cuadre controlados":rows},`Cuadre_controlados_ABG_${$("controlledDate").value||todayISO()}.xlsx`)
+  const rows=controlledProducts().map(m=>{
+    const r=(controlledReconciliation.rows||{})[norm(m.glosaABG)]||{};
+    const ray=(r.rayen!==null&&r.rayen!==undefined)?r.rayen:stockFor(m);
+    const physical=r.physical??null,book=r.book??null;
+    return {
+      Medicamento:m.glosaABG,
+      "Stock Rayen":ray,
+      "Stock físico":physical,
+      "Stock libro":book,
+      "Rayen - físico":ray===null||physical===null?null:ray-physical,
+      "Libro - físico":book===null||physical===null?null:book-physical,
+      Estado:ray!==null&&physical!==null&&book!==null?(ray===physical&&book===physical?"Cuadrado":"Revisar"):"Pendiente"
+    };
+  });
+  exportWorkbook({"Cuadre controlados":rows},`Cuadre_controlados_ABG_${$("controlledDate").value||todayISO()}.xlsx`);
 }
 async function fetchAllSupabase(makeQuery,batch=1000){const out=[];let from=0;while(true){const {data,error}=await makeQuery().range(from,from+batch-1);if(error)throw error;out.push(...(data||[]));if((data||[]).length<batch)break;from+=batch}return out}
 function mhCpmFor(productId,cons){const a=cons.filter(x=>x.product_id===productId).sort((a,b)=>String(a.month).localeCompare(String(b.month))).slice(-3).map(x=>Number(x.quantity));return a.length?a.reduce((s,v)=>s+v,0)/a.length:null}
