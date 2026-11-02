@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.5.3.css?v=3.4.1">
-<meta name="app-build" content="v3.5.3"></head>
+  <link rel="stylesheet" href="styles-abg-v3.6.0.css?v=3.4.1">
+<meta name="app-build" content="v3.6.0"></head>
 <body>
 <header class="topbar">
   <div>
@@ -83,6 +83,12 @@
       </button>
       <button id="ordersBtn" class="module-card">
         <span>📦</span><strong>Pedidos mensuales</strong><small>MEDICAMENTOS + PATERNIDAD · exige stock del día</small>
+      </button>
+      <button id="controlledReconciliationBtn" class="module-card">
+        <span>🔐</span><strong>Cuadre de controlados</strong><small>Rayen · físico · libro · diferencias</small>
+      </button>
+      <button id="redistributionBtn" class="module-card">
+        <span>↔️</span><strong>Redistribución ABG ↔ MH</strong><small>Compara stock, CPM y cobertura de ambos centros</small>
       </button>
       <button id="tracerReportBtn" class="module-card">
         <span>📊</span><strong>Reporte trazadores</strong><small>IAAPS/FOFAR · CPM 3M · 20% · stock actual</small>
@@ -266,6 +272,25 @@
 </dialog>
 
 
+<dialog id="controlledReconciliationDialog" class="xlarge-dialog">
+  <form method="dialog">
+    <div class="dialog-head"><div><h3>Cuadre de medicamentos controlados</h3><p>Compara el stock registrado en Rayen con el conteo físico y el saldo del libro de control.</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div class="form-grid three"><label>Fecha<input id="controlledDate" type="date"></label><div></div><div class="button-row"><button type="button" id="saveControlledReconciliation" class="good-btn">Guardar cuadre</button><button type="button" id="exportControlledReconciliation" class="secondary">Exportar Excel</button></div></div>
+    <div id="controlledSummary" class="status-strip">Completa stock físico y stock libro.</div>
+    <div class="table-wrap"><table><thead><tr><th>Medicamento</th><th>Stock Rayen</th><th>Stock físico</th><th>Stock libro</th><th>Rayen - físico</th><th>Libro - físico</th><th>Estado</th></tr></thead><tbody id="controlledTable"></tbody></table></div>
+  </form>
+</dialog>
+
+<dialog id="redistributionDialog" class="xlarge-dialog">
+  <form method="dialog">
+    <div class="dialog-head"><div><h3>Redistribución de stock ABG ↔ MH</h3><p>Compara stock actual y consumo promedio de ambos centros y sugiere traspasos para equilibrar cobertura.</p></div><button value="close" class="secondary">Cerrar</button></div>
+    <div class="button-row wrap"><button type="button" id="refreshRedistribution" class="good-btn">Actualizar datos MH</button><button type="button" id="exportRedistribution" class="secondary">Exportar Excel</button><label class="check-line redistribution-check"><input type="checkbox" id="onlySuggestedRedistribution" checked> Mostrar solo sugerencias</label></div>
+    <div id="redistributionStatus" class="status-strip">Carga stock actual de ABG y luego actualiza los datos de MH.</div>
+    <div class="table-wrap"><table><thead><tr><th>Producto</th><th>CPM ABG</th><th>Stock ABG</th><th>Cob. ABG</th><th>CPM MH</th><th>Stock MH</th><th>Cob. MH</th><th>Sugerencia</th><th>Cantidad</th><th>Prioridad</th></tr></thead><tbody id="redistributionTable"></tbody></table></div>
+    <p class="muted">La sugerencia busca aproximar la cobertura en meses de ambos centros. No incluye controlados ni productos no dispensables en MH. Requiere revisión QF antes de efectuar cualquier traspaso.</p>
+  </form>
+</dialog>
+
 <dialog id="annualConfigDialog" class="large-dialog">
   <form method="dialog">
     <div class="dialog-head">
@@ -379,7 +404,7 @@
   </form>
 </dialog>
 
-<footer>Farmacia ABG · v3.5.3 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.5.3.js"></script>
+<footer>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
+<script src="app-v3.6.0.js"></script>
 </body>
 </html>

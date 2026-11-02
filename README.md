@@ -82,3 +82,7 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Se agrega 2° conteo opcional por producto. Si se ingresa, pasa a ser el conteo usado para la diferencia final.
 - El inventario se considera completo cuando todos los productos tienen STOCK SISTEMA y 1° CONTEO.
 - El Excel incorpora 1° conteo, 2° conteo, diferencia del primer conteo, diferencia final, estado y avance.
+
+- v3.6.0: agrega módulo de Cuadre de controlados con stock Rayen, físico y libro, diferencias y exportación Excel.
+- Agrega módulo Redistribución ABG ↔ MH: consulta el último stock y consumo MH desde Supabase, cruza por glosa de bodega exacta y compara cobertura en meses.
+- La redistribución excluye controlados y productos no dispensables en MH y propone cantidad/dirección para aproximar la cobertura de ambos centros.
