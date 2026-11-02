@@ -101,3 +101,13 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Inventarios, Pedidos, Cuadre de controlados, Redistribución, Trazadores, Vencimientos, Excepciones y Configuración anual pasan a un menú lateral de Operaciones.
 - Se mantienen accesos directos a Inventario rotativo, Controlados, Redistribución y Pedido mensual.
 - Se conserva toda la lógica funcional de v3.7.0/v3.6.0.
+
+- v3.9.0: navegación principal mediante menú lateral fijo.
+- Secciones del menú: Inventarios, Cuadratura, Pedido mensual y Reportes.
+- Inventarios incluye Rotativo, General y Programación anual.
+- Cuadratura incluye Controlados y Redistribución ABG ↔ MH.
+- Pedido mensual abre directamente el módulo de preparación de pedido.
+- Reportes incluye Trazadores, Vencimientos, Excepciones y Exportar gestión.
+- En escritorio el menú permanece siempre visible.
+- En tablet/celular se transforma en menú lateral desplegable.
+- La lógica funcional y los datos de v3.8.0 se mantienen sin cambios.
