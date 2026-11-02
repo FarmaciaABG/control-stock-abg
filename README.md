@@ -131,3 +131,9 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - La última sincronización MH válida queda almacenada localmente en ABG.
 - Si Supabase presenta una caída temporal, ABG muestra el último conjunto de datos MH disponible con su fecha, en vez de dejar el módulo vacío.
 - El estado distingue conexión actual versus datos en caché.
+
+- v3.10.3: corrige error de inicialización de v3.10.2.
+- El script principal se carga ahora al final real del HTML, después de todos los diálogos y botones.
+- Se evita el error por intentar enlazar `exportKpiQuick` antes de que exista en el DOM.
+- Se agrega cache-busting explícito a CSS y JS para evitar mezclas de versiones en GitHub Pages/navegador.
+- Verificado: el arranque ya alcanza `init()` correctamente.
