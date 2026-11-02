@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-<meta name="app-build" content="v3.10.4">
+<meta name="app-build" content="v3.10.5">
 <style id="abg-inline-styles">
 :root{
   --bg:#f4f7f8;--panel:#fff;--text:#18333c;--muted:#697b83;--line:#dce6e9;
@@ -1131,6 +1131,34 @@ body{padding-left:0!important}
   box-shadow:0 0 0 4px rgba(22,160,133,.10);
 }
 
+
+/* v3.10.5 · diseño modernizado para celdas de cuadre de controlados */
+#controlledTable td{vertical-align:middle}
+#controlledTable input.inventory-input{
+  width:112px;min-width:112px;height:42px;padding:10px 12px;border-radius:12px;
+  border:1.5px solid #d7dee8;background:#ffffff;color:var(--text);font-weight:700;
+  text-align:center;box-shadow:inset 0 1px 2px rgba(16,24,40,.05),0 1px 1px rgba(16,24,40,.03);
+  transition:border-color .18s ease, box-shadow .18s ease, transform .12s ease, background .18s ease;
+}
+#controlledTable input.controlled-physical{
+  background:linear-gradient(180deg,#fffef8 0%,#fff7df 100%);
+  border-color:#e6d5a8;
+}
+#controlledTable input.controlled-book{
+  background:linear-gradient(180deg,#f8fbff 0%,#edf5ff 100%);
+  border-color:#c9daef;
+}
+#controlledTable input.inventory-input::placeholder{color:#98a2b3;font-weight:600}
+#controlledTable input.inventory-input:hover{border-color:#b8c4d0}
+#controlledTable input.inventory-input:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 4px rgba(15,118,110,.12), inset 0 1px 2px rgba(16,24,40,.04);
+  transform:translateY(-1px);
+}
+#controlledTable .result-ok,#controlledTable .result-diff{display:inline-flex;align-items:center;justify-content:center;min-width:90px;padding:6px 10px;border-radius:999px}
+#controlledTable .result-ok{background:#ecfdf3;color:var(--good)}
+#controlledTable .result-diff{background:#fff1f0;color:var(--critical)}
+
 </style>
 </head>
 <body>
@@ -1552,7 +1580,7 @@ body{padding-left:0!important}
   </form>
 </dialog>
 
-<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.4 · Clasificación y consumos actualizados</footer>
+<footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.10.5 · Controlados con diseño modernizado</footer>
 <dialog id="kpiQuickDialog" class="xlarge-dialog kpi-quick-dialog">
   <div class="dialog-head quick-dialog-head">
     <div>
@@ -2238,7 +2266,7 @@ function renderControlledReconciliation(){
     const k=norm(m.glosaABG),r=rows[k]||{},rayen=stockFor(m),physical=r.physical??null,book=r.book??null;
     const dRay=rayen===null||physical===null?null:rayen-physical,dBook=book===null||physical===null?null:book-physical;
     const ok=dRay===0&&dBook===0,complete=physical!==null&&book!==null&&rayen!==null;
-    return `<tr><td>${esc(m.glosaABG)}</td><td>${fmt(rayen,0)}</td><td><input class="inventory-input controlled-physical" data-k="${esc(k)}" inputmode="numeric" value="${physical??""}"></td><td><input class="inventory-input controlled-book" data-k="${esc(k)}" inputmode="numeric" value="${book??""}"></td><td data-cr="${i}">${fmt(dRay,0)}</td><td data-cb="${i}">${fmt(dBook,0)}</td><td data-ce="${i}" class="${ok?"result-ok":complete?"result-diff":""}">${!complete?"Pendiente":ok?"Cuadrado":"Revisar"}</td></tr>`
+    return `<tr><td>${esc(m.glosaABG)}</td><td>${fmt(rayen,0)}</td><td><input class="inventory-input controlled-physical" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${physical??""}"></td><td><input class="inventory-input controlled-book" data-k="${esc(k)}" inputmode="numeric" placeholder="0" value="${book??""}"></td><td data-cr="${i}">${fmt(dRay,0)}</td><td data-cb="${i}">${fmt(dBook,0)}</td><td data-ce="${i}" class="${ok?"result-ok":complete?"result-diff":""}">${!complete?"Pendiente":ok?"Cuadrado":"Revisar"}</td></tr>`
   }).join("")||'<tr><td colspan="7">No hay medicamentos marcados como controlados en el maestro.</td></tr>';
   const recalc=()=>{
     const all=controlledProducts(),rr=controlledReconciliation.rows||{};let complete=0,ok=0;

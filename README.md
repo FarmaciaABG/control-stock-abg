@@ -138,9 +138,12 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Se agrega cache-busting explícito a CSS y JS para evitar mezclas de versiones en GitHub Pages/navegador.
 - Verificado: el arranque ya alcanza `init()` correctamente.
 
-- v3.10.4: versión robusta de carga para GitHub Pages.
+- v3.10.5: versión robusta de carga para GitHub Pages.
 - CSS y JavaScript principal se integran directamente dentro de index.html.
 - Ya no depende de archivos app-vX.js o styles-vX.css para iniciar.
 - Esto evita mezclas de caché o referencias entre distintas versiones.
 - Se eliminó código residual del antiguo menú lateral.
 - La aplicación conserva maestro.json, pedido_template.json y pedido_template.xlsx como archivos externos.
+
+
+Actualización v3.10.5: se modernizó visualmente el ingreso de Stock físico y Stock libro en el módulo de cuadre de medicamentos controlados.
