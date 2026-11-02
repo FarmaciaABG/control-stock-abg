@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-  <link rel="stylesheet" href="styles-abg-v3.7.0.css?v=3.7.0">
-<meta name="app-build" content="v3.7.0"></head>
+  <link rel="stylesheet" href="styles-abg-v3.8.0.css?v=3.8.0">
+<meta name="app-build" content="v3.8.0"></head>
 <body>
 <header class="topbar">
   <div class="brand-block">
@@ -83,41 +83,20 @@
     </div>
   </section>
 
-  <section class="panel">
+  <section class="panel operations-launcher-panel">
     <div class="section-head">
       <div>
-        <span class="section-eyebrow">Accesos rápidos</span><h2>Gestión operativa</h2>
-        <p>Accesos rápidos a tareas periódicas.</p>
+        <span class="section-eyebrow">Acceso permanente</span>
+        <h2>Operaciones de Farmacia</h2>
+        <p>Inventarios, pedidos, controlados, redistribución y reportes disponibles desde el menú lateral.</p>
       </div>
+      <button type="button" id="openOperationsMenu" class="good-btn operations-open-btn">☰ Abrir operaciones</button>
     </div>
-    <div class="module-grid">
-      <button id="weeklyInventoryBtn" class="module-card">
-        <span>🎲</span><strong>Inventario rotativo</strong><small>15 productos · Pareto/ABC · prioridad IAAPS/FOFAR</small>
-      </button>
-      <button id="generalInventoryBtn" class="module-card">
-        <span>📋</span><strong>Inventario general</strong><small>Planilla, responsables, cuadratura QF y calendario</small>
-      </button>
-      <button id="ordersBtn" class="module-card">
-        <span>📦</span><strong>Pedidos mensuales</strong><small>MEDICAMENTOS + PATERNIDAD · exige stock del día</small>
-      </button>
-      <button id="controlledReconciliationBtn" class="module-card">
-        <span>🔐</span><strong>Cuadre de controlados</strong><small>Rayen · físico · libro · diferencias</small>
-      </button>
-      <button id="redistributionBtn" class="module-card">
-        <span>↔️</span><strong>Redistribución ABG ↔ MH</strong><small>Compara stock, CPM y cobertura de ambos centros</small>
-      </button>
-      <button id="tracerReportBtn" class="module-card">
-        <span>📊</span><strong>Reporte trazadores</strong><small>IAAPS/FOFAR · CPM 3M · 20% · stock actual</small>
-      </button>
-      <button id="expiriesBtn" class="module-card">
-        <span>⏳</span><strong>Vencimientos</strong><small>Carga manual sin lote · cantidad y fecha más próxima</small>
-      </button>
-      <button id="exceptionsBtn" class="module-card">
-        <span>⚠️</span><strong>Excepciones</strong><small>Datos faltantes, sin CPM, sin glosa o sin stock</small>
-      </button>
-      <button id="annualConfigBtn" class="module-card">
-        <span>🗓️</span><strong>Configuración anual</strong><small>Fechas de pedidos e inventarios generales por año</small>
-      </button>
+    <div class="operations-shortcuts">
+      <button type="button" class="ops-shortcut" data-trigger="weeklyInventoryBtn"><span>🎲</span><strong>Inventario rotativo</strong></button>
+      <button type="button" class="ops-shortcut" data-trigger="controlledReconciliationBtn"><span>🔐</span><strong>Controlados</strong></button>
+      <button type="button" class="ops-shortcut" data-trigger="redistributionBtn"><span>↔️</span><strong>Redistribución</strong></button>
+      <button type="button" class="ops-shortcut" data-trigger="ordersBtn"><span>📦</span><strong>Pedido mensual</strong></button>
     </div>
   </section>
 
@@ -421,6 +400,69 @@
 </dialog>
 
 <footer><span class="footer-brand">Farmacia ABG</span><span class="footer-dot">•</span>Farmacia ABG · v3.6.0 · Clasificación y consumos actualizados</footer>
-<script src="app-v3.7.0.js"></script>
+<script src="app-v3.8.0.js"></script>
+
+
+<div id="operationsBackdrop" class="operations-backdrop" hidden></div>
+<aside id="operationsDrawer" class="operations-drawer" aria-hidden="true">
+  <div class="operations-drawer-head">
+    <div>
+      <span class="section-eyebrow">Farmacia ABG</span>
+      <h3>Operaciones</h3>
+      <p>Accede a las tareas frecuentes sin desplazarte por la página.</p>
+    </div>
+    <button type="button" id="closeOperationsMenu" class="drawer-close" aria-label="Cerrar">×</button>
+  </div>
+
+  <div class="operations-drawer-group">
+    <span class="drawer-group-title">Inventarios</span>
+    <button id="weeklyInventoryBtn" class="drawer-action"><span>🎲</span><div><strong>Inventario rotativo</strong><small>15 productos · prioridad y segundo conteo</small></div></button>
+    <button id="generalInventoryBtn" class="drawer-action"><span>📋</span><div><strong>Inventario general</strong><small>Responsables, cuadratura QF e historial</small></div></button>
+  </div>
+
+  <div class="operations-drawer-group">
+    <span class="drawer-group-title">Abastecimiento</span>
+    <button id="ordersBtn" class="drawer-action"><span>📦</span><div><strong>Pedidos mensuales</strong><small>MEDICAMENTOS + PATERNIDAD</small></div></button>
+    <button id="redistributionBtn" class="drawer-action"><span>↔️</span><div><strong>Redistribución ABG ↔ MH</strong><small>Stock, CPM y cobertura comparada</small></div></button>
+  </div>
+
+  <div class="operations-drawer-group">
+    <span class="drawer-group-title">Control y seguimiento</span>
+    <button id="controlledReconciliationBtn" class="drawer-action"><span>🔐</span><div><strong>Cuadre de controlados</strong><small>Rayen · físico · libro</small></div></button>
+    <button id="tracerReportBtn" class="drawer-action"><span>📊</span><div><strong>Reporte trazadores</strong><small>IAAPS / FOFAR y stock actual</small></div></button>
+    <button id="expiriesBtn" class="drawer-action"><span>⏳</span><div><strong>Vencimientos</strong><small>Seguimiento de fechas próximas</small></div></button>
+    <button id="exceptionsBtn" class="drawer-action"><span>⚠️</span><div><strong>Excepciones</strong><small>Datos faltantes y problemas a revisar</small></div></button>
+    <button id="annualConfigBtn" class="drawer-action"><span>🗓️</span><div><strong>Configuración anual</strong><small>Pedidos e inventarios generales</small></div></button>
+  </div>
+</aside>
+
+
+<dialog id="kpiQuickDialog" class="xlarge-dialog kpi-quick-dialog">
+  <div class="dialog-head quick-dialog-head">
+    <div>
+      <span class="section-eyebrow">Vista rápida</span>
+      <h3 id="kpiQuickTitle">Productos</h3>
+      <p id="kpiQuickSubtitle">Resumen filtrado.</p>
+    </div>
+    <button value="close" class="secondary">Cerrar</button>
+  </div>
+  <div id="kpiQuickStats" class="quick-stats"></div>
+  <div class="table-wrap quick-table-wrap">
+    <table class="quick-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Programa</th>
+          <th>Stock</th>
+          <th>CPM 3M</th>
+          <th>Cobertura</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="kpiQuickTable"></tbody>
+    </table>
+  </div>
+</dialog>
 </body>
 </html>

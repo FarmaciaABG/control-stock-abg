@@ -94,3 +94,10 @@ Los datos operativos se guardan en localStorage del navegador. Exportar respaldo
 - Módulos operativos convertidos en tarjetas más limpias y navegables.
 - Filtros, tablas, diálogos, formularios y botones actualizados.
 - Mejoras responsivas para notebook, tablet y celular.
+
+- v3.8.0: navegación orientada a evitar desplazamientos largos.
+- Los KPI (Críticos, Bajo mínimo, Riesgo alto, etc.) ahora abren una vista rápida en modal con los productos filtrados.
+- La vista rápida permite abrir el detalle del producto o revisar bodega sin bajar al panel principal.
+- Inventarios, Pedidos, Cuadre de controlados, Redistribución, Trazadores, Vencimientos, Excepciones y Configuración anual pasan a un menú lateral de Operaciones.
+- Se mantienen accesos directos a Inventario rotativo, Controlados, Redistribución y Pedido mensual.
+- Se conserva toda la lógica funcional de v3.7.0/v3.6.0.
