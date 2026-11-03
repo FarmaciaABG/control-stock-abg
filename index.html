@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Gestión de Inventario Farmacia ABG</title>
-<meta name="app-build" content="v3.10.8">
+<meta name="app-build" content="v3.10.9">
 <style id="abg-inline-styles">
 :root{
   --bg:#f4f7f8;--panel:#fff;--text:#18333c;--muted:#697b83;--line:#dce6e9;
@@ -1635,7 +1635,7 @@ const MONTHS=["enero","febrero","marzo","abril","mayo","junio","julio","agosto",
 const STORAGE={
   timeline:"abg_v3_consumption_timeline",stock:"abg_v3_stock",prevStock:"abg_v3_prev_stock",lastStock:"abg_v3_last_stock",
   warehouse:"abg_v3_warehouse",arsenalAdd:"abg_v3_arsenal_add",arsenalOverride:"abg_v3_arsenal_override",arsenalRemoved:"abg_v3_arsenal_removed",
-  weekly:"abg_v3_weekly_inventory",generalDates:"abg_v3_general_dates",generalHistory:"abg_v3_general_history",
+  weekly:"abg_v3_weekly_inventory",weeklyDraft:"abg_v3_weekly_draft",generalDates:"abg_v3_general_dates",generalHistory:"abg_v3_general_history",
   participants:"abg_v3_participants",orders:"abg_v3_orders",expiries:"abg_v3_expiries",stockouts:"abg_v3_stockouts",
   orderDates:"abg_v3_order_dates",medicineMeta:"abg_v3_medicine_meta",controlledReconciliation:"abg_v36_controlled_reconciliation",
   mhRedistributionCache:"abg_v310_mh_redistribution_cache"};
@@ -1650,6 +1650,15 @@ let ordersHistory=load(STORAGE.orders,[]),expiries=load(STORAGE.expiries,[]),sto
 let medicineMeta=load(STORAGE.medicineMeta,{}),controlledReconciliation=load(STORAGE.controlledReconciliation,{date:"",rows:{}});
 let currentWeekly=[],currentWeeklyHistoryId=null,currentOrder=[],activeQuick="",activeMedicineDetail=null;
 weeklyHistory=weeklyHistory.map((h,i)=>({...h,id:h.id||`legacy-${h.date||"sinfecha"}-${i}`,status:h.status||undefined,items:(h.items||[]).map(x=>({...x,secondPhysical:x.secondPhysical??null}))}));save(STORAGE.weekly,weeklyHistory);
+
+// Inventario histórico del 02-11-2026 recuperado del Excel exportado.
+// Se agrega una sola vez y nunca reemplaza los inventarios existentes.
+(function importRecoveredWeeklyInventory(){
+  const recovered={id:"recuperado-excel-abg-2026-11-02",date:"2026-11-02",responsible:"",status:"Pendiente",updatedAt:"2026-11-02T12:00:00.000Z",items:[{"n":1,"product":"Acido Valproico 500 mg Comprimidos de Liberacion Prolongada","abc":"C","priority":"Siempre incluir","reasons":["GES","PPMM","Alto costo"],"tracer":"IAAPS","system":null,"physical":null,"secondPhysical":null},{"n":2,"product":"Carbamazepina 400 mg Comprimidos de Liberacion Prolongada","abc":"C","priority":"Siempre incluir","reasons":["GES","PPMM","Alto costo"],"tracer":"IAAPS","system":null,"physical":null,"secondPhysical":null},{"n":3,"product":"Etonogestrel 68 mg Implante Subcutaneo","abc":"C","priority":"Siempre incluir","reasons":["Alto costo"],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null},{"n":4,"product":"Levonorgestrel 20 mcg/24 hrs sistema intrauterino","abc":"C","priority":"Siempre incluir","reasons":["Alto costo"],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null},{"n":5,"product":"Atorvastatina 20 mg Comprimidos","abc":"A","priority":"Normal","reasons":[],"tracer":"IAAPS/FOFAR","system":null,"physical":null,"secondPhysical":null},{"n":6,"product":"Enalapril Maleato Comprimidos Recubiertos 10 Mg","abc":"A","priority":"Normal","reasons":[],"tracer":"FOFAR","system":null,"physical":null,"secondPhysical":null},{"n":7,"product":"Sertralina 50 Mg Comprimidos","abc":"A","priority":"Normal","reasons":[],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null},{"n":8,"product":"Jeringa desechable   1ml. Insulina  ud.","abc":"A","priority":"Normal","reasons":[],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null},{"n":9,"product":"Acido Acetilsalicilico Comprimidos 100 Mg","abc":"A","priority":"Normal","reasons":[],"tracer":"FOFAR","system":null,"physical":null,"secondPhysical":null},{"n":10,"product":"Levotiroxina Sodica Comprimidos 50 Mcg","abc":"A","priority":"Normal","reasons":[],"tracer":"IAAPS","system":null,"physical":null,"secondPhysical":null},{"n":11,"product":"Amlodipino Comprimidos 5 mg","abc":"A","priority":"Normal","reasons":[],"tracer":"IAAPS/FOFAR","system":null,"physical":null,"secondPhysical":null},{"n":12,"product":"Paracetamol 500 mg Comprimidos","abc":"A","priority":"Normal","reasons":[],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null},{"n":13,"product":"Losartan Potasico Comprimidos Recubiertos 50 Mg","abc":"A","priority":"Normal","reasons":[],"tracer":"IAAPS/FOFAR","system":null,"physical":null,"secondPhysical":null},{"n":14,"product":"Quetiapina 25 mg Comprimidos","abc":"B","priority":"Normal","reasons":[],"tracer":"IAAPS","system":null,"physical":null,"secondPhysical":null},{"n":15,"product":"Dapagliflozina 10 mg Comprimidos","abc":"B","priority":"Normal","reasons":[],"tracer":"NO TRAZADOR","system":null,"physical":null,"secondPhysical":null}]};
+  const exists=weeklyHistory.some(h=>h.id===recovered.id || (h.date===recovered.date && (h.items||[]).length===recovered.items.length && h.items.every((x,i)=>String(x.product||"").trim().toLowerCase()===String(recovered.items[i].product).trim().toLowerCase())));
+  if(!exists){weeklyHistory.push(recovered);save(STORAGE.weekly,weeklyHistory)}
+})();
+
 let annualDraftOrders=[],annualDraftGeneral=[];
 
 const $=id=>document.getElementById(id);
@@ -1919,7 +1928,7 @@ function classifyABC(){const arr=master.map(m=>({m,c:cpm3(m)||0})).filter(x=>x.c
 function inventorySelectionWeight(m,abc,recent){const cls=classificationFor(m),priority=inventoryPriorityRank(m);let w=abc[norm(m.glosaABG)]==="A"?5:abc[norm(m.glosaABG)]==="B"?3:1;w*=priority===4?20:priority===3?7:priority===2?3:1;const reasons=cls.inventoryReasons||[];if(reasons.includes("Diferencias frecuentes de inventario"))w*=2.2;if(reasons.includes("Alta rotación"))w*=1.8;if(reasons.includes("IAAPS")||reasons.includes("FOFAR")||reasons.includes("GES")||reasons.includes("PPMM"))w*=1.5;if(reasons.includes("Alto costo"))w*=1.4;if(m.iaaps||m.fofar)w*=1.35;const weeks=weeksSinceWeeklyCount(m);if(recent.has(norm(m.glosaABG)))w*=.16;else if(weeks>=8)w*=1.5;else if(weeks>=4)w*=1.2;return Math.max(w,.01)}
 function weightedPick(pool,n,abc,recent){const c=[...pool],out=[];while(out.length<n&&c.length){const ws=c.map(m=>inventorySelectionWeight(m,abc,recent));let r=Math.random()*ws.reduce((s,x)=>s+x,0),i=0;for(;i<c.length;i++){r-=ws[i];if(r<=0)break}i=Math.min(i,c.length-1);out.push(c[i]);c.splice(i,1)}return out}
 function prioritySortForAlways(a,b,abc){const wa=weeksSinceWeeklyCount(a),wb=weeksSinceWeeklyCount(b);if(wa!==wb)return wb-wa;const rank={A:3,B:2,C:1};return (rank[abc[norm(b.glosaABG)]]||0)-(rank[abc[norm(a.glosaABG)]]||0)}
-function generateWeekly(){currentWeeklyHistoryId=null;const abc=classifyABC(),recent=new Set();weeklyHistory.slice(0,4).forEach(h=>(h.items||[]).forEach(i=>recent.add(norm(i.product))));const always=master.filter(m=>classificationFor(m).inventoryPriority==="Siempre incluir").sort((a,b)=>prioritySortForAlways(a,b,abc));let sel=always.slice(0,15);const used=new Set(sel.map(m=>norm(m.glosaABG))),targets={A:9,B:4,C:2};for(const group of ["A","B","C"]){if(sel.length>=15)break;const already=sel.filter(m=>abc[norm(m.glosaABG)]===group).length,need=Math.max(0,targets[group]-already),pool=master.filter(m=>!used.has(norm(m.glosaABG))&&abc[norm(m.glosaABG)]===group),picked=weightedPick(pool,Math.min(need,15-sel.length),abc,recent);picked.forEach(m=>used.add(norm(m.glosaABG)));sel.push(...picked)}if(sel.length<15){const remaining=master.filter(m=>!used.has(norm(m.glosaABG)));sel.push(...weightedPick(remaining,15-sel.length,abc,recent))}currentWeekly=sel.slice(0,15).map((m,i)=>({n:i+1,product:m.glosaABG,abc:abc[norm(m.glosaABG)],priority:classificationFor(m).inventoryPriority||"Normal",reasons:inventoryReasonsFor(m),tracer:program(m),system:null,physical:null,secondPhysical:null}));renderWeekly()}
+function generateWeekly(){currentWeeklyHistoryId=null;const abc=classifyABC(),recent=new Set();weeklyHistory.slice(0,4).forEach(h=>(h.items||[]).forEach(i=>recent.add(norm(i.product))));const always=master.filter(m=>classificationFor(m).inventoryPriority==="Siempre incluir").sort((a,b)=>prioritySortForAlways(a,b,abc));let sel=always.slice(0,15);const used=new Set(sel.map(m=>norm(m.glosaABG))),targets={A:9,B:4,C:2};for(const group of ["A","B","C"]){if(sel.length>=15)break;const already=sel.filter(m=>abc[norm(m.glosaABG)]===group).length,need=Math.max(0,targets[group]-already),pool=master.filter(m=>!used.has(norm(m.glosaABG))&&abc[norm(m.glosaABG)]===group),picked=weightedPick(pool,Math.min(need,15-sel.length),abc,recent);picked.forEach(m=>used.add(norm(m.glosaABG)));sel.push(...picked)}if(sel.length<15){const remaining=master.filter(m=>!used.has(norm(m.glosaABG)));sel.push(...weightedPick(remaining,15-sel.length,abc,recent))}currentWeekly=sel.slice(0,15).map((m,i)=>({n:i+1,product:m.glosaABG,abc:abc[norm(m.glosaABG)],priority:classificationFor(m).inventoryPriority||"Normal",reasons:inventoryReasonsFor(m),tracer:program(m),system:null,physical:null,secondPhysical:null}));renderWeekly();persistWeeklyDraft();saveWeeklyAutomatically()}
 function weeklyFinalCount(i){return i.secondPhysical!==null&&i.secondPhysical!==undefined?i.secondPhysical:i.physical}
 function weeklyFinalDiff(i){const c=weeklyFinalCount(i);return c===null||c===undefined||i.system===null||i.system===undefined?null:c-i.system}
 function weeklyComplete(items=currentWeekly){return items.length>0&&items.every(i=>i.system!==null&&i.system!==undefined&&i.physical!==null&&i.physical!==undefined)}
@@ -1960,16 +1969,42 @@ function renderWeekly(){
   };
 
   document.querySelectorAll(".weekly-system-input").forEach(inp=>inp.addEventListener("input",()=>{
-    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].system=v===""?null:Number(v);recalc(i)
+    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].system=v===""?null:Number(v);recalc(i);saveWeeklyAutomatically()
   }));
   document.querySelectorAll(".weekly-input").forEach(inp=>inp.addEventListener("input",()=>{
-    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].physical=v===""?null:Number(v);recalc(i)
+    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].physical=v===""?null:Number(v);recalc(i);saveWeeklyAutomatically()
   }));
   document.querySelectorAll(".weekly-second-input").forEach(inp=>inp.addEventListener("input",()=>{
-    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].secondPhysical=v===""?null:Number(v);recalc(i)
+    const i=Number(inp.dataset.i),v=inp.value.replace(/\D/g,"");inp.value=v;currentWeekly[i].secondPhysical=v===""?null:Number(v);recalc(i);saveWeeklyAutomatically()
   }))
 }
 
+// v3.10.9: borrador local recuperable y registro inmediato de inventarios.
+function persistWeeklyDraft(){
+  if(!currentWeekly.length)return;
+  try{save(STORAGE.weeklyDraft,{id:currentWeeklyHistoryId,date:$("weeklyDate").value||todayISO(),responsible:$("weeklyResponsible").value.trim(),items:currentWeekly,updatedAt:new Date().toISOString()})}catch(e){console.warn("No se pudo guardar borrador rotativo",e)}
+}
+function saveWeeklyAutomatically(){
+  if(!currentWeekly.length)return;
+  const now=new Date().toISOString();
+  const record={id:currentWeeklyHistoryId||("rot-"+Date.now()),date:$("weeklyDate").value||todayISO(),responsible:$("weeklyResponsible").value.trim(),status:weeklyStatus(),updatedAt:now,items:currentWeekly.map(x=>({...x,secondPhysical:x.secondPhysical??null}))};
+  const pos=weeklyHistory.findIndex(h=>h.id===record.id);
+  if(pos>=0)weeklyHistory[pos]=record;else weeklyHistory.unshift(record);
+  weeklyHistory=weeklyHistory.slice(0,52);
+  currentWeeklyHistoryId=record.id;
+  try{save(STORAGE.weekly,weeklyHistory);persistWeeklyDraft();renderWeeklyHistory()}catch(e){console.error("Error guardando inventario",e);alert("No se pudo guardar el inventario en este navegador. Exporta una copia antes de cerrar.")}
+}
+function restoreWeeklyDraft(){
+  const draft=load(STORAGE.weeklyDraft,null);
+  const pending=weeklyHistory.find(h=>h.status!=="Completo"&&weeklyStatus(h.items||[])!=="Completo");
+  const source=draft?.items?.length&&weeklyStatus(draft.items)!=="Completo"?draft:pending;
+  if(!source?.items?.length)return;
+  currentWeeklyHistoryId=source.id||null;
+  currentWeekly=source.items.map((x,i)=>({...x,n:x.n||i+1,secondPhysical:x.secondPhysical??null}));
+  $("weeklyDate").value=source.date||todayISO();
+  $("weeklyResponsible").value=source.responsible||"";
+  renderWeekly();
+}
 function saveWeekly(){
   const resp=$("weeklyResponsible").value.trim();
   if(!resp)return alert("Indica quién realizó el inventario.");
@@ -1986,6 +2021,7 @@ function saveWeekly(){
   weeklyHistory=weeklyHistory.slice(0,52);
   currentWeeklyHistoryId=record.id;
   save(STORAGE.weekly,weeklyHistory);
+  persistWeeklyDraft();
   renderWeeklyHistory();
   const p=weeklyProgress();
   alert(status==="Pendiente"?`Inventario guardado como PENDIENTE (${p.done}/${p.total} completos). Puedes abrirlo desde el historial y continuar después.`:"Inventario completo y guardado.")
@@ -1999,6 +2035,7 @@ function openWeeklyHistory(id){
   $("weeklyDate").value=h.date||todayISO();
   $("weeklyResponsible").value=h.responsible||"";
   renderWeekly();
+  persistWeeklyDraft();
 }
 
 function newWeeklyInventory(){
@@ -2006,6 +2043,7 @@ function newWeeklyInventory(){
   currentWeekly=[];
   $("weeklyDate").value=todayISO();
   $("weeklyResponsible").value="";
+  try{localStorage.removeItem(STORAGE.weeklyDraft)}catch(e){}
   renderWeekly();
 }
 
@@ -2666,7 +2704,7 @@ $("consumptionFile").onchange=async e=>{try{if(e.target.files[0])await loadMonth
 $("singleConsumptionBtn").onclick=()=>{initMultiConsumption();$("singleConsumptionDialog").showModal()};$("addConsumptionMonth").onclick=()=>{const rows=[...document.querySelectorAll(".multi-month")],base=rows.length?rows.at(-1).value:previousMonthKey();addConsumptionRow(shiftMonthKey(base,-1),"")};
 $("saveSingleConsumption").onclick=saveSingleConsumption;$("arsenalBtn").onclick=()=>{clearArsenalForm();renderArsenal();$("arsenalDialog").showModal()};$("arsenalSearch").oninput=renderArsenal;$("saveArsenal").onclick=saveMed;$("clearArsenal").onclick=clearArsenalForm;
 $("backupBtn").onclick=backup;$("backupFile").onchange=async e=>{if(e.target.files[0])await importBackup(e.target.files[0]);e.target.value=""};
-$("weeklyInventoryBtn").onclick=()=>{if(!currentWeekly.length){currentWeeklyHistoryId=null;$("weeklyDate").value=todayISO()}renderWeekly();renderWeeklyHistory();$("weeklyInventoryDialog").showModal()};$("generateWeekly").onclick=()=>{if(currentWeekly.length&&!confirm("Esto reemplazará el listado actualmente abierto. ¿Generar un nuevo inventario?"))return;generateWeekly()};$("saveWeekly").onclick=saveWeekly;$("exportWeekly").onclick=exportWeekly;
+$("weeklyInventoryBtn").onclick=()=>{if(!currentWeekly.length){restoreWeeklyDraft();if(!currentWeekly.length){currentWeeklyHistoryId=null;$("weeklyDate").value=todayISO()}}renderWeekly();renderWeeklyHistory();$("weeklyInventoryDialog").showModal()};$("generateWeekly").onclick=()=>{if(currentWeekly.length&&!confirm("Esto reemplazará el listado actualmente abierto. ¿Generar un nuevo inventario?"))return;generateWeekly()};$("weeklyResponsible").addEventListener("input",()=>{if(currentWeekly.length)saveWeeklyAutomatically()});$("weeklyDate").addEventListener("change",()=>{if(currentWeekly.length)saveWeeklyAutomatically()});$("saveWeekly").onclick=saveWeekly;$("exportWeekly").onclick=exportWeekly;
 
 function annualYearOptions(){
   const y=new Date().getFullYear(),years=[];
