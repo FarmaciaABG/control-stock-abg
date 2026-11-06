@@ -1222,6 +1222,7 @@ body{padding-left:0!important}
     <div class="top-menu-group">
       <button type="button" class="module-menu-btn" data-top-menu="reportes"><span>📊</span><strong>Reportes</strong><span class="chev">▾</span></button>
       <div class="top-dropdown top-dropdown-right" data-dropdown="reportes">
+        <button id="consumptionTrendBtn" type="button"><span>📉</span><div><strong>Análisis de consumo</strong><small>Disminuciones y cobertura</small></div></button>
         <button id="tracerReportBtn" type="button"><span>📊</span><div><strong>Trazadores</strong><small>IAAPS / FOFAR</small></div></button>
         <button id="expiriesBtn" type="button"><span>⏳</span><div><strong>Vencimientos</strong><small>Fechas próximas</small></div></button>
         <button id="exceptionsBtn" type="button"><span>⚠️</span><div><strong>Excepciones</strong><small>Datos que requieren revisión</small></div></button>
@@ -1369,6 +1370,17 @@ body{padding-left:0!important}
 </dialog>
 
 
+<dialog id="consumptionTrendDialog" class="large-dialog">
+  <div class="dialog-head"><div><h3>📉 Análisis de consumo · ABG</h3><p>Compara los últimos 3 meses completos con los 3 anteriores. Los datos se leen desde este navegador.</p></div><button type="button" class="secondary" id="closeConsumptionTrend">Cerrar</button></div>
+  <div class="form-grid" style="margin:14px 0;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+    <label>Programa<select id="consumptionTrendProgram"><option value="all">Todos</option><option value="iaaps">IAAPS</option><option value="fofar">FOFAR</option><option value="other">Otros</option></select></label>
+    <label>Buscar medicamento<input id="consumptionTrendSearch" type="search" placeholder="Nombre del medicamento"></label>
+    <label>Ordenar<select id="consumptionTrendSort"><option value="percent">Mayor caída porcentual</option><option value="units">Mayor caída en unidades</option></select></label>
+  </div>
+  <div id="consumptionTrendStatus" class="status-strip"></div>
+  <div class="table-wrap" style="max-height:55vh;overflow:auto"><table><thead><tr><th>Medicamento</th><th>3 meses previos (prom.)</th><th>3 meses recientes (prom.)</th><th>Variación</th><th>Stock</th><th>Cobertura</th></tr></thead><tbody id="consumptionTrendRows"></tbody></table></div>
+  <p style="font-size:12px;color:#697b83">Una disminución no demuestra menor demanda: revisar quiebres de stock, cambios de prescripción y registros incompletos. La cobertura usa el promedio reciente.</p>
+</dialog>
 <dialog id="singleConsumptionDialog" class="medium-dialog">
   <form method="dialog">
     <div class="dialog-head"><div><h3>Agregar consumos de un producto</h3><p>Selecciona el producto una sola vez y registra uno o varios meses.</p></div><button value="close" class="secondary">Cerrar</button></div>
@@ -2837,6 +2849,30 @@ document.addEventListener("click",e=>{
   if(!e.target.closest(".top-menu-group"))closeTopMenus();
 });
 document.querySelectorAll(".top-dropdown button").forEach(b=>b.addEventListener("click",()=>setTimeout(closeTopMenus,60)));
+function renderConsumptionTrend(){
+  const rows=[],insufficient=[];
+  for(const m of master){
+    const vals=Object.entries(getTimeline(m)).filter(([k,v])=>/^\\d{4}-\\d{2}$/.test(k)&&num(v)!==null).sort((a,b)=>a[0].localeCompare(b[0]));
+    if(vals.length<6){insufficient.push(m);continue}
+    const recent=vals.slice(-6);
+    const [y,mo]=recent[5][0].split("-").map(Number);
+    const expected=Array.from({length:6},(_,i)=>{const d=new Date(y,mo-1-(5-i),1);return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")});
+    if(recent.some((v,i)=>v[0]!==expected[i])){insufficient.push(m);continue}
+    const old=recent.slice(0,3).reduce((a,v)=>a+Number(v[1]),0)/3;
+    const now=recent.slice(3).reduce((a,v)=>a+Number(v[1]),0)/3;
+    if(!(old>0)||now>=old)continue;
+    const change=(now-old)/old*100,stock=stockFor(m),coverage=now>0&&stock!==null?stock/now:null;
+    rows.push({m,old,now,change,units:old-now,stock,coverage,period:expected[0]+" a "+expected[5]});
+  }
+  const program=$("consumptionTrendProgram").value,search=norm($("consumptionTrendSearch").value);
+  const filtered=rows.filter(r=>(program==="all"||(program==="iaaps"&&r.m.iaaps)||(program==="fofar"&&r.m.fofar)||(program==="other"&&!r.m.iaaps&&!r.m.fofar))&&norm(r.m.glosaABG).includes(search));
+  filtered.sort((a,b)=>$("consumptionTrendSort").value==="units"?b.units-a.units:a.change-b.change);
+  $("consumptionTrendStatus").textContent=rows.length+" medicamentos con consumo a la baja · "+filtered.length+" visibles · "+insufficient.length+" sin 6 meses consecutivos completos. Se consideran los 6 últimos meses registrados de cada producto.";
+  $("consumptionTrendRows").innerHTML=filtered.length?filtered.map(r=>`<tr><td><strong>${esc(r.m.glosaABG)}</strong><small style="display:block;color:#697b83">${esc(r.period)}</small></td><td>${fmt(r.old,1)}</td><td>${fmt(r.now,1)}</td><td style="color:#b42318;font-weight:700">${fmt(r.change,1)} %</td><td>${fmt(r.stock,0)}</td><td>${r.coverage===null?"—":fmt(r.coverage,1)+" meses"}</td></tr>`).join(""):'<tr><td colspan="6">No hay medicamentos que cumplan estos filtros y criterios.</td></tr>';
+}
+$("consumptionTrendBtn").onclick=()=>{renderConsumptionTrend();$("consumptionTrendDialog").showModal();closeTopMenus()};
+$("closeConsumptionTrend").onclick=()=>$("consumptionTrendDialog").close();
+["consumptionTrendProgram","consumptionTrendSearch","consumptionTrendSort"].forEach(id=>$(id).addEventListener(id==="consumptionTrendSearch"?"input":"change",renderConsumptionTrend));
 $("exportManagementTop").onclick=()=>{$("exportManagementBtn").click();closeTopMenus()};
 $("exportKpiQuick").onclick=exportKpiQuickView;
 init().catch(e=>{$("masterBadge").textContent="Error al cargar maestro";$("summaryText").textContent=e.message;console.error(e)});
