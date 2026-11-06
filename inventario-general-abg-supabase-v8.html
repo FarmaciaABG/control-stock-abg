@@ -28,4 +28,4 @@ $("addStaff").onclick=()=>adminAction("staff",{name:$("newStaff").value});
 $("close").onclick=()=>$("detail").close();$("detail").onclick=e=>{if(e.target===$("detail"))$("detail").close()};
 $("csv").onclick=()=>{const rows=[["Medicamento","Funcionaria","Sector","Cantidad","Vencimiento","Fecha"],...counts.map(r=>[productName(r.product_id),staffName(r.staff_id),r.sector,r.quantity,r.expiry_date,r.created_at])];const csv="\ufeff"+rows.map(r=>r.map(v=>'"'+safe(v).replaceAll('"','""')+'"').join(";")).join("\r\n");const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="inventario_abg_conteos.csv";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)};
 setInterval(()=>{if(access&&!busy&&!document.hidden)load().catch(()=>msg("status","Sin conexión: revisa internet antes de guardar"))},15000);
-<\/script></body></html>
+</script></body></html>
