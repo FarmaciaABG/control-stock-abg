@@ -571,6 +571,17 @@ footer{
 }
 
 
+.kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important}
+.kpi-grid .kpi{min-height:135px;padding:22px 20px;border-radius:19px;box-shadow:0 8px 24px rgba(18,45,60,.09);transition:transform .15s,box-shadow .15s}
+.kpi-grid .kpi:hover{transform:translateY(-3px);box-shadow:0 13px 28px rgba(18,45,60,.15)}
+.kpi-grid .kpi strong{font-size:clamp(34px,3vw,48px);font-weight:850;line-height:1.15}
+.kpi-grid .kpi span{font-size:14px;font-weight:750;line-height:1.4}
+.kpi-grid .kpi.critical{background:#fff1f0;border-left:6px solid #bd251b}
+.kpi-grid .kpi.warning{background:#fff3e4;border-left:6px solid #ea8500}
+.kpi-grid .kpi.storage{background:#edf5ff;border-left:6px solid #2563eb}
+.kpi-grid .kpi.overstock{background:#eff4f7;border-left:6px solid #64748b}
+@media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:440px){.kpi-grid .kpi{padding:16px;min-height:115px}.kpi-grid .kpi strong{font-size:32px}.kpi-grid .kpi span{font-size:12px}}
 /* =========================================================
    ABG v3.8.0 · navigation + quick KPI views
    ========================================================= */
@@ -1247,15 +1258,11 @@ body{padding-left:0!important}
     <div class="dashboard-chip">ABG · Gestión local</div>
   </section>
 
-  <section class="kpi-grid">
-    <button class="kpi critical" data-kpi="critical"><strong id="kpiCritical">0</strong><span>Críticos</span></button>
-    <button class="kpi warning" data-kpi="review"><strong id="kpiReview">0</strong><span>Bajo mínimo</span></button>
-    <button class="kpi storage" data-kpi="warehouse"><strong id="kpiWarehouse">0</strong><span>Revisar bodega</span></button>
-    <button class="kpi notify" data-kpi="notify"><strong id="kpiNotify">0</strong><span>Informar</span></button>
-    <button class="kpi risk" data-kpi="risk"><strong id="kpiRisk">0</strong><span>Riesgo alto</span></button>
+  <section class="kpi-grid" aria-label="Indicadores de stock">
+    <button class="kpi critical" data-kpi="zero"><strong id="kpiZero">0</strong><span>Stock cero / Quiebre</span></button>
+    <button class="kpi warning" data-kpi="critical"><strong id="kpiCritical">0</strong><span>Crítico · Bajo 20%</span></button>
+    <button class="kpi storage" data-kpi="review"><strong id="kpiReview">0</strong><span>Mínimo · Bajo 40%</span></button>
     <button class="kpi overstock" data-kpi="overstock"><strong id="kpiOverstock">0</strong><span>Sobrestock</span></button>
-    <button class="kpi expiry" data-kpi="expiry"><strong id="kpiExpiry">0</strong><span>Vencimientos</span></button>
-    <button class="kpi exception" data-kpi="exception"><strong id="kpiException">0</strong><span>Excepciones</span></button>
   </section>
 
   <section class="panel">
@@ -1880,8 +1887,11 @@ function renderAlerts(){
   $("alertsArea").innerHTML=a.join("")
 }
 function renderKPIs(){
-  const xs=master.map(m=>({m,st:state(m),ac:action(m),ri:risk(m),ex:exceptionsFor(m)}));
-  $("kpiCritical").textContent=xs.filter(x=>x.st==="CRÍTICO").length;$("kpiReview").textContent=xs.filter(x=>x.st==="REVISAR").length;$("kpiWarehouse").textContent=xs.filter(x=>x.ac==="REVISAR BODEGA").length;$("kpiNotify").textContent=xs.filter(x=>x.ac==="INFORMAR").length;$("kpiRisk").textContent=xs.filter(x=>x.ri==="ALTO").length;$("kpiOverstock").textContent=xs.filter(x=>isOverstock(x.m)).length;$("kpiExpiry").textContent=expiries.filter(e=>expiryStatus(e)!==">180 días").length;$("kpiException").textContent=xs.filter(x=>x.ex.length).length
+  const xs=master.map(m=>({m,st:state(m)}));
+  $("kpiZero").textContent=xs.filter(x=>stockFor(x.m)===0).length;
+  $("kpiCritical").textContent=xs.filter(x=>x.st==="CRÍTICO"&&stockFor(x.m)>0).length;
+  $("kpiReview").textContent=xs.filter(x=>x.st==="REVISAR").length;
+  $("kpiOverstock").textContent=xs.filter(x=>isOverstock(x.m)).length;
 }
 function inferredProductType(m){
   const meta=medicineMetaFor(m);if(meta.productType)return meta.productType;
@@ -1904,7 +1914,7 @@ function weeksSinceWeeklyCount(m){const d=lastWeeklyCountDate(m);if(!d)return 99
 
 function filteredMaster(){
   const q=norm($("searchInput").value),p=$("programFilter").value,s=$("stateFilter").value,type=$("productTypeFilter")?.value||"",admin=$("adminCategoryFilter")?.value||"",detail=norm($("adminDetailFilter")?.value||"");
-  return master.filter(m=>{if(q&&!norm(m.glosaABG+" "+(m.glosaBodega||"")).includes(q))return false;if(p&&program(m)!==p)return false;if(s&&state(m)!==s)return false;if(type&&classificationFor(m).productType!==type)return false;if(admin&&!hasAdminCategory(m,admin))return false;if(detail&&!classificationDetail(m).includes(detail))return false;if(activeQuick==="critical"&&state(m)!=="CRÍTICO")return false;if(activeQuick==="review"&&state(m)!=="REVISAR")return false;if(activeQuick==="warehouse"&&action(m)!=="REVISAR BODEGA")return false;if(activeQuick==="notify"&&action(m)!=="INFORMAR")return false;if(activeQuick==="risk"&&risk(m)!=="ALTO")return false;if(activeQuick==="overstock"&&!isOverstock(m))return false;if(activeQuick==="expiry"&&!expiryFor(m))return false;if(activeQuick==="exception"&&!exceptionsFor(m).length)return false;return true})
+  return master.filter(m=>{if(q&&!norm(m.glosaABG+" "+(m.glosaBodega||"")).includes(q))return false;if(p&&program(m)!==p)return false;if(s&&state(m)!==s)return false;if(type&&classificationFor(m).productType!==type)return false;if(admin&&!hasAdminCategory(m,admin))return false;if(detail&&!classificationDetail(m).includes(detail))return false;if(activeQuick==="zero"&&stockFor(m)!==0)return false;if(activeQuick==="critical"&&(state(m)!=="CRÍTICO"||stockFor(m)===0))return false;if(activeQuick==="review"&&state(m)!=="REVISAR")return false;if(activeQuick==="warehouse"&&action(m)!=="REVISAR BODEGA")return false;if(activeQuick==="notify"&&action(m)!=="INFORMAR")return false;if(activeQuick==="risk"&&risk(m)!=="ALTO")return false;if(activeQuick==="overstock"&&!isOverstock(m))return false;if(activeQuick==="expiry"&&!expiryFor(m))return false;if(activeQuick==="exception"&&!exceptionsFor(m).length)return false;return true})
 }
 
 function medicineMetaFor(m){return medicineMeta[norm(m.glosaABG)]||{}}
@@ -2584,8 +2594,9 @@ async function importBackup(file){const x=JSON.parse(await file.text());if(!conf
 
 
 const KPI_TITLES={
-  critical:["Críticos","Productos con stock bajo el umbral crítico."],
-  review:["Bajo mínimo","Productos que requieren vigilancia por stock bajo."],
+  zero:["Stock cero / Quiebre","Productos con stock registrado igual a cero."],
+  critical:["Crítico · Bajo 20%","Productos con stock positivo y cobertura inferior al 20% del consumo mensual."],
+  review:["Mínimo · Bajo 40%","Productos con cobertura entre 20% y menos de 40% del consumo mensual."],
   warehouse:["Revisar bodega","Productos que requieren confirmar disponibilidad en bodega."],
   notify:["Informar","Productos que requieren comunicación o gestión."],
   risk:["Riesgo alto","Productos con mayor riesgo de quiebre según consumo y cobertura."],
